@@ -1,0 +1,114 @@
+﻿@model List<TPS.Web.Core.ViewModels.ImageViewModel>
+@{
+    ViewBag.Title = "Confirm Pending Uploads";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<p class="lead">Label your photos and provide a description. Save the changes to add the photo to the tour.</p>
+
+<div class="approve-images">
+    @foreach (var image in Model)
+    {
+        <div class="row form-group">
+            <div class="col-sm-6">
+                <div class="thumbnail">
+                    <img src="@image.ImagePath.Replace("~", "..")?w=550&autorotate=true" alt="@image.AltText"/>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => image.Title)
+                    @Html.TextBoxFor(m => image.Title, new {@class = "form-control js-image-title"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => image.Caption)
+                    @Html.TextAreaFor(m => image.Caption, new {@class = "form-control js-image-caption"})
+                </div>
+
+                @Html.HiddenFor(m => image.Id, new {@class = "js-image-id"})
+                <button type="button" class="btn btn-primary js-save-image">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    Save Changes
+                </button>
+                <button type="button" class="btn btn-link js-delete-image" data-image-id="@image.Id">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    Remove Photo
+                </button>
+
+            </div>
+        </div>
+    }
+</div>
+
+<div class="upload-message hidden">
+    <p>There are currently no pending uploads.</p>
+    <a href="@Url.Action("Upload")" class="btn btn-primary">
+        <i class="glyphicon glyphicon-upload"></i>
+        Upload a new photo now
+    </a>
+    <a href="@Url.Action("Index", "Image")" class="btn btn-link">
+        <i class="glyphicon glyphicon-picture"></i>
+        View my photos
+    </a>
+    
+</div>
+
+@section Scripts {
+    <script>
+        var showNoUploadMessage = function() {
+            if ($(".approve-images").children().length > 0) return;
+
+            $(".upload-message").removeClass("hidden");
+        };
+
+        showNoUploadMessage();
+
+        $(".approve-images").on("click", ".js-save-image", function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var row = $this.closest(".row");
+
+            var imageId = row.find(".js-image-id").val();
+            var title = row.find(".js-image-title").val();
+            var caption = row.find(".js-image-caption").val();
+
+            var imageObj = {
+                id: imageId,
+                title: title,
+                caption: caption
+            };
+
+            $.ajax({
+                url: "/api/image/" + imageId,
+                method: "PUT",
+                data: imageObj
+            }).done(function(result) {
+                row.remove();
+                showNoUploadMessage();
+            }).fail(function(error) {
+                console.log(error);
+            });
+        });
+
+        $(".approve-images").on("click", ".js-delete-image", function(e) {
+            e.preventDefault();
+
+            var button = $(this);
+
+            var result = confirm("Are you sure you want to deleted this item?");
+
+            if (!result) return;
+
+            $.ajax({
+                url: "/api/image/" + button.attr("data-image-id"),
+                method: "DELETE",
+                success: function() {
+                    button.closest(".row").remove();
+                    showNoUploadMessage();
+                }
+            });
+        });
+    </script>
+}
+

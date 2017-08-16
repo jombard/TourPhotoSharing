@@ -1,0 +1,49 @@
+﻿@model TPS.Web.Core.ViewModels.TourImagesViewModel
+
+@{
+    ViewBag.Title = Model.Tour.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<p>@Model.Tour.Description</p>
+
+@*TODO: Filters, map*@
+
+<div id="image-list">
+    <div class="row">
+        <div class="col-sm-3">
+            <input class="search form-control" />
+        </div>
+        <div class="col-sm-9">
+            <span class="sort btn btn-default" data-sort="title">Sort by title</span>
+            <span class="sort btn btn-default" data-sort="date">Sort by date</span>
+            <span class="sort btn btn-default" data-sort="owner">Sort by owner</span>
+        </div>
+    </div>
+    
+    <hr />
+    
+    <ul class="list-inline list">
+        @foreach (var imageModel in Model.TourImages)
+        {
+            <li>
+                <div class="thumbnail">
+                    <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&maxwidth=150&maxheight=150" alt="@imageModel.Image.AltText" class="image"/>
+                    <div class="title">@imageModel.Image.Title</div>
+                    <div class="date">@imageModel.Image.CreatedDate</div>
+                    <div class="owner">@imageModel.Image.Owner.Email</div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+@Html.Partial("_ImageModal")
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/App/app.min.js")
+    <script>
+        var options = { valueNames: ["title", "date", "owner"] };
+        var imageList = new List("image-list", options);
+    </script>
+}

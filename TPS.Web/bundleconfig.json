@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "Scripts/App/app.min.js",
+    "inputFiles": [
+      "Scripts/App/app.js"
+    ]
+  }
+]

@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<TPS.Web.Core.Models.Tour>
+
+@{
+    ViewBag.Title = "Tours";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tours</h2>
+
+@*<p>
+    @Html.ActionLink("New Tour", "New", "Tour", null, new {@class="btn btn-default"})
+</p>*@
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var tour in Model)
+        {
+            <div class="col-sm-3">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="@tour.Thumbnail.Replace("~","..")?maxwidth=250&maxheight=200&crop=auto" alt="Tour Thumbnail"/>
+                    </a>
+                    <div class="caption">
+                        <h3>@tour.Name</h3>
+                        <p>@tour.Description</p>
+                        @Html.ActionLink("View", "ViewTour", new {tour.Id}, new {@class = "btn btn-primary btn-block"})
+                        @if (tour.OwnerId == User.Identity.GetUserId())
+                            {
+                                    @Html.ActionLink("Edit", "Edit", new { tour.Id }, new { @class = "btn btn-link btn-block" })
+                            }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No tours added yet</p>
+    <p>
+        <a href="@Url.Action("New", "Tour")" class="btn btn-primary">
+            <i class="glyphicon glyphicon-plus-sign"></i>
+            Create New Tour
+        </a>
+    </p>
+}

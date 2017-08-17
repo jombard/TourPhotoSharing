@@ -250,7 +250,16 @@
     <Compile Include="Core\Models\Utils.cs" />
     <Compile Include="Core\Repositories\IImageRepository.cs" />
     <Compile Include="Core\Dtos\ImageDto.cs" />
+    <Compile Include="Core\ViewModels\ExternalLoginListViewModel.cs" />
+    <Compile Include="Core\ViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\ForgotViewModel.cs" />
+    <Compile Include="Core\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Core\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Core\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\SendCodeViewModel.cs" />
     <Compile Include="Core\ViewModels\TourImagesViewModel.cs" />
+    <Compile Include="Core\ViewModels\UserProfileViewModel.cs" />
+    <Compile Include="Core\ViewModels\VerifyCodeViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -318,8 +327,12 @@
     <Compile Include="Persistence\Migrations\201708162159134_AddUploadDateColumnAndChangeCreateDateColumnToNullableOnImageTable.Designer.cs">
       <DependentUpon>201708162159134_AddUploadDateColumnAndChangeCreateDateColumnToNullableOnImageTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708171402315_AddFirstLastNameToUserTable.cs" />
+    <Compile Include="Persistence\Migrations\201708171402315_AddFirstLastNameToUserTable.Designer.cs">
+      <DependentUpon>201708171402315_AddFirstLastNameToUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
-    <Compile Include="Core\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Core\ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\Models\Image.cs" />
@@ -440,6 +453,7 @@
     <Content Include="Views\Image\Confirm.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Shared\_ImageModal.cshtml" />
+    <Content Include="Views\Manage\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -502,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708162159134_AddUploadDateColumnAndChangeCreateDateColumnToNullableOnImageTable.resx">
       <DependentUpon>201708162159134_AddUploadDateColumnAndChangeCreateDateColumnToNullableOnImageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708171402315_AddFirstLastNameToUserTable.resx">
+      <DependentUpon>201708171402315_AddFirstLastNameToUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

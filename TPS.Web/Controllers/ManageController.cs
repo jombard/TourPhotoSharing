@@ -27,26 +27,14 @@ namespace TPS.Web.Controllers
 
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
+            get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            private set => _signInManager = value;
         }
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            private set => _userManager = value;
         }
 
         //
@@ -60,6 +48,7 @@ namespace TPS.Web.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeProfileSuccess ? "Your user profile has been changed."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -380,9 +369,37 @@ namespace TPS.Web.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            ChangeProfileSuccess
         }
 
 #endregion
+
+        public ActionResult UserProfile()
+        {
+
+            var viewModel = new UserProfileViewModel
+            {
+                FirstName = "",
+                LastName = ""
+            };
+            return View(viewModel);
+        }
+
+        public async Task<ActionResult> SaveProfile(UserProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("UserProfile", model);
+            }
+
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null)
+                return View("UserProfile", model);
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            return RedirectToAction("Index", new {Message = ManageMessageId.ChangeProfileSuccess});
+        }
     }
 }

@@ -1,0 +1,29 @@
+﻿@model TPS.Web.Core.ViewModels.UserProfileViewModel
+
+@{
+    ViewBag.Title = "User Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Profile</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        @using (Html.BeginForm("SaveProfile", "Manage", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new {@class="text-danger"})
+            <div class="form-group">
+                @Html.LabelFor(u => u.FirstName)
+                @Html.TextBoxFor(u => u.FirstName)
+                @Html.ValidationMessageFor(u => u.FirstName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(u => u.LastName)
+                @Html.TextBoxFor(u => u.LastName)
+                @Html.ValidationMessageFor(u => u.LastName)
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        }
+    </div>
+</div>

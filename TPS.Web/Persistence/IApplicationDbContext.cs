@@ -6,6 +6,8 @@ namespace TPS.Web.Persistence
     public interface IApplicationDbContext
     {
         DbSet<Image> Images { get; set; }
+        DbSet<Tour> Tours { get; set; }
+        DbSet<TourImages> TourImages { get; set; }
         IDbSet<ApplicationUser> Users { get; set; }
     }
 }

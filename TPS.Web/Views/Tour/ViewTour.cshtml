@@ -29,7 +29,7 @@
         {
             <li>
                 <div class="thumbnail">
-                    <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&maxwidth=150&maxheight=150" alt="@imageModel.Image.AltText" class="image"/>
+                    <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&maxwidth=150&maxheight=150" alt="@imageModel.Image.Caption" class="image"/>
                     <div class="title">@imageModel.Image.Title</div>
                     <div class="date">@imageModel.Image.CreatedDate</div>
                     <div class="owner">@imageModel.Image.Owner.FullName</div>
@@ -41,7 +41,7 @@
 @Html.Partial("_ImageModal")
 
 @section Scripts {
-    @Scripts.Render("~/Scripts/App/app.min.js")
+    @Scripts.Render("~/Scripts/App/app.js")
     <script>
         var options = { valueNames: ["title", "date", "owner"] };
         var imageList = new List("image-list", options);

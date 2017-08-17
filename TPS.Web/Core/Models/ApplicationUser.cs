@@ -18,5 +18,7 @@ namespace TPS.Web.Core.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

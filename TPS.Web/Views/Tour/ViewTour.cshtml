@@ -32,7 +32,7 @@
                     <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&maxwidth=150&maxheight=150" alt="@imageModel.Image.AltText" class="image"/>
                     <div class="title">@imageModel.Image.Title</div>
                     <div class="date">@imageModel.Image.CreatedDate</div>
-                    <div class="owner">@imageModel.Image.Owner.Email</div>
+                    <div class="owner">@imageModel.Image.Owner.FullName</div>
                 </div>
             </li>
         }

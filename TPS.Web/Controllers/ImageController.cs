@@ -194,7 +194,7 @@ namespace TPS.Web.Controllers
         {
             var userId = User.Identity.GetUserId();
             var images = _context.Images
-                .Where(i => i.OwnerId == userId && i.Confirmed)
+                .Where(i => i.OwnerId == userId)
                 .OrderByDescending(d => d.CreatedDate)
                 .ToList();
 

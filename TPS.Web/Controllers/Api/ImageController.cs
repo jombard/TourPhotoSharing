@@ -103,9 +103,6 @@ namespace TPS.Web.Controllers.Api
         [HttpPut]
         public IHttpActionResult UpdateImage(string id, ImageDto imageDto)
         {
-            if (string.IsNullOrWhiteSpace(imageDto.Title))
-                return BadRequest("Title is required");
-
             var userId = User.Identity.GetUserId();
 
             var imageInDb = _unitOfWork.Images.GetImage(id, userId);
@@ -113,7 +110,6 @@ namespace TPS.Web.Controllers.Api
             if (imageInDb == null)
                 return NotFound();
 
-            imageInDb.Title = imageDto.Title;
             imageInDb.Caption = imageDto.Caption;
             imageInDb.Confirmed = true;
 

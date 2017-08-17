@@ -19,6 +19,8 @@ namespace TPS.Web.Controllers
     public class ImageController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private const string Filepath = "~\\uploads\\images\\";
+        private const string Guid = "<guid>";
 
         public ImageController()
         {
@@ -44,19 +46,17 @@ namespace TPS.Web.Controllers
                 foreach (string fileName in Request.Files)
                 {
                     var file = Request.Files[fileName];
+
                     //Save file content goes here
                     if (file != null && file.ContentLength > 0)
                     {
                         fName = file.FileName;
 
-                        System.Drawing.Image sourceImage = System.Drawing.Image.FromStream(file.InputStream, true, true);
+                        var sourceImage = System.Drawing.Image.FromStream(file.InputStream, true, true);
                         var latitude = GetLatitude(sourceImage);
                         var longitude = GetLongitude(sourceImage);
                         var dateTaken = GetDateTaken(sourceImage);
                         
-                        var filepath = "~\\uploads\\images\\";
-                        var guid = "<guid>";
-
                         var resizeSettings = new ResizeSettings
                         {
                             MaxWidth = 1900,
@@ -66,11 +66,10 @@ namespace TPS.Web.Controllers
 
                         file.InputStream.Seek(0, SeekOrigin.Begin);
 
-                        var imageJob = new ImageJob(file, filepath + guid, new Instructions(resizeSettings), true, true);
+                        var imageJob = new ImageJob(file, Filepath + Guid, new Instructions(resizeSettings), true, true);
                         var compressedImg = ImageBuilder.Current.Build(imageJob);
-                        //compressedImg.Build();
 
-                        var url = filepath + compressedImg.FinalPath.Split('\\').Last();
+                        var url = Filepath + compressedImg.FinalPath.Split('\\').Last();
                         
                         var image = new Image
                         {
@@ -131,8 +130,8 @@ namespace TPS.Web.Controllers
         {
             try
             {
-                PropertyItem propItemLatRef = targetImage.GetPropertyItem(1);
-                PropertyItem propItemLat = targetImage.GetPropertyItem(2);
+                var propItemLatRef = targetImage.GetPropertyItem(1);
+                var propItemLat = targetImage.GetPropertyItem(2);
                 return ExifGpsToFloat(propItemLatRef, propItemLat);
             }
             catch (ArgumentException)
@@ -145,8 +144,8 @@ namespace TPS.Web.Controllers
         {
             try
             {
-                PropertyItem propItemLongRef = targetImage.GetPropertyItem(3);
-                PropertyItem propItemLong = targetImage.GetPropertyItem(4);
+                var propItemLongRef = targetImage.GetPropertyItem(3);
+                var propItemLong = targetImage.GetPropertyItem(4);
                 return ExifGpsToFloat(propItemLongRef, propItemLong);
             }
             catch (ArgumentException)
@@ -163,14 +162,14 @@ namespace TPS.Web.Controllers
 
             var minutesNumerator = BitConverter.ToUInt32(propItem.Value, 8);
             var minutesDenominotor = BitConverter.ToUInt32(propItem.Value, 12);
-            float minutes = minutesNumerator / (float) minutesDenominotor;
+            var minutes = minutesNumerator / (float) minutesDenominotor;
 
             var secondsNumerator = BitConverter.ToUInt32(propItem.Value, 16);
             var secondsDenominotor = BitConverter.ToUInt32(propItem.Value, 20);
-            float seconds = secondsNumerator / (float)secondsDenominotor;
+            var seconds = secondsNumerator / (float)secondsDenominotor;
 
-            float coordinate = degrees + (minutes / 60f) + (seconds / 3600f);
-            string gpsRef = System.Text.Encoding.ASCII.GetString(new byte[1] {propItemRef.Value[0]}); // N, S, E, or W
+            var coordinate = degrees + (minutes / 60f) + (seconds / 3600f);
+            var gpsRef = System.Text.Encoding.ASCII.GetString(new byte[1] {propItemRef.Value[0]}); // N, S, E, or W
             if(gpsRef == "S" || gpsRef == "W")
                 coordinate = 0 - coordinate;
 

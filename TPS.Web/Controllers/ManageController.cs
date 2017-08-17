@@ -400,6 +400,8 @@ namespace TPS.Web.Controllers
 
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
+            await UserManager.UpdateAsync(user);
+
             return RedirectToAction("Index", new {Message = ManageMessageId.ChangeProfileSuccess});
         }
     }

@@ -247,6 +247,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Models\Comment.cs" />
     <Compile Include="Core\Models\Utils.cs" />
     <Compile Include="Core\Repositories\IImageRepository.cs" />
     <Compile Include="Core\Dtos\ImageDto.cs" />

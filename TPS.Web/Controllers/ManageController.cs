@@ -375,13 +375,14 @@ namespace TPS.Web.Controllers
 
 #endregion
 
-        public ActionResult UserProfile()
+        public async Task<ActionResult> UserProfile()
         {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             var viewModel = new UserProfileViewModel
             {
-                FirstName = "",
-                LastName = ""
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
             return View(viewModel);
         }

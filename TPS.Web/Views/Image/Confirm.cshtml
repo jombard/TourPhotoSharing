@@ -17,25 +17,23 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => image.Title)
-                    @Html.TextBoxFor(m => image.Title, new {@class = "form-control js-image-title"})
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => image.Caption)
-                    @Html.TextAreaFor(m => image.Caption, new {@class = "form-control js-image-caption"})
-                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.LabelFor(m => image.Caption, new {@class="h3"})
+                            @Html.TextAreaFor(m => image.Caption, new {@class = "form-control js-image-caption"})
+                        </div>
 
-                @Html.HiddenFor(m => image.Id, new {@class = "js-image-id"})
-                <button type="button" class="btn btn-primary js-save-image">
-                    <i class="glyphicon glyphicon-ok"></i>
-                    Save Changes
-                </button>
-                <button type="button" class="btn btn-link js-delete-image" data-image-id="@image.Id">
-                    <i class="glyphicon glyphicon-remove"></i>
-                    Remove Photo
-                </button>
-
+                        <button type="button" class="btn btn-primary js-save-image" data-image-id="@image.Id">
+                            <i class="glyphicon glyphicon-ok"></i>
+                            Save Changes
+                        </button>
+                        <button type="button" class="btn btn-link js-delete-image" data-image-id="@image.Id">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            Remove Photo
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     }
@@ -69,13 +67,11 @@
             var $this = $(this);
             var row = $this.closest(".row");
 
-            var imageId = row.find(".js-image-id").val();
-            var title = row.find(".js-image-title").val();
+            var imageId = $this.attr("data-image-id");
             var caption = row.find(".js-image-caption").val();
 
             var imageObj = {
                 id: imageId,
-                title: title,
                 caption: caption
             };
 

@@ -13,7 +13,7 @@
 <div id="image-list">
     <div class="row">
         <div class="col-sm-3">
-            <input class="search form-control" />
+            <input class="search form-control" placeholder="Type to filter eg: Jon" />
         </div>
         <div class="col-sm-9">
             <span class="sort btn btn-default" data-sort="date">Sort by date</span>
@@ -28,7 +28,7 @@
         {
             <li>
                 <div class="thumbnail">
-                    <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&maxwidth=150&maxheight=150" alt="@imageModel.Image.Caption" class="image"/>
+                    <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&maxwidth=150&maxheight=112" alt="@imageModel.Image.Caption" class="image"/>
                     <div class="date">@imageModel.Image.CreatedDate</div>
                     <div class="owner">@imageModel.Image.Owner.FullName</div>
                 </div>

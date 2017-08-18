@@ -23,29 +23,37 @@
                 <div class="thumbnail">
                     <div class="row">
                         <div class="col-sm-6">
-                            <img src="@imageModel.ImagePath.Replace("~", "..")?autorotate=true&maxwidth=150&maxheight=150" alt="@imageModel.AltText" class="image" />
+                            <img src="@imageModel.ImagePath.Replace("~", "..")?autorotate=true&maxwidth=150&maxheight=150" alt="@imageModel.AltText" class="image"/>
                             <div>
                                 <a href="#" class="btn btn-block btn-link">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                     Edit details
                                 </a>
-                            </div>
+                            </div>  
                         </div>
                         <div class="col-sm-6 hidden js-image-edit">
-                            <div class="form-group">
-                                @Html.LabelFor(m => imageModel.Caption, new{@class="h3"})
-                                <p>Add a useful description to this image.</p>
-                                @Html.TextAreaFor(m => imageModel.Caption, new {@class = "form-control js-image-caption"})
-                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => imageModel.Caption, new {@class = "h3"})
+                                    <p>Add a useful description to this image.</p>
+                                    @Html.TextAreaFor(m => imageModel.Caption, new {@class = "form-control js-image-caption"})
+                                </div>
 
-                            <button type="button" class="btn btn-primary js-save-image" data-image-id="@imageModel.Id">
-                                <i class="glyphicon glyphicon-ok"></i>
-                                Save Changes
-                            </button>
-                            <button type="button" class="btn btn-link js-delete-image" data-image-id="@imageModel.Id">
-                                <i class="glyphicon glyphicon-remove"></i>
-                                Remove Photo
-                            </button>
+                                <button type="button" class="btn btn-primary js-save-image" data-image-id="@imageModel.Id">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                    Save Changes
+                                </button>
+                                <button type="button" class="btn btn-link js-cancel-image" data-image-id="@imageModel.Id">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                    Cancel Changes
+                                </button>
+                                <button type="button" class="btn btn-link js-delete-image" data-image-id="@imageModel.Id">
+                                    <i class="glyphicon glyphicon-remove-sign"></i>
+                                    Remove Photo
+                                </button>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -117,6 +125,15 @@ else
                     button.closest("li").remove();
                 }
             });
+        }).on("click", ".js-cancel-image", function(e) {
+            e.preventDefault();
+
+            var $this = $(this);
+            var row = $this.closest(".row");
+            var img = row.find("img");
+            img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true&maxwidth=150&maxheight=150");
+            row.find(".js-image-edit").addClass("hidden");
+            row.closest("li").attr("style", "display:inline-block;");
         });
     </script>
 }

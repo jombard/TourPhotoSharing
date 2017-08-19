@@ -20,6 +20,7 @@ namespace TPS.Web
 
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                       "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/photoswipe.min.js",
                       "~/Scripts/list.min.js",
                       "~/Scripts/respond.min.js"));
 
@@ -30,6 +31,7 @@ namespace TPS.Web
                       "~/Content/bootstrap-simplex.min.css",
                       "~/Scripts/dropzone/basic.min.css",
                       "~/Scripts/dropzone/dropzone.min.css",
+                      "~/Scripts/photoswipe.css",
                       "~/Content/site.css"));
         }
     }

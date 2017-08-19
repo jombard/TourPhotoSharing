@@ -355,6 +355,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\default-skin\default-skin.css" />
+    <Content Include="Content\default-skin\default-skin.png" />
+    <Content Include="Content\default-skin\default-skin.svg" />
+    <Content Include="Content\default-skin\preloader.gif" />
     <Content Include="Content\photoswipe.css" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
@@ -408,6 +412,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\list.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\photoswipe-ui-default.js" />
+    <Content Include="Scripts\photoswipe-ui-default.min.js" />
+    <Content Include="Scripts\photoswipe.js" />
     <Content Include="Scripts\photoswipe.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />

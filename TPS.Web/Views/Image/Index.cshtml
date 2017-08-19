@@ -23,7 +23,7 @@
                 <div class="thumbnail">
                     <div class="row">
                         <div class="col-sm-6">
-                            <img src="@imageModel.ImagePath.Replace("~", "..")?autorotate=true&maxwidth=150&maxheight=150" alt="@imageModel.AltText" class="image"/>
+                            <img src="@imageModel.ImagePath.Replace("~", "..")?autorotate=true&maxwidth=150&maxheight=112" alt="@imageModel.AltText" class="image img-responsive"/>
                             <div>
                                 <a href="#" class="btn btn-block btn-link">
                                     <i class="glyphicon glyphicon-pencil"></i>
@@ -81,7 +81,7 @@ else
                 var $thumbnail = $this.closest(".thumbnail");
                 var img = $thumbnail.find("img");
 
-                img.attr("src", img.attr("src").split("?")[0] + "?w=550&autorotate=true");
+                img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true");
                 $thumbnail.find(".js-image-edit").removeClass("hidden");
                 $thumbnail.closest("li").attr("style", "display:block;");
             }).on("click", ".js-save-image", function (e) {

@@ -386,6 +386,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\tourpic.co.uk - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\app.min.js">
@@ -464,6 +466,8 @@
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Shared\_ImageModal.cshtml" />
     <Content Include="Views\Manage\UserProfile.cshtml" />
+    <Content Include="Views\Manage\Terms.cshtml" />
+    <Content Include="Views\Manage\Privacy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

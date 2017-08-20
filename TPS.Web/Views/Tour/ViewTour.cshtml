@@ -8,21 +8,22 @@
 <h2>@ViewBag.Title</h2>
 <p>@Model.Tour.Description</p>
 
-@*TODO: Filters, map*@
-
 <div id="image-list">
     <div class="row">
         <div class="col-sm-3">
             <input class="search form-control" placeholder="Type to filter eg: Jon" />
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <span class="sort btn btn-default" data-sort="date">Sort by date</span>
             <span class="sort btn btn-default" data-sort="owner">Sort by owner</span>
+            <span class="btn btn-info js-view-map">View map</span>
         </div>
     </div>
     
     <hr />
     
+    <div id="map" class="hidden" style="width: 100%; height: 400px;"></div>
+
     <ul class="list-inline list">
         @foreach (var imageModel in Model.TourImages)
         {
@@ -31,6 +32,8 @@
                     <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&maxwidth=150&maxheight=112"
                          alt="@imageModel.Image.Caption" 
                          data-author="@imageModel.Image.Owner.FullName"
+                         data-lat="@imageModel.Image.Latitude"
+                         data-lng="@imageModel.Image.Longitude"
                          class="image"/>
                     <div class="date">@imageModel.Image.CreatedDate</div>
                     <div class="owner">Photo by: @imageModel.Image.Owner.FullName</div>
@@ -43,8 +46,48 @@
 
 @section Scripts {
     @Scripts.Render("~/Scripts/App/app.js")
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYa67zXJI_Zdh_NNyuIfq1k6rO2TuNp8Y"></script>
     <script>
         var options = { valueNames: ["date", "owner"] };
         var imageList = new List("image-list", options);
+
+        var mapLocations = $("img").map(function(i, pic) {
+            return {
+                lat: parseFloat(pic.dataset.lat),
+                lng: parseFloat(pic.dataset.lng),
+                alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
+                "<p>" + pic.alt + "</p><p>" + pic.dataset.author + "</p></div>"
+            }
+        });
+
+        function mapInit() {
+            $("#map").removeClass("hidden");
+
+            var bounds = new google.maps.LatLngBounds();
+            var infowindow = new google.maps.InfoWindow();
+
+            var map = new google.maps.Map(document.getElementById('map'));
+            $.each(mapLocations, function(i, loc) {
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(loc.lat, loc.lng),
+                    map: map
+                });
+                bounds.extend(marker.position);
+
+                google.maps.event.addListener(marker,
+                    "click",
+                    (function(marker, i) {
+                        return function() {
+                            infowindow.setContent(loc.alt);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+            });
+
+            map.fitBounds(bounds);
+        }
+
+        $(".js-view-map").on("click", mapInit);
     </script>
 }

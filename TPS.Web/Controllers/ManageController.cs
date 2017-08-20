@@ -404,5 +404,17 @@ namespace TPS.Web.Controllers
 
             return RedirectToAction("Index", new {Message = ManageMessageId.ChangeProfileSuccess});
         }
+
+        [AllowAnonymous]
+        public ActionResult Terms()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Privacy()
+        {
+            return View();
+        }
     }
 }

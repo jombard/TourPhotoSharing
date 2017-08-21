@@ -60,6 +60,8 @@
             $(".js-view-map").removeClass("hidden");
         }
 
+        var google = google || {};
+
         var options = { valueNames: ["date", "owner"] };
         var imageList = new List("image-list", options);
 

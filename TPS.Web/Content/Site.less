@@ -119,3 +119,42 @@ textarea {
         margin-bottom: 5px;
     }
 }
+
+.sort {
+    padding-right: 15px;
+    &::after {
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        content: "";
+        position: relative;
+        top: -10px;
+        right: -4px;
+    }
+
+    &.asc::after {
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid #fff;
+        content: "";
+        position: relative;
+        top: 11px;
+        right: -4px;
+    }
+
+    &.desc::after {
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 4px solid #fff;
+        content: "";
+        position: relative;
+        top: -9px;
+        right: -4px;
+    }
+}

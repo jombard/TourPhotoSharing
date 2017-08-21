@@ -11,12 +11,19 @@
 <div id="image-list">
     <div class="row">
         <div class="col-sm-3">
-            <input class="search form-control" placeholder="Type to filter eg: Jon" />
+            <input class="search form-control" placeholder="Type to filter by name, date or time" />
         </div>
         <div class="col-sm-5">
-            <span class="sort btn btn-default" data-sort="date">Sort by date</span>
-            <span class="sort btn btn-default" data-sort="owner">Sort by owner</span>
-            <span class="btn btn-primary js-view-map">View map</span>
+            <span class="sort btn btn-default" data-sort="date">
+                Sort by date
+            </span>
+            <span class="sort btn btn-default" data-sort="owner">
+                Sort by owner
+            </span>
+            <span class="btn btn-primary js-view-map hidden">
+                <i class="glyphicon glyphicon-globe"></i>
+                View map
+            </span>
         </div>
     </div>
     
@@ -47,8 +54,12 @@
 @section Scripts {
     @Scripts.Render("~/Scripts/App/app.js")
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYa67zXJI_Zdh_NNyuIfq1k6rO2TuNp8Y"></script>
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYa67zXJI_Zdh_NNyuIfq1k6rO2TuNp8Y&callback=enableMaps"></script>
     <script>
+        function enableMaps() {
+            $(".js-view-map").removeClass("hidden");
+        }
+
         var options = { valueNames: ["date", "owner"] };
         var imageList = new List("image-list", options);
 
@@ -57,7 +68,7 @@
                 lat: parseFloat(pic.dataset.lat),
                 lng: parseFloat(pic.dataset.lng),
                 alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
-                "<p>" + pic.alt + "</p><p>" + pic.dataset.author + "</p></div>"
+                    "<p>" + pic.alt + "</p><p>" + pic.dataset.author + "</p></div>"
             }
         });
 

@@ -16,7 +16,7 @@
         <div class="col-sm-5">
             <span class="sort btn btn-default" data-sort="date">Sort by date</span>
             <span class="sort btn btn-default" data-sort="owner">Sort by owner</span>
-            <span class="btn btn-info js-view-map">View map</span>
+            <span class="btn btn-primary js-view-map">View map</span>
         </div>
     </div>
     
@@ -62,7 +62,10 @@
         });
 
         function mapInit() {
-            $("#map").removeClass("hidden");
+            $("#map").toggleClass("hidden");
+
+            if ($("#map").children().length)
+                return;
 
             var bounds = new google.maps.LatLngBounds();
             var infowindow = new google.maps.InfoWindow();

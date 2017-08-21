@@ -8,6 +8,17 @@
 <p class="lead">Label your photos and provide a description. Save the changes to add the photo to the tour.</p>
 
 <div class="approve-images">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <strong>Select the tour to assign the uploads</strong>
+                <select class="form-control">
+                    <option>LEJOG</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     @foreach (var image in Model)
     {
         <div class="row form-group">
@@ -20,7 +31,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="form-group">
-                            @Html.LabelFor(m => image.Caption, new {@class="h3"})
+                            @Html.LabelFor(m => image.Caption, new {@class = "h3"})
                             @Html.TextAreaFor(m => image.Caption, new {@class = "form-control js-image-caption"})
                         </div>
 
@@ -54,9 +65,11 @@
 
 @section Scripts {
     <script>
-        var showNoUploadMessage = function() {
-            if ($(".approve-images").children().length > 0) return;
+        var showNoUploadMessage = function () {
+            var approveImg = $(".approve-images");
+            if (approveImg.find("img").length > 0) return;
 
+            approveImg.addClass("hidden");
             $(".upload-message").removeClass("hidden");
         };
 

@@ -416,5 +416,15 @@ namespace TPS.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Delete()
+        {
+            return View();
+        }
+
+        public ActionResult ConfirmDelete()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

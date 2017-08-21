@@ -70,7 +70,7 @@
                 lat: parseFloat(pic.dataset.lat),
                 lng: parseFloat(pic.dataset.lng),
                 alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
-                    "<p>" + pic.alt + "</p><p>" + pic.dataset.author + "</p></div>"
+                    "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>"
             }
         });
 

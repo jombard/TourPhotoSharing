@@ -15,7 +15,7 @@
         </div>
         <div class="col-sm-5">
             @Html.LabelFor(m => m.UploaderNames)
-            @Html.DropDownListFor(m => m.UploaderNames, new SelectList(Model.UploaderNames), "Show all photos", new {@class = "form-control"})
+            @Html.DropDownListFor(m => m.UploaderNames, new SelectList(Model.UploaderNames), "Show all photos", new {@class = "form-control", id="selectOwner"})
             <span class="sort btn btn-default" data-sort="date">
                 Sort by date
             </span>
@@ -45,7 +45,7 @@
                          data-lng="@imageModel.Image.Longitude"
                          class="image"/>
                     <div class="date">@imageModel.Image.CreatedDate</div>
-                    <div class="owner">Photo by: @imageModel.Image.Owner.FullName</div>
+                    <div class="owner">Photo by: <span>@imageModel.Image.Owner.FullName</span></div>
                 </div>
             </li>
         }
@@ -66,6 +66,17 @@
 
         var options = { valueNames: ["date", "owner"] };
         var imageList = new List("image-list", options);
+
+        $("#selectOwner").on("change", function() {
+            var selectedOwner = $(this).val();
+
+            $(".owner").each(function(i, owner) {
+                $(owner).closest("li").show();
+                if (selectedOwner !== "" && $(owner).find("span").text() !== selectedOwner) {
+                    $(owner).closest("li").hide();
+                }
+            });
+        });
 
         var mapLocations = $("img").map(function(i, pic) {
             return {

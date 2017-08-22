@@ -66,19 +66,6 @@ namespace TourPhotoSharing.Tests.Api
         }
 
         [TestMethod]
-        public void UpdateImage_NoTitleSpecified_ShouldReturnBadRequest()
-        {
-            var image = new Image();
-            _mockRepository.Setup(r => r.GetImage("1", _userId)).Returns(image);
-
-            var imageDto = new ImageDto {Title = ""};
-
-            var result = _controller.UpdateImage("1", imageDto);
-
-            result.Should().BeOfType<BadRequestErrorMessageResult>();
-        }
-
-        [TestMethod]
         public void UpdateImage_NoImageToUpdate_ShouldReturnNotFound()
         {
             var imageDto = new ImageDto{Title = "Test"};

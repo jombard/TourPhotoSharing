@@ -10,12 +10,13 @@
 
 <div id="image-list">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-6 col-md-4">
             <input class="search form-control" placeholder="Type to filter by name, date or time" />
         </div>
-        <div class="col-sm-5">
-            @Html.LabelFor(m => m.UploaderNames)
+        <div class="col-sm-6 col-md-4">
             @Html.DropDownListFor(m => m.UploaderNames, new SelectList(Model.UploaderNames), "Show all photos", new {@class = "form-control", id="selectOwner"})
+        </div>
+        <div class="col-sm-12 col-md-4">
             <span class="sort btn btn-default" data-sort="date">
                 Sort by date
             </span>
@@ -24,7 +25,7 @@
             </span>
             <span class="btn btn-primary js-view-map hidden">
                 <i class="glyphicon glyphicon-globe"></i>
-                View map
+                View photos on map
             </span>
         </div>
     </div>
@@ -44,7 +45,7 @@
                          data-lat="@imageModel.Image.Latitude"
                          data-lng="@imageModel.Image.Longitude"
                          class="image"/>
-                    <div class="date">@imageModel.Image.CreatedDate</div>
+                    <div class="date">@imageModel.Image.CreatedDate.Value.Ticks</div>
                     <div class="owner">Photo by: <span>@imageModel.Image.Owner.FullName</span></div>
                 </div>
             </li>

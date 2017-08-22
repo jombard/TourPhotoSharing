@@ -86,10 +86,17 @@ namespace TPS.Web.Controllers
                 .OrderByDescending(t => t.Image.CreatedDate)
                 .ToList();
 
+            var uploaders = tourImages
+                .Select(u => u.Image.Owner.FullName)
+                .Distinct()
+                .OrderBy(o => o.Substring(0))
+                .ToList();
+
             var viewModel = new TourImagesViewModel()
             {
                 Tour = tour,
-                TourImages = tourImages
+                TourImages = tourImages,
+                UploaderNames = uploaders
             };
             return View(viewModel);
         }

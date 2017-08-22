@@ -78,9 +78,7 @@ textarea {
   color: #ccc;
   padding: 10px;
   height: 150px;
-  -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
-  animation-name: zoom;
   animation-duration: 0.6s;
 }
 .overlay .close {

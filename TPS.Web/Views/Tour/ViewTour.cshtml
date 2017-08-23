@@ -25,7 +25,7 @@
             </span>
             <span class="btn btn-primary js-view-map hidden">
                 <i class="glyphicon glyphicon-globe"></i>
-                View map
+                <span>View map</span>
             </span>
         </div>
     </div>
@@ -101,6 +101,12 @@
                         "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>"
                 }
             });
+
+            if (!mapLocations.length) {
+                var noMapData = $("<div />").addClass("alert alert-danger").text("Unfortunately there is no location data for the selected photo's.");
+                $("#map").append(noMapData);
+                return;
+            }
 
             var bounds = new google.maps.LatLngBounds();
             var infowindow = new google.maps.InfoWindow();

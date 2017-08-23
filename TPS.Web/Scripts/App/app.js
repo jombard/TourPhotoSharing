@@ -5,7 +5,7 @@ $(document).on("click", ".image", function (e) {
     var index = 0;
     var thisImg = this;
 
-    var items = $("img").map(function (i, pic) {
+    var items = $("li:visible").find("img").map(function (i, pic) {
         if ($(pic).hasClass("pswp__img")) {
             return null;
         }
@@ -16,11 +16,10 @@ $(document).on("click", ".image", function (e) {
 
         return {
             src: pic.src.split("?")[0] + "?maxwidth=1024&maxheight=768&mode=crop",
-            title: pic.alt,
+            title: pic.alt + "<br />Photo by: " + $(pic).data("author"),
             w: 1024,
             h: 768,
-            msrc: pic.src,
-            author: $(pic).data("author")
+            msrc: pic.src
         }
     });
 

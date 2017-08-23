@@ -32,9 +32,9 @@
     
     <hr />
     
-    <div id="map" class="hidden" style="width: 100%; height: 400px;"></div>
+    <div id="map" class="hidden" style="width: 100%; margin-bottom: 10px; height: 400px;"></div>
 
-    <ul class="list-inline list">
+    <ul class="list-inline list list-tour-images">
         @foreach (var imageModel in Model.TourImages)
         {
             <li>
@@ -79,7 +79,9 @@
             });
         });
 
-        var mapLocations = $("img").map(function(i, pic) {
+        var mapLocations = $("img").filter(function(pic) {
+            return pic;
+        }).map(function (i, pic) {
             return {
                 lat: parseFloat(pic.dataset.lat),
                 lng: parseFloat(pic.dataset.lng),

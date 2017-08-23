@@ -8,11 +8,11 @@
 <h2>@ViewBag.Title</h2>
 <p>@Model.Tour.Description</p>
 
-<div id="image-list">
-    <div class="row">
-        <div class="col-sm-6 col-md-3">
-            <input class="search form-control" placeholder="Type to filter by name, date or time" />
-        </div>
+<div id="image-list" >
+    <div class="row image-filters">
+        @*<div class="col-sm-6 col-md-3">
+        <input class="search form-control" placeholder="Type to filter by name, date or time" />
+    </div>*@
         <div class="col-sm-6 col-md-3">
             @Html.DropDownListFor(m => m.UploaderNames, new SelectList(Model.UploaderNames), "Show all photos", new {@class = "form-control", id="selectOwner"})
         </div>
@@ -25,7 +25,7 @@
             </span>
             <span class="btn btn-primary js-view-map hidden">
                 <i class="glyphicon glyphicon-globe"></i>
-                View photos on map
+                View map
             </span>
         </div>
     </div>
@@ -34,23 +34,28 @@
     
     <div id="map" class="hidden" style="width: 100%; margin-bottom: 10px; height: 400px;"></div>
 
-    <ul class="list-inline list list-tour-images">
-        @foreach (var imageModel in Model.TourImages)
-        {
-            <li>
-                <div class="thumbnail">
-                    <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&maxwidth=150&maxheight=112"
-                         alt="@imageModel.Image.Caption" 
-                         data-author="@imageModel.Image.Owner.FullName"
-                         data-lat="@imageModel.Image.Latitude"
-                         data-lng="@imageModel.Image.Longitude"
-                         class="image"/>
-                    <div class="date">@imageModel.Image.CreatedDate.Value.Ticks</div>
-                    <div class="owner">Photo by: <span>@imageModel.Image.Owner.FullName</span></div>
-                </div>
-            </li>
-        }
-    </ul>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="list-inline list list-tour-images">
+                @foreach (var imageModel in Model.TourImages)
+                {
+                    <li>
+                        <div class="thumbnail">
+                            <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&w=100&h=100&mode=crop"
+                                 alt="@imageModel.Image.Caption"
+                                 data-author="@imageModel.Image.Owner.FullName"
+                                 data-lat="@imageModel.Image.Latitude"
+                                 data-lng="@imageModel.Image.Longitude"
+                                 class="image"/>
+                            <div class="date">@imageModel.Image.CreatedDate.Value.Ticks</div>
+                            <div class="owner">Photo by: <span>@imageModel.Image.Owner.FullName</span>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 </div>
 @Html.Partial("_ImageModal")
 
@@ -70,6 +75,7 @@
 
         $("#selectOwner").on("change", function() {
             var selectedOwner = $(this).val();
+            $("#map").addClass("hidden").empty();
 
             $(".owner").each(function(i, owner) {
                 $(owner).closest("li").show();
@@ -79,22 +85,22 @@
             });
         });
 
-        var mapLocations = $("img").filter(function (i, pic) {
-            return pic.dataset.lat && pic.dataset.lng;
-        }).map(function (i, pic) {
-            return {
-                lat: parseFloat(pic.dataset.lat),
-                lng: parseFloat(pic.dataset.lng),
-                alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
-                    "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>"
-            }
-            });
-
         function mapInit() {
             $("#map").toggleClass("hidden");
 
             if ($("#map").children().length)
                 return;
+
+            var mapLocations = $("img").filter(function (i, pic) {
+                return pic.dataset.lat && pic.dataset.lng && $(pic).is(":visible");
+            }).map(function (i, pic) {
+                return {
+                    lat: parseFloat(pic.dataset.lat),
+                    lng: parseFloat(pic.dataset.lng),
+                    alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
+                        "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>"
+                }
+            });
 
             var bounds = new google.maps.LatLngBounds();
             var infowindow = new google.maps.InfoWindow();

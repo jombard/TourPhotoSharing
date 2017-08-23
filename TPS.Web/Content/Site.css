@@ -96,8 +96,8 @@ textarea {
 .overlay .close:focus {
   color: #bbb;
 }
-#image-list .form-control,
-#image-list .btn {
+.image-filters .form-control,
+.image-filters .btn {
   margin-bottom: 5px;
 }
 .sort {

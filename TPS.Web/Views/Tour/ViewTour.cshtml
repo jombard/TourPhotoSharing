@@ -10,13 +10,13 @@
 
 <div id="image-list">
     <div class="row">
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-3">
             <input class="search form-control" placeholder="Type to filter by name, date or time" />
         </div>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-3">
             @Html.DropDownListFor(m => m.UploaderNames, new SelectList(Model.UploaderNames), "Show all photos", new {@class = "form-control", id="selectOwner"})
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-6">
             <span class="sort btn btn-default" data-sort="date">
                 Sort by date
             </span>
@@ -79,8 +79,8 @@
             });
         });
 
-        var mapLocations = $("img").filter(function(pic) {
-            return pic;
+        var mapLocations = $("img").filter(function (i, pic) {
+            return pic.dataset.lat && pic.dataset.lng;
         }).map(function (i, pic) {
             return {
                 lat: parseFloat(pic.dataset.lat),
@@ -88,7 +88,7 @@
                 alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
                     "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>"
             }
-        });
+            });
 
         function mapInit() {
             $("#map").toggleClass("hidden");

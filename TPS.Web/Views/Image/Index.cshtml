@@ -22,7 +22,7 @@
             <li>
                 <div class="thumbnail">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <img src="@imageModel.ImagePath.Replace("~", "..")?autorotate=true&maxwidth=150&maxheight=112" alt="@imageModel.AltText" class="image img-responsive"/>
                             <div>
                                 <a href="#" class="btn btn-block btn-link">
@@ -31,7 +31,7 @@
                                 </a>
                             </div>  
                         </div>
-                        <div class="col-sm-6 hidden js-image-edit">
+                        <div class="col-sm-12 hidden js-image-edit">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                 <div class="form-group">
@@ -76,15 +76,17 @@ else
     @Scripts.Render("~/Scripts/App/app.min.js")
     <script>
         $(".thumbnail").on("click", "a.btn", function(e) {
-                e.preventDefault();
-                var $this = $(this);
-                var $thumbnail = $this.closest(".thumbnail");
-                var img = $thumbnail.find("img");
+            e.preventDefault();
+            var $this = $(this);
+            var $thumbnail = $this.closest(".thumbnail");
+            var img = $thumbnail.find("img");
+            var cols = $thumbnail.find(".col-sm-12");
 
-                img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true");
-                $thumbnail.find(".js-image-edit").removeClass("hidden");
-                $thumbnail.closest("li").attr("style", "display:block;");
-            }).on("click", ".js-save-image", function (e) {
+            img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true");
+            $thumbnail.find(".js-image-edit").removeClass("hidden");
+            $thumbnail.closest("li").attr("style", "display:block;");
+            cols.toggleClass("col-sm-12 col-sm-6");
+        }).on("click", ".js-save-image", function (e) {
             e.preventDefault();
             var $this = $(this);
             var row = $this.closest(".row");
@@ -103,8 +105,9 @@ else
                 data: imageObj
             }).done(function (result) {
                 var img = row.find("img");
+                img.parent().toggleClass("col-sm-6 col-sm-12");
                 img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true&maxwidth=150&maxheight=150");
-                row.find(".js-image-edit").addClass("hidden");
+                row.find(".js-image-edit").addClass("hidden col-sm-12").removeClass("col-sm-6");
                 row.closest("li").attr("style", "display:inline-block;");
             }).fail(function (error) {
                 console.log(error);
@@ -131,8 +134,9 @@ else
             var $this = $(this);
             var row = $this.closest(".row");
             var img = row.find("img");
+            img.parent().toggleClass("col-sm-6 col-sm-12");
             img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true&maxwidth=150&maxheight=150");
-            row.find(".js-image-edit").addClass("hidden");
+            row.find(".js-image-edit").addClass("hidden col-sm-12").removeClass("col-sm-6");
             row.closest("li").attr("style", "display:inline-block;");
         });
     </script>

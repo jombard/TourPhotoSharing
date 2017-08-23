@@ -19,8 +19,8 @@
         {
             <div class="col-sm-3">
                 <div class="thumbnail">
-                    <a href="#">
-                        <img src="@tour.Thumbnail.Replace("~","..")?maxwidth=250&maxheight=200&crop=auto" alt="Tour Thumbnail"/>
+                    <a href="@Url.Action("ViewTour", new{tour.Id})">
+                        <img src="@tour.Thumbnail.Replace("~","..")" alt="Tour Thumbnail"/>
                     </a>
                     <div class="caption">
                         <h3>@tour.Name</h3>

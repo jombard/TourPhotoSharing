@@ -78,7 +78,9 @@ textarea {
   color: #ccc;
   padding: 10px;
   height: 150px;
+  -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
   animation-duration: 0.6s;
 }
 .overlay .close {
@@ -133,4 +135,18 @@ textarea {
   position: relative;
   top: -9px;
   right: -4px;
+}
+.list-tour-images > li {
+  margin: 0 2px;
+  padding: 0;
+}
+.list-tour-images .thumbnail {
+  padding: 0;
+  margin-bottom: 0;
+  border-radius: 0;
+  border: none;
+}
+.list-tour-images .owner,
+.list-tour-images .date {
+  display: none;
 }

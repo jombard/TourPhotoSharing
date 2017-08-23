@@ -19,7 +19,8 @@ $(document).on("click", ".image", function (e) {
             title: pic.alt,
             w: 1024,
             h: 768,
-            author: pic.dataset.author
+            msrc: pic.src,
+            author: $(pic).data("author")
         }
     });
 

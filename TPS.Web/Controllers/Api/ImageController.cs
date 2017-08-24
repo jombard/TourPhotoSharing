@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
-using ImageResizer;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using TPS.Web.Core;
 using TPS.Web.Core.Dtos;
@@ -32,71 +28,6 @@ namespace TPS.Web.Controllers.Api
                 return NotFound();
 
             return Ok(Mapper.Map<Image, ImageDto>(imageInDb));
-        }
-
-        // POST: api/Image
-        public IHttpActionResult PostImage()
-        {
-            var httpRequest = HttpContext.Current.Request;
-
-            if (httpRequest.Files.Count < 1)
-                return BadRequest("No images provided");
-
-            try
-            {
-                foreach (string fileName in httpRequest.Files)
-                {
-                    var file = httpRequest.Files[fileName];
-                    //Save file content goes here
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        var filepath = "~\\uploads\\images\\";
-                        var guid = "<guid>";
-
-                        var resizeSettings = new ResizeSettings
-                        {
-                            MaxWidth = 1900,
-                            MaxHeight = 1900,
-                            Format = "jpg"
-                        };
-
-                        var imageJob = new ImageJob(file, filepath + guid, new Instructions(resizeSettings), true, true);
-                        var compressedImg = ImageBuilder.Current.Build(imageJob);
-                        compressedImg.Build();
-
-                        var url = filepath + compressedImg.FinalPath.Split('\\').Last();
-
-                        var imageDto = new ImageDto
-                        {
-                            ImageUrl = url,
-                            Title = file.FileName,
-                            ImageMimeType = file.ContentType,
-                            OwnerId = User.Identity.GetUserId()
-                        };
-
-                        var id = _unitOfWork.Images.AddImage(imageDto);
-
-                        // TODO attach to tour
-                        //var lejogTour = _context.Tours.SingleOrDefault(t => t.Name == "LEJOG");
-
-                        //var tourImage = new TourImages
-                        //{
-                        //    Image = image,
-                        //    Tour = lejogTour
-                        //};
-
-                        //_unitOfWork.TourImages.Add(tourImage);
-                    }
-                }
-
-                _unitOfWork.Complete();
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok();
         }
 
         // PUT: api/Image/5

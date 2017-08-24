@@ -473,6 +473,7 @@
     <Content Include="Views\Manage\Terms.cshtml" />
     <Content Include="Views\Manage\Privacy.cshtml" />
     <Content Include="Views\Manage\Delete.cshtml" />
+    <Content Include="Views\Manage\ConfirmDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -424,7 +424,7 @@ namespace TPS.Web.Controllers
 
         public ActionResult ConfirmDelete()
         {
-            throw new System.NotImplementedException();
+            return View();
         }
     }
 }

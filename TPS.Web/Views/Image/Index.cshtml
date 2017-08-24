@@ -23,11 +23,15 @@
                 <div class="thumbnail">
                     <div class="row">
                         <div class="col-sm-12">
-                            <img src="@imageModel.ImagePath.Replace("~", "..")?autorotate=true&maxwidth=150&maxheight=112" alt="@imageModel.AltText" class="image img-responsive"/>
+                            <img src="@imageModel.ImagePath.Replace("~", "..")?maxwidth=150&maxheight=112" alt="@imageModel.AltText" class="image img-responsive" />
                             <div>
-                                <a href="#" class="btn btn-block btn-link">
+                                <a href="#" class="btn btn-block btn-link js-edit-link">
                                     <i class="glyphicon glyphicon-pencil"></i>
-                                    Edit description
+                                    Edit
+                                </a>
+                                <a href="#" class="btn btn-block btn-primary js-rotate-link hidden">
+                                    <i class="glyphicon glyphicon-refresh"></i>
+                                    Rotate
                                 </a>
                             </div>  
                         </div>
@@ -75,17 +79,40 @@ else
 @section Scripts {
     @Scripts.Render("~/Scripts/App/app.min.js")
     <script>
-        $(".thumbnail").on("click", "a.btn", function(e) {
+        $(".thumbnail").on("click", "a.js-edit-link", function(e) {
             e.preventDefault();
             var $this = $(this);
             var $thumbnail = $this.closest(".thumbnail");
             var img = $thumbnail.find("img");
             var cols = $thumbnail.find(".col-sm-12");
 
-            img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true");
+            $this.addClass("hidden");
+            img.attr("src", img.attr("src").split("?")[0]);
+            $thumbnail.find(".js-rotate-link").removeClass("hidden");
             $thumbnail.find(".js-image-edit").removeClass("hidden");
             $thumbnail.closest("li").attr("style", "display:block;");
             cols.toggleClass("col-sm-12 col-sm-6");
+        }).on("click", ".js-rotate-link", function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var $thumbnail = $this.closest(".thumbnail");
+            var img = $thumbnail.find("img");
+            var query = img.attr("src").split("?")[1];
+            var options = new URLSearchParams(query);
+
+            var rotate = options.get("rotate");
+            if (rotate === "90") {
+                options.set("rotate", 180);
+            } else if (rotate === "180") {
+                options.set("rotate", 270);
+            } else if (rotate === "270") {
+                options.delete("rotate");
+            } else {
+                options.set("rotate", 90);
+            }
+
+            img.attr("src", img.attr("src").split("?")[0] + "?" + options);
+
         }).on("click", ".js-save-image", function (e) {
             e.preventDefault();
             var $this = $(this);
@@ -93,6 +120,8 @@ else
 
             var imageId = $this.attr("data-image-id");
             var caption = row.find(".js-image-caption").val();
+            row.find(".js-edit-link").removeClass("hidden");
+            row.find(".js-rotate-link").addClass("hidden");
 
             var imageObj = {
                 id: imageId,
@@ -134,6 +163,8 @@ else
             var $this = $(this);
             var row = $this.closest(".row");
             var img = row.find("img");
+            row.find(".js-edit-link").removeClass("hidden");
+            row.find(".js-rotate-link").addClass("hidden");
             img.parent().toggleClass("col-sm-6 col-sm-12");
             img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true&maxwidth=150&maxheight=150");
             row.find(".js-image-edit").addClass("hidden col-sm-12").removeClass("col-sm-6");

@@ -4,7 +4,7 @@
     <ul class="nav navbar-nav">
         <li>@Html.ActionLink("My Tours", "Index", "Tour")</li>
         <li>@Html.ActionLink("My Photos", "Index", "Image")</li>
-        <li>@Html.ActionLink("Upload", "Upload", "Image")</li>
+        @*<li>@Html.ActionLink("Upload", "Upload", "Image")</li>*@
     </ul>
 
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -13,7 +13,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage")
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

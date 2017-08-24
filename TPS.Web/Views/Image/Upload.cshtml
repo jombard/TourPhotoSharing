@@ -30,26 +30,12 @@
         Dropzone.options.dropzoneForm = {
             acceptedFiles: "image/*",
             maxFilesize: 10,
-
+            uploadMultiple: true,
+            addRemoveLinks: true,
+            parallelUploads: 10,
             init: function() {
-                this.on("complete", function(data) {
-                    var res = JSON.parse(data.xhr.responseText);
-                    console.log(data, res);
+                this.on("queuecomplete", function() {
                     $("#btnUpload").removeClass("hidden");
-                });
-
-                this.on("addedfile", function(file) {
-                    var btn = Dropzone.createElement("<button class='btn btn-link btn-block m-t'><i class='glyphicon glyphicon-remove-sign'></i> Remove</button>");
-
-                    var thisDz = this;
-                    console.log(file);
-                    btn.addEventListener("click", function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        thisDz.removeFile(file);
-                    });
-
-                    //file.previewElement.appendChild(btn);
                 });
 
             }

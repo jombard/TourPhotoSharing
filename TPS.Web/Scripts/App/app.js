@@ -14,9 +14,11 @@ $(document).on("click", ".image", function (e) {
             index = i;
         }
 
+        var authorName = $(pic).data("author");
+
         return {
             src: pic.src.split("?")[0] + "?maxwidth=1024&maxheight=768&mode=crop",
-            title: pic.alt + "<br />Photo by: " + $(pic).data("author"),
+            title: pic.alt + (authorName ? "<br />Photo by: " + authorName : ""),
             w: 1024,
             h: 768,
             msrc: pic.src

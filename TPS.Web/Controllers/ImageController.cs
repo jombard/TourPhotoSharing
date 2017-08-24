@@ -51,11 +51,6 @@ namespace TPS.Web.Controllers
                     if (file != null && file.ContentLength > 0)
                     {
                         fName = file.FileName;
-
-                        var sourceImage = System.Drawing.Image.FromStream(file.InputStream, true, true);
-                        var latitude = GetLatitude(sourceImage);
-                        var longitude = GetLongitude(sourceImage);
-                        var dateTaken = GetDateTaken(sourceImage);
                         
                         var resizeSettings = new ResizeSettings
                         {
@@ -63,14 +58,19 @@ namespace TPS.Web.Controllers
                             MaxHeight = 1900,
                             Format = "jpg"
                         };
-
-                        file.InputStream.Seek(0, SeekOrigin.Begin);
+                        resizeSettings.Set("autorotate", "true");
 
                         var imageJob = new ImageJob(file, Filepath + Guid, new Instructions(resizeSettings), true, true);
                         var compressedImg = ImageBuilder.Current.Build(imageJob);
 
                         var url = Filepath + compressedImg.FinalPath.Split('\\').Last();
-                        
+
+                        file.InputStream.Seek(0, SeekOrigin.Begin);
+
+                        var sourceImage = System.Drawing.Image.FromStream(file.InputStream, true, true);
+                        var latitude = GetLatitude(sourceImage);
+                        var longitude = GetLongitude(sourceImage);
+                        var dateTaken = GetDateTaken(sourceImage);
                         var image = new Image
                         {
                             ImageUrl = url,
@@ -169,7 +169,7 @@ namespace TPS.Web.Controllers
             var seconds = secondsNumerator / (float)secondsDenominotor;
 
             var coordinate = degrees + (minutes / 60f) + (seconds / 3600f);
-            var gpsRef = System.Text.Encoding.ASCII.GetString(new byte[1] {propItemRef.Value[0]}); // N, S, E, or W
+            var gpsRef = Encoding.ASCII.GetString(new byte[1] {propItemRef.Value[0]}); // N, S, E, or W
             if(gpsRef == "S" || gpsRef == "W")
                 coordinate = 0 - coordinate;
 

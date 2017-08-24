@@ -18,7 +18,10 @@ namespace TPS.Web.Core.ViewModels
             Caption = image.Caption;
             ImagePath = image.ImageUrl;
             Thumbnail = image.Thumbnail;
+            Query = image.Query;
         }
+
+        public string Query { get; set; }
 
         public string Id { get; set; }
 

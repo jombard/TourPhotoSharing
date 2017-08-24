@@ -23,16 +23,16 @@
                 <div class="thumbnail">
                     <div class="row">
                         <div class="col-sm-12">
-                            <img src="@imageModel.ImagePath.Replace("~", "..")?maxwidth=150&maxheight=112" alt="@imageModel.AltText" class="image img-responsive" />
+                            <img src="@imageModel.ImagePath.Replace("~", "..")?@imageModel.Query&maxwidth=150&maxheight=112" alt="@imageModel.AltText" class="image img-responsive" />
                             <div>
                                 <a href="#" class="btn btn-block btn-link js-edit-link">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                     Edit
                                 </a>
-                                <a href="#" class="btn btn-block btn-primary js-rotate-link hidden">
+                                @*<a href="#" class="btn btn-block btn-primary js-rotate-link hidden" data-image-id="@imageModel.Id">
                                     <i class="glyphicon glyphicon-refresh"></i>
                                     Rotate
-                                </a>
+                                </a>*@
                             </div>  
                         </div>
                         <div class="col-sm-12 hidden js-image-edit">
@@ -87,7 +87,9 @@ else
             var cols = $thumbnail.find(".col-sm-12");
 
             $this.addClass("hidden");
-            img.attr("src", img.attr("src").split("?")[0]);
+            var imgParams = img.attr("src").split("?");
+            var imgQuery = new URLSearchParams(imgParams[1]);
+            img.attr("src", imgParams[0] + (imgQuery.has("rotate") ? "?rotate=" + imgQuery.get("rotate") : ""));
             $thumbnail.find(".js-rotate-link").removeClass("hidden");
             $thumbnail.find(".js-image-edit").removeClass("hidden");
             $thumbnail.closest("li").attr("style", "display:block;");
@@ -95,6 +97,7 @@ else
         }).on("click", ".js-rotate-link", function (e) {
             e.preventDefault();
             var $this = $(this);
+            var imageId = $this.attr("data-image-id");
             var $thumbnail = $this.closest(".thumbnail");
             var img = $thumbnail.find("img");
             var query = img.attr("src").split("?")[1];
@@ -112,6 +115,20 @@ else
             }
 
             img.attr("src", img.attr("src").split("?")[0] + "?" + options);
+
+            var imageObj = {
+                query: options.toString()
+            };
+
+            $.ajax({
+                url: "/api/image/" + imageId,
+                method: "PUT",
+                data: imageObj
+            }).done(function (result) {
+                console.log("rotate result", result);
+            }).fail(function (error) {
+                console.log("rotate error", error);
+            });
 
         }).on("click", ".js-save-image", function (e) {
             e.preventDefault();
@@ -135,7 +152,7 @@ else
             }).done(function (result) {
                 var img = row.find("img");
                 img.parent().toggleClass("col-sm-6 col-sm-12");
-                img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true&maxwidth=150&maxheight=150");
+                img.attr("src", img.attr("src").split("?")[0] + "?" + img.attr("src").split("?")[1] + "&maxwidth=150&maxheight=112");
                 row.find(".js-image-edit").addClass("hidden col-sm-12").removeClass("col-sm-6");
                 row.closest("li").attr("style", "display:inline-block;");
             }).fail(function (error) {
@@ -166,7 +183,7 @@ else
             row.find(".js-edit-link").removeClass("hidden");
             row.find(".js-rotate-link").addClass("hidden");
             img.parent().toggleClass("col-sm-6 col-sm-12");
-            img.attr("src", img.attr("src").split("?")[0] + "?autorotate=true&maxwidth=150&maxheight=150");
+            img.attr("src", img.attr("src").split("?")[0] + "?" + img.attr("src").split("?")[1] + "&maxwidth=150&maxheight=112");
             row.find(".js-image-edit").addClass("hidden col-sm-12").removeClass("col-sm-6");
             row.closest("li").attr("style", "display:inline-block;");
         });

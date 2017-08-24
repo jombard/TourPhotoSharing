@@ -51,6 +51,8 @@ namespace TPS.Web.Core.Models
         [DataType(DataType.DateTime)]
         public DateTime UploadDate { get; set; }
 
+        public string Query { get; set; }
+
         public static readonly string[] ValidImageTypes = {
             "image/gif",
             "image/jpeg",

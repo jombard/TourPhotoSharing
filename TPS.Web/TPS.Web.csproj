@@ -332,6 +332,10 @@
     <Compile Include="Persistence\Migrations\201708171402315_AddFirstLastNameToUserTable.Designer.cs">
       <DependentUpon>201708171402315_AddFirstLastNameToUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708241131586_AddQueryColumnToImageTable.cs" />
+    <Compile Include="Persistence\Migrations\201708241131586_AddQueryColumnToImageTable.Designer.cs">
+      <DependentUpon>201708241131586_AddQueryColumnToImageTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
@@ -534,6 +538,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708171402315_AddFirstLastNameToUserTable.resx">
       <DependentUpon>201708171402315_AddFirstLastNameToUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708241131586_AddQueryColumnToImageTable.resx">
+      <DependentUpon>201708241131586_AddQueryColumnToImageTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

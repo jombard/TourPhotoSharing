@@ -14,5 +14,6 @@ namespace TPS.Web.Core.Dtos
         public string ImageMimeType { get; set; }
         public string Confirmed { get; set; }
         public string OwnerId { get; set; }
+        public string Query { get; set; }
     }
 }

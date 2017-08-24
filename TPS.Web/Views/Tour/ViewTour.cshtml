@@ -41,7 +41,7 @@
                 {
                     <li>
                         <div class="thumbnail">
-                            <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?autorotate=true&w=100&h=100&mode=crop"
+                            <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?w=100&h=100&mode=crop"
                                  alt="@imageModel.Image.Caption"
                                  data-author="@imageModel.Image.Owner.FullName"
                                  data-lat="@imageModel.Image.Latitude"

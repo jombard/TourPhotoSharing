@@ -83,7 +83,7 @@ namespace TPS.Web.Controllers
                 .Where(t => t.Tour.Id.ToString() == id)
                 .Include(i => i.Image)
                 .Include(u => u.Image.Owner)
-                .OrderByDescending(t => t.Image.CreatedDate)
+                .OrderBy(t => t.Image.CreatedDate)
                 .ToList();
 
             var uploaders = tourImages

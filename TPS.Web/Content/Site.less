@@ -6,6 +6,9 @@
     src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
+@smartphones: ~"only screen and (max-width: 479px)";
+@tablets: ~"only screen and (min-width: 768px) and (max-width: 959px)";
+
 html,
 body {
     height: 100%;
@@ -69,7 +72,7 @@ textarea {
     }
 }
 
-.thumbnail:hover {
+.thumbnail {
     position: relative;
 
     .owner,
@@ -204,21 +207,27 @@ textarea {
 
 .list-tour-images {
     margin: 0;
+
     > li {
         margin: 0;
         padding: 0;
         float: left;
     }
+
     .thumbnail {
         padding: 0;
-        margin-bottom: 0;
+        margin-bottom: 10px;
+        margin-right: 10px;
         border-radius: 0;
-        border:none;
+        border: none;
+
+        @media @smartphones, @tablets {
+            margin-right: 0;
+        }
     }
-    .owner,
-    .img-caption,
+
     .date {
-        display:none;
+        display: none;
     }
 }
 

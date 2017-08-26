@@ -20,14 +20,21 @@ $(document).on("click", ".image", function (e) {
         return {
             src: pic.src.split("?")[0] + "?maxwidth=1024&maxheight=768&mode=crop",
             title: pic.alt + (authorName ? "<br />Photo by: " + authorName : ""),
-            w: 1024,
-            h: 768,
-            msrc: pic.src
+            w: 1000,
+            h: 1000
         }
     });
 
     var options = {
-        index: index
+        index: index,
+        showHideOpacity: false,
+        getThumbBoundsFn: function (x) {
+            var thumbnail = $("li:visible").find("img")[x];
+            var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+            var rect = $(thumbnail).offset();
+            var width = $(thumbnail).width();
+            return { x: rect.left, y: rect.top + pageYScroll, w: width };
+        }
     };
 
     var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);

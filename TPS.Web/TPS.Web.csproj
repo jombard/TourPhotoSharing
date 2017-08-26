@@ -337,6 +337,10 @@
     <Compile Include="Persistence\Migrations\201708241131586_AddQueryColumnToImageTable.Designer.cs">
       <DependentUpon>201708241131586_AddQueryColumnToImageTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708262054577_AddImageDimensionsWidthHeightColumns.cs" />
+    <Compile Include="Persistence\Migrations\201708262054577_AddImageDimensionsWidthHeightColumns.Designer.cs">
+      <DependentUpon>201708262054577_AddImageDimensionsWidthHeightColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
@@ -544,6 +548,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708241131586_AddQueryColumnToImageTable.resx">
       <DependentUpon>201708241131586_AddQueryColumnToImageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708262054577_AddImageDimensionsWidthHeightColumns.resx">
+      <DependentUpon>201708262054577_AddImageDimensionsWidthHeightColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

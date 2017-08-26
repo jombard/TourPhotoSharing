@@ -81,7 +81,9 @@ namespace TPS.Web.Controllers
                             OwnerId = User.Identity.GetUserId(),
                             Latitude = latitude,
                             Longitude = longitude,
-                            UploadDate = DateTime.Now
+                            UploadDate = DateTime.Now,
+                            Width = compressedImg.FinalWidth,
+                            Height = compressedImg.FinalHeight
                         };
                         
                         _context.Images.Add(image);

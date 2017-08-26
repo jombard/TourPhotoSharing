@@ -53,6 +53,10 @@ namespace TPS.Web.Core.Models
 
         public string Query { get; set; }
 
+        public int? Width { get; set; }
+
+        public int? Height { get; set; }
+
         public static readonly string[] ValidImageTypes = {
             "image/gif",
             "image/jpeg",

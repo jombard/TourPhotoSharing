@@ -5,8 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
-<p>@Model.Tour.Description</p>
+<div class="tour-header">
+    <img src="@Model.Tour.Thumbnail.Replace("~","../..")" alt="@Model.Tour.Name" class="img-responsive"/>
+    <div class="tour-text">
+        <h1 class="tour-title">@ViewBag.Title</h1>
+        <p class="lead tour-description">@Model.Tour.Description</p>
+    </div>
+</div>
 
 <div id="image-list" >
     <div class="row image-filters">
@@ -46,7 +51,7 @@
                                  data-author="@imageModel.Image.Owner.FullName"
                                  data-lat="@imageModel.Image.Latitude"
                                  data-lng="@imageModel.Image.Longitude"
-                                 class="image"/>
+                                 class="image img-responsive"/>
                             <div class="date">@imageModel.Image.CreatedDate.Value.Ticks</div>
                             <div class="img-caption">@imageModel.Image.Caption</div>
                             <div class="owner">Photo by: <span>@imageModel.Image.Owner.FullName</span>

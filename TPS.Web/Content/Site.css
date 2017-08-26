@@ -174,7 +174,7 @@ textarea {
   right: -4px;
 }
 .list-tour-images {
-  margin: 0 -15px;
+  margin: 0;
 }
 .list-tour-images > li {
   margin: 0;
@@ -191,4 +191,31 @@ textarea {
 .list-tour-images .img-caption,
 .list-tour-images .date {
   display: none;
+}
+.tour-header {
+  position: relative;
+  margin-bottom: 20px;
+}
+.tour-header img {
+  margin: 0 auto;
+}
+.tour-header .tour-text {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  width: 90%;
+}
+.tour-header .tour-title {
+  position: relative;
+  color: white;
+  top: 50%;
+  left: -50%;
+  text-align: center;
+}
+.tour-header .tour-description {
+  position: relative;
+  color: white;
+  top: 75%;
+  left: -50%;
+  text-align: center;
 }

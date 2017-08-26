@@ -69,6 +69,27 @@ textarea {
     }
 }
 
+.thumbnail:hover {
+    position: relative;
+
+    .owner,
+    .img-caption {
+        display: block;
+        position: absolute;
+        left: 5px;
+        color: white;
+    }
+
+    .owner {
+        bottom: 5px;
+    }
+
+    .img-caption {
+        font-weight: bold;
+        bottom: 25px;
+    }
+}
+
 @-moz-keyframes zoom {
 0%{
     height:200px;
@@ -195,6 +216,7 @@ textarea {
         border:none;
     }
     .owner,
+    .img-caption,
     .date {
         display:none;
     }

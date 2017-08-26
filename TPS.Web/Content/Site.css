@@ -4,6 +4,14 @@
   src: url('fonts/glyphicons-halflings-regular.eot');
   src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+/* Small devices (tablets, 768px and up) */
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
+.m-w-300 {
+  max-width: 300px;
+}
 html,
 body {
   height: 100%;
@@ -57,23 +65,6 @@ textarea {
 }
 .image:hover {
   opacity: 0.7;
-}
-.thumbnail {
-  position: relative;
-}
-.thumbnail .owner,
-.thumbnail .img-caption {
-  display: block;
-  position: absolute;
-  left: 5px;
-  color: white;
-}
-.thumbnail .owner {
-  bottom: 5px;
-}
-.thumbnail .img-caption {
-  font-weight: bold;
-  bottom: 25px;
 }
 @-moz-keyframes zoom {
   0% {
@@ -133,6 +124,12 @@ textarea {
 .overlay .close:focus {
   color: #bbb;
 }
+.image-filters {
+  text-align: center;
+}
+.image-filters .form-control {
+  margin: 0 auto 10px;
+}
 .image-filters .form-control,
 .image-filters .btn {
   margin-bottom: 5px;
@@ -180,18 +177,55 @@ textarea {
   margin: 0;
   padding: 0;
   float: left;
+  width: 100%;
+}
+@media (min-width: 400px) {
+  .list-tour-images > li {
+    width: 50%;
+  }
+}
+@media (min-width: 768px) {
+  .list-tour-images > li {
+    width: 33.33333333%;
+  }
+}
+@media (min-width: 992px) {
+  .list-tour-images > li {
+    width: 25%;
+  }
 }
 .list-tour-images .thumbnail {
+  position: relative;
   padding: 0;
   margin-bottom: 10px;
-  margin-right: 10px;
   border-radius: 0;
   border: none;
 }
-@media only screen and (max-width: 479px), only screen and (min-width: 768px) and (max-width: 959px) {
+@media (min-width: 400px) {
   .list-tour-images .thumbnail {
-    margin-right: 0;
+    margin-right: 10px;
   }
+}
+.list-tour-images .thumbnail .img-data {
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  width: 90%;
+}
+.list-tour-images .thumbnail .img-data .owner,
+.list-tour-images .thumbnail .img-data .img-caption {
+  display: block;
+  position: relative;
+  left: -50%;
+  color: white;
+  text-shadow: 2px 2px 8px #444;
+}
+.list-tour-images .thumbnail .img-data .owner {
+  bottom: 5px;
+}
+.list-tour-images .thumbnail .img-data .img-caption {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 .list-tour-images .date {
   display: none;

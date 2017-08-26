@@ -6,8 +6,19 @@
     src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
-@smartphones: ~"only screen and (max-width: 479px)";
-@tablets: ~"only screen and (min-width: 768px) and (max-width: 959px)";
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+@screen-xs-min: ~"(min-width: 400px)";
+/* Small devices (tablets, 768px and up) */
+@screen-sm-min: ~"(min-width: 768px)";
+/* Medium devices (desktops, 992px and up) */
+@screen-md-min: ~"(min-width: 992px)";
+/* Large devices (large desktops, 1200px and up) */
+@screen-lg-min: ~"(min-width: 1200px)";
+
+.m-w-300 {
+    max-width: 300px;
+}
 
 html,
 body {
@@ -69,27 +80,6 @@ textarea {
     transition: 0.3s;
     &:hover {
         opacity: 0.7;
-    }
-}
-
-.thumbnail {
-    position: relative;
-
-    .owner,
-    .img-caption {
-        display: block;
-        position: absolute;
-        left: 5px;
-        color: white;
-    }
-
-    .owner {
-        bottom: 5px;
-    }
-
-    .img-caption {
-        font-weight: bold;
-        bottom: 25px;
     }
 }
 
@@ -160,6 +150,10 @@ textarea {
 }
 
 .image-filters {
+    text-align: center;
+    .form-control {
+        margin: 0 auto 10px;
+    }
     .form-control,
     .btn {
         margin-bottom: 5px;
@@ -212,17 +206,55 @@ textarea {
         margin: 0;
         padding: 0;
         float: left;
+        width: 100%;
+
+        @media @screen-xs-min {
+            width: 50%;
+        }
+
+        @media @screen-sm-min {
+            width: 33.33333333%;
+        }
+
+        @media @screen-md-min {
+            width: 25%;
+        }
     }
 
     .thumbnail {
+        position: relative;
         padding: 0;
         margin-bottom: 10px;
-        margin-right: 10px;
         border-radius: 0;
         border: none;
 
-        @media @smartphones, @tablets {
-            margin-right: 0;
+        @media @screen-xs-min {
+            margin-right: 10px;
+        }
+
+        .img-data {
+            position: absolute;
+            left: 50%;
+            bottom: 5px;
+            width: 90%;
+
+            .owner,
+            .img-caption {
+                display: block;
+                position: relative;
+                left: -50%;
+                color: white;
+                text-shadow: 2px 2px 8px #444;
+            }
+
+            .owner {
+                bottom: 5px;
+            }
+
+            .img-caption {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
         }
     }
 

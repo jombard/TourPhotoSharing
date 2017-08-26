@@ -18,8 +18,8 @@
         @*<div class="col-sm-6 col-md-3">
         <input class="search form-control" placeholder="Type to filter by name, date or time" />
     </div>*@
-        <div class="col-sm-6 col-md-3">
-            @Html.DropDownListFor(m => m.UploaderNames, new SelectList(Model.UploaderNames), "Show all photos", new {@class = "form-control", id="selectOwner"})
+        <div class="col-sm-12 col-md-6">
+            @Html.DropDownListFor(m => m.UploaderNames, new SelectList(Model.UploaderNames), "Show all photos", new {@class = "form-control m-w-300", id="selectOwner"})
         </div>
         <div class="col-sm-12 col-md-6">
             <span class="sort btn btn-default" data-sort="date">
@@ -52,9 +52,12 @@
                                  data-lat="@imageModel.Image.Latitude"
                                  data-lng="@imageModel.Image.Longitude"
                                  class="image img-responsive"/>
-                            <div class="date">@imageModel.Image.CreatedDate.Value.Ticks</div>
-                            <div class="img-caption">@imageModel.Image.Caption</div>
-                            <div class="owner">Photo by: <span>@imageModel.Image.Owner.FullName</span>
+                            <div class="img-data">
+                                <div class="date">@imageModel.Image.CreatedDate.Value.Ticks</div>
+                                <div class="img-caption">@imageModel.Image.Caption</div>
+                                <div class="owner">
+                                    Photo by: <span>@imageModel.Image.Owner.FullName</span>
+                                </div>
                             </div>
                         </div>
                     </li>

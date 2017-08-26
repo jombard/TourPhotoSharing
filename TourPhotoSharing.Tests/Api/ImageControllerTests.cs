@@ -58,7 +58,7 @@ namespace TourPhotoSharing.Tests.Api
             var image = new Image();
             _mockRepository.Setup(r => r.GetImage("1", _userId)).Returns(image);
 
-            var imageDto = new ImageDto {Title = "Updated Title"};
+            var imageDto = new ImageDto {Title = "Updated Title", Caption = "Caption", Query = "Query"};
 
             var result = _controller.UpdateImage("1", imageDto);
 

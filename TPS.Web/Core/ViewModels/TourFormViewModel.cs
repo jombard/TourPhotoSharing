@@ -1,4 +1,5 @@
-﻿using TPS.Web.Core.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using TPS.Web.Core.Models;
 
 namespace TPS.Web.Core.ViewModels
 {
@@ -6,6 +7,7 @@ namespace TPS.Web.Core.ViewModels
     {
         public string Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }

@@ -1,28 +1,28 @@
 ﻿using Microsoft.AspNet.Identity;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using TPS.Web.Core;
 using TPS.Web.Core.Models;
 using TPS.Web.Core.ViewModels;
-using TPS.Web.Persistence;
 
 namespace TPS.Web.Controllers
 {
     [Authorize]
     public class TourController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TourController()
+        public TourController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Tour
-        public ActionResult Index()
+        public ActionResult Index() // replace index
         {
-            var tours = _context.Tours.ToList();
-            return View(tours);
+            var userId = User.Identity.GetUserId();
+            var tours = _unitOfWork.Tours.GetTours(userId);
+            return View("Index", tours);
         }
 
         public ActionResult New()
@@ -32,9 +32,9 @@ namespace TPS.Web.Controllers
 
         public ActionResult Edit(string id)
         {
-            var tour = _context.Tours.SingleOrDefault(t => t.Id.ToString() == id);
+            var tour = _unitOfWork.Tours.GetTour(id);
 
-            if(tour == null)
+            if (tour == null)
                 return HttpNotFound();
 
             var viewModel = new TourFormViewModel(tour);
@@ -58,35 +58,30 @@ namespace TPS.Web.Controllers
                     Description = tour.Description,
                     Thumbnail = @"~\Uploads\default.jpg"
                 };
-                _context.Tours.Add(newTour);
+                _unitOfWork.Tours.AddTour(newTour);
             }
             else
             {
-                var tourInDb = _context.Tours.Single(t => t.Id.ToString() == tour.Id);
+                var tourInDb = _unitOfWork.Tours.GetTour(tour.Id);
                 tourInDb.Name = tour.Name;
                 tourInDb.Description = tour.Description;
             }
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return RedirectToAction("Index");
         }
 
         public ActionResult ViewTour(string id)
         {
-            var tour = _context.Tours.SingleOrDefault(t => t.Id.ToString() == id);
+            var tour = _unitOfWork.Tours.GetTour(id);
 
-            if(tour == null)
+            if (tour == null)
                 return HttpNotFound();
 
-            var tourImages = _context.TourImages
-                .Where(t => t.Tour.Id.ToString() == id)
-                .Include(i => i.Image)
-                .Include(u => u.Image.Owner)
-                .OrderBy(t => t.Image.CreatedDate)
-                .ToList();
+            var tourImages = _unitOfWork.Tours.GetImages(id);
 
-            var uploaders = tourImages
+            var uploaders = tourImages?
                 .Select(u => u.Image.Owner.FullName)
                 .Distinct()
                 .OrderBy(o => o.Substring(0))

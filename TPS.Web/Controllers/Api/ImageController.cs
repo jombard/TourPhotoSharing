@@ -74,6 +74,7 @@ namespace TPS.Web.Controllers.Api
             return Ok(id);
         }
 
+        // POST: api/image
         [HttpPost]
         public IHttpActionResult AddImage(ImageDto imageDto)
         {

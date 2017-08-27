@@ -23,6 +23,7 @@ namespace TPS.Web.Controllers.Api
             return Ok(comments);
         }
 
+        // POST: api/Comments
         public IHttpActionResult AddComment(CommentDto commentDto)
         {
             var userId = User.Identity.GetUserId();
@@ -35,6 +36,7 @@ namespace TPS.Web.Controllers.Api
             return Ok(id);
         }
 
+        // DLETE: api/Comments/id
         public IHttpActionResult DeleteComment(string id)
         {
             var userId = User.Identity.GetUserId();

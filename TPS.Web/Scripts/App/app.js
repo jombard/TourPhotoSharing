@@ -20,8 +20,8 @@ $(document).on("click", ".image", function (e) {
         return {
             src: pic.src.split("?")[0] + "?maxwidth=1024&maxheight=768&mode=crop",
             title: pic.alt + (authorName ? "<br />Photo by: " + authorName : ""),
-            w: 1000,
-            h: 1000
+            w: $(pic).data("width"),
+            h: $(pic).data("height")
         }
     });
 

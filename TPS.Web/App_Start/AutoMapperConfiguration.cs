@@ -11,6 +11,7 @@ namespace TPS.Web.App_Start
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Image, ImageDto>().ReverseMap();
+                cfg.CreateMap<Comment, CommentDto>().ReverseMap();
             });
         }
     }

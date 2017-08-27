@@ -11,10 +11,34 @@ namespace TourPhotoSharing.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            var result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void About()
+        {
+            // Arrange
+            var controller = new HomeController();
+
+            // Act
+            var result = controller.About() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void Contact()
+        {
+            // Arrange
+            var controller = new HomeController();
+
+            // Act
+            var result = controller.Contact() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 using System.Security.Principal;
 using System.Web.Mvc;
 using TPS.Web.Controllers;
@@ -73,7 +74,7 @@ namespace TourPhotoSharing.Tests.Controllers
             result.ViewName.Should().Be("TourForm");
         }
         [TestMethod]
-        public void Save_ValidTour_ShouldRedirectToView()
+        public void Save_UpdateValidTour_ShouldRedirectToView()
         {
             var tour = new Tour();
             _mockRepository.Setup(r => r.GetTour("1")).Returns(tour);
@@ -85,9 +86,21 @@ namespace TourPhotoSharing.Tests.Controllers
             result.Should().BeOfType<RedirectToRouteResult>();
         }
         [TestMethod]
+        public void Save_NewValidTour_ShouldRedirectToView()
+        {
+            var tour = new Tour();
+            _mockRepository.Setup(r => r.GetTour("1")).Returns(tour);
+
+            var tourFormViewModel = new TourFormViewModel {Name = "Name"};
+
+            var result = _controller.Save(tourFormViewModel);
+
+            result.Should().BeOfType<RedirectToRouteResult>();
+        }
+        [TestMethod]
         public void Save_NoNameSpecified_ShouldReturnForm()
         {
-            _controller.ViewData.ModelState.Clear();
+            _controller.ViewData.ModelState.AddModelError("Name", "Name is required");
 
             var tour = new Tour();
             _mockRepository.Setup(r => r.GetTour("1")).Returns(tour);
@@ -109,7 +122,16 @@ namespace TourPhotoSharing.Tests.Controllers
         public void ViewTour_ValidTour_ShouldReturnView()
         {
             var tour = new Tour();
+            var tourImages = new List<TourImages>
+            {
+                new TourImages
+                {
+                    Id = 1,
+                    Image = new Image {Owner = new ApplicationUser {FirstName = "First", LastName = "Last"}}
+                }
+            };
             _mockRepository.Setup(r => r.GetTour("1")).Returns(tour);
+            _mockRepository.Setup(r => r.GetImages("1")).Returns(tourImages);
 
             var result = _controller.ViewTour("1") as ViewResult;
 

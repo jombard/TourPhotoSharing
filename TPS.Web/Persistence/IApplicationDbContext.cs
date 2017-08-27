@@ -8,6 +8,7 @@ namespace TPS.Web.Persistence
         DbSet<Image> Images { get; set; }
         DbSet<Tour> Tours { get; set; }
         DbSet<TourImages> TourImages { get; set; }
+        DbSet<Comment> Comments { get; set; }
         IDbSet<ApplicationUser> Users { get; set; }
     }
 }

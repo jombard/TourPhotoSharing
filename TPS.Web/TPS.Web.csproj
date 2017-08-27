@@ -341,6 +341,10 @@
     <Compile Include="Persistence\Migrations\201708262054577_AddImageDimensionsWidthHeightColumns.Designer.cs">
       <DependentUpon>201708262054577_AddImageDimensionsWidthHeightColumns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708271820232_AddCommentTableWithForeignKeys.cs" />
+    <Compile Include="Persistence\Migrations\201708271820232_AddCommentTableWithForeignKeys.Designer.cs">
+      <DependentUpon>201708271820232_AddCommentTableWithForeignKeys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
@@ -551,6 +555,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708262054577_AddImageDimensionsWidthHeightColumns.resx">
       <DependentUpon>201708262054577_AddImageDimensionsWidthHeightColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708271820232_AddCommentTableWithForeignKeys.resx">
+      <DependentUpon>201708271820232_AddCommentTableWithForeignKeys.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

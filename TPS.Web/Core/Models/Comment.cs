@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace TPS.Web.Core.Models
 {
     public class Comment
     {
         [Key]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
 
         public ApplicationUser Commenter { get; set; }
 
@@ -20,5 +18,12 @@ namespace TPS.Web.Core.Models
         public string CommentValue { get; set; }
 
         public DateTime CommentDate { get; set; }
+
+        public Tour Tour { get; set; }
+
+        [ForeignKey("Tour")]
+        public Guid TourId { get; set; }
+
+        public string ParentCommentId { get; set; }
     }
 }

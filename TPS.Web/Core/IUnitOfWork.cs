@@ -6,6 +6,7 @@ namespace TPS.Web.Core
     {
         IImageRepository Images { get; }
         ITourRepository Tours { get; }
+        ICommentRepository Comments { get; }
 
         void Complete();
     }

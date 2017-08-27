@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TPS.Web.Core.Dtos;
 
 namespace TPS.Web.Core.Models
 {
@@ -25,5 +26,19 @@ namespace TPS.Web.Core.Models
         public Guid TourId { get; set; }
 
         public string ParentCommentId { get; set; }
+
+        public Comment(CommentDto commentDto)
+        {
+            Id = commentDto.Id;
+            CommenterId = commentDto.CommenterId;
+            CommentValue = commentDto.CommentValue;
+            CommentDate = Convert.ToDateTime(commentDto.CommentDate);
+            TourId = commentDto.TourId;
+            ParentCommentId = commentDto.ParentCommentId;
+        }
+
+        public Comment()
+        {
+        }
     }
 }

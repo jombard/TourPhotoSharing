@@ -33,7 +33,8 @@ $(document).on("click", ".image", function (e) {
             var rect = $(thumbnail).offset();
             var width = $(thumbnail).width();
             return { x: rect.left, y: rect.top + pageYScroll, w: width };
-        }
+        },
+        shareButtons: [{id: "download", label: "Download image", url: "{{raw_image_url}}", download:true}]
     };
 
     var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);

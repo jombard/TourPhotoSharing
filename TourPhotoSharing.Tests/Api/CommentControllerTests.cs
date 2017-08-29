@@ -49,9 +49,10 @@ namespace TourPhotoSharing.Tests.Api
         [TestMethod]
         public void AddComment_ValidRequest_ShouldReturnOk()
         {
-            var commentDto = new CommentDto();
-            _mockRepository.Setup(i => i.AddComment(commentDto)).Returns("1");
+            var comment = new Comment();
+            _mockRepository.Setup(i => i.AddComment(comment)).Returns("1");
 
+            var commentDto = new CommentDto();
             var result = _controller.AddComment(commentDto);
 
             result.Should().BeOfType<OkNegotiatedContentResult<string>>();

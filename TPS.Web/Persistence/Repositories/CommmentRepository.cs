@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using TPS.Web.Core.Dtos;
 using TPS.Web.Core.Models;
 using TPS.Web.Core.Repositories;
 
@@ -19,12 +19,12 @@ namespace TPS.Web.Persistence.Repositories
         {
             return _context.Comments
                 .Where(c => c.TourId.ToString() == tourId)
+                .Include(u => u.Commenter)
                 .ToList();
         }
 
-        public string AddComment(CommentDto commentDto)
+        public string AddComment(Comment comment)
         {
-            var comment = new Comment(commentDto);
             var savedComment = _context.Comments.Add(comment);
             return savedComment.Id.ToString();
         }

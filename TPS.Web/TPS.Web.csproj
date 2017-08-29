@@ -248,6 +248,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Core\Dtos\CommentDto.cs" />
+    <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\Comment.cs" />
     <Compile Include="Core\Models\Utils.cs" />

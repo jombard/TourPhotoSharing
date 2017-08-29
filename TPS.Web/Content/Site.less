@@ -71,10 +71,6 @@ textarea {
     min-height: 100px;
 }
 
-.list-inline>li {
-    margin-bottom: 10px;
-}
-
 .image {
     cursor: pointer;
     transition: 0.3s;
@@ -294,5 +290,32 @@ textarea {
         top: 75%;
         left: -50%;
         text-align: center;
+    }
+}
+
+.media-heading {
+    font-weight: bold;
+
+    @media @screen-sm-min {
+        display: inline;
+    }
+}
+
+.panel-heading {
+    font-weight: bold;
+}
+
+.media-object {
+    width: 64px;
+    height: 64px;
+}
+
+.img-pending {
+    border: 1px solid #b81e0d;
+}
+
+.my-photos {
+    .thumbnail {
+        margin-bottom: 0;
     }
 }

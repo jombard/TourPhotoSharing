@@ -68,6 +68,25 @@
         </div>
     </div>
 </div>
+
+<div class="comment-box">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Comments</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="media-list">
+            </ul>
+            <div class="comment-entry">
+                <div class="form-group">
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="button" class="btn btn-default">Add comment</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @Html.Partial("_ImageModal")
 
 @section Scripts {
@@ -75,6 +94,65 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYa67zXJI_Zdh_NNyuIfq1k6rO2TuNp8Y&callback=enableMaps"></script>
     <script>
+        var tourId = "@Model.Tour.Id";
+
+        function addComment(comment) {
+            var commenter = $("<h4 />").addClass("media-heading").text(comment.Commenter.FullName);
+            var dateDiv = $("<div />").addClass("small").text("on " + moment(comment.CommentDate).format("dddd, MMMM Do YYYY, h:mm a"));
+            var p = $("<p />").addClass("lead").text(comment.CommentValue);
+
+            var mediaLeft = $("<div />").addClass("media-left").append("<a href=#><img alt='64x64' class='media-object' src='/Uploads/avatar.jpg'></a>");
+            var mediaBody = $("<div />").addClass("media-body").append(commenter).append(dateDiv).append(p);
+            var li = $("<li />").addClass("media").append(mediaLeft).append(mediaBody);
+
+            $(".media-list").append(li);
+        }
+
+        $(document).ready(function() {
+            console.log("doc ready");
+
+            $.ajax({
+                url: "/api/Comments/" + tourId,
+                method: "GET"
+            }).done(function (comments) {
+                console.log("get comments result", comments);
+
+                $.each(comments, function(i, comment) {
+                    addComment(comment);
+                });
+            }).fail(function (error) {
+                console.log("get comments error", error);
+            });
+        });
+
+        $(".comment-entry").on("click", "button", function(e) {
+            e.preventDefault();
+
+            var commentTextarea = $(".comment-entry").find("textarea");
+
+            if (commentTextarea.val() === "") {
+                return;
+            }
+
+            var commentDto = {
+                CommentValue: commentTextarea.val(),
+                TourId: tourId
+            };
+
+            $.ajax({
+                url: "/api/Comments",
+                method: "POST",
+                data: commentDto
+            }).done(function (comment) {
+                console.log("post comment result", comment);
+                commentTextarea.val("");
+
+                addComment(comment);
+            }).fail(function (error) {
+                console.log("post comment error", error);
+            });
+        });
+
         function enableMaps() {
             $(".js-view-map").removeClass("hidden");
         }

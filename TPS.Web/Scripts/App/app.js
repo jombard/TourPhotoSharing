@@ -2,11 +2,10 @@
 
 $(document).on("click", ".image", function (e) {
     e.preventDefault();
-    console.log("click event on image");
     var index = 0;
     var thisImg = this;
 
-    var items = $("li:visible").find("img").map(function (i, pic) {
+    var items = $("li:visible").find("img.image").map(function (i, pic) {
         if ($(pic).hasClass("pswp__img")) {
             return null;
         }

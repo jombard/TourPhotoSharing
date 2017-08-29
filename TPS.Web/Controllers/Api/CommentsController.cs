@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Web.Http;
 using TPS.Web.Core;
 using TPS.Web.Core.Dtos;
+using TPS.Web.Core.Models;
 
 namespace TPS.Web.Controllers.Api
 {
@@ -26,17 +29,26 @@ namespace TPS.Web.Controllers.Api
         // POST: api/Comments
         public IHttpActionResult AddComment(CommentDto commentDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
             var userId = User.Identity.GetUserId();
 
             commentDto.CommenterId = userId;
+            commentDto.CommentDate = DateTime.Now.ToString("s");
 
-            var id = _unitOfWork.Comments.AddComment(commentDto);
+            var comment = Mapper.Map<CommentDto, Comment>(commentDto);
+
+            _unitOfWork.Comments.AddComment(comment);
             _unitOfWork.Complete();
 
-            return Ok(id);
+            commentDto.Id = comment.Id;
+            commentDto.Commenter = new UserDto { FullName = User.GetFullName() };
+
+            return Created(new Uri(Request.RequestUri + "/" + comment.Id), commentDto);
         }
 
-        // DLETE: api/Comments/id
+        // DELETE: api/Comments/id
         public IHttpActionResult DeleteComment(string id)
         {
             var userId = User.Identity.GetUserId();

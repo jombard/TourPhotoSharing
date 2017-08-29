@@ -241,14 +241,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\CommentsController.cs" />
     <Compile Include="Controllers\Api\ImageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TourController.cs" />
+    <Compile Include="Core\Dtos\CommentDto.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Models\Comment.cs" />
     <Compile Include="Core\Models\Utils.cs" />
+    <Compile Include="Core\Repositories\ICommentRepository.cs" />
     <Compile Include="Core\Repositories\IImageRepository.cs" />
     <Compile Include="Core\Dtos\ImageDto.cs" />
     <Compile Include="Core\Repositories\ITourRepository.cs" />
@@ -355,6 +358,7 @@
     <Compile Include="Core\Models\Tour.cs" />
     <Compile Include="Core\Models\TourImages.cs" />
     <Compile Include="Persistence\IApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repositories\CommmentRepository.cs" />
     <Compile Include="Persistence\Repositories\ImageRepository.cs" />
     <Compile Include="Persistence\Repositories\TourRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -428,6 +432,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\list.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\photoswipe-ui-default.js" />
     <Content Include="Scripts\photoswipe-ui-default.min.js" />
     <Content Include="Scripts\photoswipe.js" />
@@ -436,6 +444,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Uploads\avatar.jpg" />
+    <Content Include="Uploads\default.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -484,13 +494,16 @@
     <Content Include="Views\Manage\Privacy.cshtml" />
     <Content Include="Views\Manage\Delete.cshtml" />
     <Content Include="Views\Manage\ConfirmDelete.cshtml" />
+    <Content Include="Uploads\images\.gitignore" />
+    <Content Include="Views\Image\ConfirmUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />

@@ -23,6 +23,7 @@ namespace TPS.Web
                       "~/Scripts/photoswipe.min.js",
                       "~/Scripts/photoswipe-ui-default.min.js",
                       "~/Scripts/list.min.js",
+                      "~/Scripts/moment.min.js",
                       "~/Scripts/respond.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(

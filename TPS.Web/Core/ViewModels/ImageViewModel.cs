@@ -19,6 +19,7 @@ namespace TPS.Web.Core.ViewModels
             ImagePath = image.ImageUrl;
             Thumbnail = image.Thumbnail;
             Query = image.Query;
+            Confirmed = image.Confirmed;
         }
 
         public string Query { get; set; }
@@ -39,5 +40,7 @@ namespace TPS.Web.Core.ViewModels
         public string ImagePath { get; set; }
 
         public byte[] Thumbnail { get; set; }
+
+        public bool Confirmed { get; set; }
     }
 }

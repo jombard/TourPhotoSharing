@@ -20,9 +20,7 @@ namespace TPS.Web.Controllers.Api
         // GET: api/Image/5
         public IHttpActionResult GetImage(string id)
         {
-            var userId = User.Identity.GetUserId();
-
-            var imageInDb = _unitOfWork.Images.GetImage(id, userId);
+            var imageInDb = _unitOfWork.Images.GetImage(id);
 
             if (imageInDb == null)
                 return NotFound();
@@ -34,9 +32,7 @@ namespace TPS.Web.Controllers.Api
         [HttpPut]
         public IHttpActionResult UpdateImage(string id, ImageDto imageDto)
         {
-            var userId = User.Identity.GetUserId();
-
-            var imageInDb = _unitOfWork.Images.GetImage(id, userId);
+            var imageInDb = _unitOfWork.Images.GetImage(id);
 
             if (imageInDb == null)
                 return NotFound();
@@ -61,9 +57,7 @@ namespace TPS.Web.Controllers.Api
         [HttpDelete]
         public IHttpActionResult DeleteImage(string id)
         {
-            var userId = User.Identity.GetUserId();
-
-            var imageInDb = _unitOfWork.Images.GetImage(id, userId);
+            var imageInDb = _unitOfWork.Images.GetImage(id);
 
             if (imageInDb == null)
                 return NotFound();

@@ -21,10 +21,9 @@ namespace TPS.Web.Persistence.Repositories
                 .Where(i => i.OwnerId == userId).ToList();
         }
 
-        public Image GetImage(string imageId, string userId)
+        public Image GetImage(string imageId)
         {
-            return _context.Images
-                .SingleOrDefault(i => i.Id.ToString() == imageId && i.OwnerId == userId);
+            return _context.Images.SingleOrDefault(i => i.Id.ToString() == imageId);
         }
 
         public void Remove(Image image)

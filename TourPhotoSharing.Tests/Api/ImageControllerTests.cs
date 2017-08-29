@@ -37,7 +37,7 @@ namespace TourPhotoSharing.Tests.Api
         public void GetImage_ValidRequest_ShouldReturnImage()
         {
             var image = new Image();
-            _mockRepository.Setup(r => r.GetImage("1", _userId)).Returns(image);
+            _mockRepository.Setup(r => r.GetImage("1")).Returns(image);
 
             var result = _controller.GetImage("1");
 
@@ -56,7 +56,7 @@ namespace TourPhotoSharing.Tests.Api
         public void UpdateImage_ValidRequest_ShouldReturnOk()
         {
             var image = new Image();
-            _mockRepository.Setup(r => r.GetImage("1", _userId)).Returns(image);
+            _mockRepository.Setup(r => r.GetImage("1")).Returns(image);
 
             var imageDto = new ImageDto {Title = "Updated Title", Caption = "Caption", Query = "Query"};
 
@@ -87,7 +87,7 @@ namespace TourPhotoSharing.Tests.Api
         public void DeleteImage_ValidRequest_ShouldReturnOk()
         {
             var image = new Image();
-            _mockRepository.Setup(r => r.GetImage("1", _userId)).Returns(image);
+            _mockRepository.Setup(r => r.GetImage("1")).Returns(image);
 
             var result = _controller.DeleteImage("1");
 

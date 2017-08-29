@@ -40,7 +40,7 @@ namespace TPS.Web.Controllers
 
         public ActionResult SaveUploadedFile()
         {
-            var fName = "";
+            var completed = new List<Image>();
             try
             {
                 foreach (string fileName in Request.Files)
@@ -50,8 +50,6 @@ namespace TPS.Web.Controllers
                     //Save file content goes here
                     if (file != null && file.ContentLength > 0)
                     {
-                        fName = file.FileName;
-                        
                         var resizeSettings = new ResizeSettings
                         {
                             MaxWidth = 1900,
@@ -97,6 +95,7 @@ namespace TPS.Web.Controllers
                         };
 
                         _context.TourImages.Add(tourImage);
+                        completed.Add(image);
                     }
                 }
 
@@ -107,7 +106,7 @@ namespace TPS.Web.Controllers
                 return Json(new { Message = "Error in saving file: " + ex.Message });
             }
 
-            return Json(new { FileName = fName });
+            return Json(new { Completed = completed });
         }
 
         private static DateTime? GetDateTaken(System.Drawing.Image sourceImage)
@@ -180,8 +179,7 @@ namespace TPS.Web.Controllers
 
         public ActionResult Confirm()
         {
-            var userId = User.Identity.GetUserId();
-            var images = _context.Images.Where(i => i.OwnerId == userId && !i.Confirmed).ToList();
+            var images = _context.Images.Where(i => !i.Confirmed).ToList();
 
             var viewModel = new List<ImageViewModel>();
             foreach (var image in images)

@@ -33,7 +33,7 @@ namespace TPS.Web.Persistence.Repositories
         public List<TourImages> GetImages(string id)
         {
             return _context.TourImages
-                .Where(t => t.Tour.Id.ToString() == id)
+                .Where(t => t.Tour.Id.ToString() == id && t.Image.Confirmed)
                 .Include(i => i.Image)
                 .Include(u => u.Image.Owner)
                 .OrderBy(t => t.Image.CreatedDate)

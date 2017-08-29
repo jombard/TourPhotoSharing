@@ -7,10 +7,10 @@
 
 <h2>@ViewBag.Title</h2>
 
-@*<a href="@Url.Action("Upload", "Image")" class="btn btn-default">
+<a href="@Url.Action("Upload", "Image")" class="btn btn-default">
     <i class="glyphicon glyphicon-cloud-upload"></i>
     Upload new photos
-</a>*@
+</a>
 
 <hr/>
 
@@ -68,10 +68,10 @@
 else
 {
     <p>You have not uploaded any photos</p>
-    <a href="@Url.Action("Upload", "Image")" class="btn btn-primary">
+    @*<a href="@Url.Action("Upload", "Image")" class="btn btn-primary">
         <i class="glyphicon glyphicon-plus-sign"></i>
         Upload a photo now
-    </a>
+    </a>*@
 }
 
 @Html.Partial("_ImageModal")

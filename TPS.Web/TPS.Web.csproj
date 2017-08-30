@@ -497,6 +497,7 @@
     <Content Include="Views\Manage\ConfirmDelete.cshtml" />
     <Content Include="Uploads\images\.gitignore" />
     <Content Include="Views\Image\ConfirmUpload.cshtml" />
+    <Content Include="Uploads\documents\lejog-memoir.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -20,7 +20,8 @@ body {
   font-family: 'Droid+Sans', Arial, sans-serif;
 }
 .wrapper {
-  display: flex;
+  /*display: flex;*/
+  /* TODO flexbox not working in edge */
   flex-direction: column;
   min-height: 100%;
 }

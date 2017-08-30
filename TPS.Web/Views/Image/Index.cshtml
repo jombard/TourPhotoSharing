@@ -96,8 +96,9 @@ else
 
             $this.addClass("hidden");
             var imgParams = img.attr("src").split("?");
-            var imgQuery = new URLSearchParams(imgParams[1]);
-            img.attr("src", imgParams[0] + (imgQuery.has("rotate") ? "?rotate=" + imgQuery.get("rotate") : ""));
+            //var imgQuery = new URLSearchParams(imgParams[1]);
+            //img.attr("src", imgParams[0] + (imgQuery.has("rotate") ? "?rotate=" + imgQuery.get("rotate") : ""));
+            img.attr("src", imgParams[0]);
             $thumbnail.find(".js-rotate-link").removeClass("hidden");
             $thumbnail.find(".js-image-edit").removeClass("hidden");
             $thumbnail.closest("li").attr("style", "display:block;");

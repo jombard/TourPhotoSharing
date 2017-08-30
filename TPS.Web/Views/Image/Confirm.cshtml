@@ -30,14 +30,9 @@
             <div class="col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="form-group">
-                            @Html.LabelFor(m => image.Caption, new {@class = "h3"})
-                            @Html.TextAreaFor(m => image.Caption, new {@class = "form-control js-image-caption"})
-                        </div>
-
                         <button type="button" class="btn btn-primary js-save-image" data-image-id="@image.Id">
                             <i class="glyphicon glyphicon-ok"></i>
-                            Save Changes
+                            Confirm Photo
                         </button>
                         <button type="button" class="btn btn-link js-delete-image" data-image-id="@image.Id">
                             <i class="glyphicon glyphicon-trash"></i>
@@ -81,18 +76,17 @@
             var row = $this.closest(".row");
 
             var imageId = $this.attr("data-image-id");
-            var caption = row.find(".js-image-caption").val();
 
             var imageObj = {
-                Id: imageId,
-                Caption: caption
+                Id: imageId
             };
 
             $.ajax({
                 url: "/api/image/" + imageId,
                 method: "PUT",
                 data: imageObj
-            }).done(function(result) {
+            }).done(function (result) {
+                console.log(result);
                 row.remove();
                 showNoUploadMessage();
             }).fail(function(error) {
@@ -112,7 +106,8 @@
             $.ajax({
                 url: "/api/image/" + button.attr("data-image-id"),
                 method: "DELETE",
-                success: function() {
+                success: function (result) {
+                    console.log(result);
                     button.closest(".row").remove();
                     showNoUploadMessage();
                 }

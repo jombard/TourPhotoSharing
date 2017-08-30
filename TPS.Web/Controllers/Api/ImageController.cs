@@ -40,13 +40,14 @@ namespace TPS.Web.Controllers.Api
             if (imageDto.Caption != null)
             {
                 imageInDb.Caption = imageDto.Caption;
-                imageInDb.Confirmed = true;
             }
 
             if (imageDto.Query != null)
             {
                 imageInDb.Query = imageDto.Query;
             }
+
+            imageInDb.Confirmed = true;
 
             _unitOfWork.Complete();
 

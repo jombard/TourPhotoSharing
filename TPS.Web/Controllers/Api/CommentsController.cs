@@ -27,6 +27,7 @@ namespace TPS.Web.Controllers.Api
         }
 
         // POST: api/Comments
+        [Audit]
         public IHttpActionResult AddComment(CommentDto commentDto)
         {
             if (!ModelState.IsValid)
@@ -49,6 +50,7 @@ namespace TPS.Web.Controllers.Api
         }
 
         // DELETE: api/Comments/id
+        [Audit]
         public IHttpActionResult DeleteComment(string id)
         {
             var userId = User.Identity.GetUserId();

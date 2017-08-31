@@ -30,6 +30,7 @@ namespace TPS.Web.Controllers.Api
 
         // PUT: api/Image/5
         [HttpPut]
+        [Audit]
         public IHttpActionResult UpdateImage(string id, ImageDto imageDto)
         {
             var imageInDb = _unitOfWork.Images.GetImage(id);
@@ -47,7 +48,7 @@ namespace TPS.Web.Controllers.Api
                 imageInDb.Query = imageDto.Query;
             }
 
-            imageInDb.Confirmed = true;
+            imageInDb.Confirmed = imageDto.Confirmed;
 
             _unitOfWork.Complete();
 
@@ -56,6 +57,7 @@ namespace TPS.Web.Controllers.Api
 
         // DELETE: api/Image/5
         [HttpDelete]
+        [Audit]
         public IHttpActionResult DeleteImage(string id)
         {
             var imageInDb = _unitOfWork.Images.GetImage(id);
@@ -71,6 +73,7 @@ namespace TPS.Web.Controllers.Api
 
         // POST: api/image
         [HttpPost]
+        [Audit]
         public IHttpActionResult AddImage(ImageDto imageDto)
         {
             var userId = User.Identity.GetUserId();

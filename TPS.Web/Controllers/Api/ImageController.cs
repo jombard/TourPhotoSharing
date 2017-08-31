@@ -39,16 +39,13 @@ namespace TPS.Web.Controllers.Api
                 return NotFound();
 
             if (imageDto.Caption != null)
-            {
                 imageInDb.Caption = imageDto.Caption;
-            }
 
             if (imageDto.Query != null)
-            {
                 imageInDb.Query = imageDto.Query;
-            }
 
-            imageInDb.Confirmed = imageDto.Confirmed;
+            if (imageDto.Confirmed)
+                imageInDb.Confirmed = true;
 
             _unitOfWork.Complete();
 

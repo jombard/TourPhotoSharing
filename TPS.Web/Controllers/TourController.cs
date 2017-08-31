@@ -18,7 +18,8 @@ namespace TPS.Web.Controllers
         }
 
         // GET: Tour
-        public ActionResult Index() // replace index
+        [Audit]
+        public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
             var tours = _unitOfWork.Tours.GetTours(userId);
@@ -30,6 +31,7 @@ namespace TPS.Web.Controllers
             return View("TourForm", new TourFormViewModel());
         }
 
+        [Audit]
         public ActionResult Edit(string id)
         {
             var tour = _unitOfWork.Tours.GetTour(id);
@@ -44,6 +46,7 @@ namespace TPS.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public ActionResult Save(TourFormViewModel tour)
         {
             if (!ModelState.IsValid)
@@ -72,6 +75,7 @@ namespace TPS.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Audit]
         public ActionResult ViewTour(string id)
         {
             var tour = _unitOfWork.Tours.GetTour(id);

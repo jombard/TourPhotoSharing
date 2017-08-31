@@ -27,17 +27,13 @@ namespace TPS.Web.Controllers
             _context = new ApplicationDbContext();
         }
 
-        public FileContentResult GetThumbnailImage(string id)
-        {
-            var image = _context.Images.FirstOrDefault(i => i.Id.ToString() == id);
-            return image == null ? null : File(image.Thumbnail, image.ImageMimeType);
-        }
-
+        [Audit]
         public ActionResult Upload()
         {
             return View();
         }
 
+        [Audit]
         public ActionResult SaveUploadedFile()
         {
             var completed = new List<Image>();
@@ -177,6 +173,7 @@ namespace TPS.Web.Controllers
             return coordinate;
         }
 
+        [Audit]
         public ActionResult Confirm()
         {
             var images = _context.Images.Where(i => !i.Confirmed).ToList();
@@ -190,6 +187,7 @@ namespace TPS.Web.Controllers
             return View(viewModel);
         }
 
+        [Audit]
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
@@ -207,6 +205,7 @@ namespace TPS.Web.Controllers
             return View(viewModel);
         }
 
+        [Audit]
         public ActionResult ConfirmUpload()
         {
             return View();

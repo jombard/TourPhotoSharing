@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using TPS.Web.Core.Models;
 using TPS.Web.Core.ViewModels;
 
 namespace TPS.Web.Controllers
@@ -39,6 +40,7 @@ namespace TPS.Web.Controllers
 
         //
         // GET: /Manage/Index
+        [Audit]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -67,6 +69,7 @@ namespace TPS.Web.Controllers
         // POST: /Manage/RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
             ManageMessageId? message;
@@ -89,6 +92,7 @@ namespace TPS.Web.Controllers
 
         //
         // GET: /Manage/AddPhoneNumber
+        [Audit]
         public ActionResult AddPhoneNumber()
         {
             return View();
@@ -98,6 +102,7 @@ namespace TPS.Web.Controllers
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -122,6 +127,7 @@ namespace TPS.Web.Controllers
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
         {
             await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
@@ -137,6 +143,7 @@ namespace TPS.Web.Controllers
         // POST: /Manage/DisableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
         {
             await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
@@ -150,6 +157,7 @@ namespace TPS.Web.Controllers
 
         //
         // GET: /Manage/VerifyPhoneNumber
+        [Audit]
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
@@ -161,6 +169,7 @@ namespace TPS.Web.Controllers
         // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -186,6 +195,7 @@ namespace TPS.Web.Controllers
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> RemovePhoneNumber()
         {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
@@ -203,6 +213,7 @@ namespace TPS.Web.Controllers
 
         //
         // GET: /Manage/ChangePassword
+        [Audit]
         public ActionResult ChangePassword()
         {
             return View();
@@ -212,6 +223,7 @@ namespace TPS.Web.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -234,6 +246,7 @@ namespace TPS.Web.Controllers
 
         //
         // GET: /Manage/SetPassword
+        [Audit]
         public ActionResult SetPassword()
         {
             return View();
@@ -243,6 +256,7 @@ namespace TPS.Web.Controllers
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -266,6 +280,7 @@ namespace TPS.Web.Controllers
 
         //
         // GET: /Manage/ManageLogins
+        [Audit]
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -291,6 +306,7 @@ namespace TPS.Web.Controllers
         // POST: /Manage/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
@@ -299,6 +315,7 @@ namespace TPS.Web.Controllers
 
         //
         // GET: /Manage/LinkLoginCallback
+        [Audit]
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
@@ -375,6 +392,7 @@ namespace TPS.Web.Controllers
 
 #endregion
 
+        [Audit]
         public async Task<ActionResult> UserProfile()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -387,6 +405,7 @@ namespace TPS.Web.Controllers
             return View(viewModel);
         }
 
+        [Audit]
         public async Task<ActionResult> SaveProfile(UserProfileViewModel model)
         {
             if (!ModelState.IsValid)
@@ -417,11 +436,13 @@ namespace TPS.Web.Controllers
             return View();
         }
 
+        [Audit]
         public ActionResult Delete()
         {
             return View();
         }
 
+        [Audit]
         public ActionResult ConfirmDelete()
         {
             return View();

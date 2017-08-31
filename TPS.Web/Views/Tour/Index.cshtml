@@ -19,17 +19,17 @@
         {
             <div class="col-sm-3">
                 <div class="thumbnail">
-                    <a href="@Url.Action("ViewTour", new{tour.Id})">
-                        <img src="@tour.Thumbnail.Replace("~","..")" alt="Tour Thumbnail"/>
+                    <a href="@Url.Action("ViewTour", new {tour.Id})">
+                        <img src="@tour.Thumbnail.Replace("~", "..")" alt="Tour Thumbnail"/>
                     </a>
                     <div class="caption">
                         <h3>@tour.Name</h3>
                         <p>@tour.Description</p>
                         @Html.ActionLink("View", "ViewTour", new {tour.Id}, new {@class = "btn btn-primary btn-block"})
                         @if (tour.OwnerId == User.Identity.GetUserId())
-                            {
-                                    @Html.ActionLink("Edit", "Edit", new { tour.Id }, new { @class = "btn btn-link btn-block" })
-                            }
+                        {
+                            @Html.ActionLink("Edit", "Edit", new {tour.Id}, new {@class = "btn btn-link btn-block"})
+                        }
                     </div>
                 </div>
             </div>

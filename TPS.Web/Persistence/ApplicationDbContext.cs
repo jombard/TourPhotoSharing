@@ -12,6 +12,7 @@ namespace TPS.Web.Persistence
         public DbSet<Tour> Tours { get; set; }
         public DbSet<TourImages> TourImages { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Audit> AuditRecords { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

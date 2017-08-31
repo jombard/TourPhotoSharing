@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using TPS.Web.Core.Models;
 
 namespace TPS.Web.Controllers
 {
@@ -6,6 +7,7 @@ namespace TPS.Web.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        [Audit]
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to Tour Photo Sharing";
@@ -13,6 +15,7 @@ namespace TPS.Web.Controllers
             return View();
         }
 
+        [Audit]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -20,6 +23,7 @@ namespace TPS.Web.Controllers
             return View();
         }
 
+        [Audit]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

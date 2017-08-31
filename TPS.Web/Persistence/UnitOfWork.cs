@@ -11,6 +11,7 @@ namespace TPS.Web.Persistence
         public IImageRepository Images { get; }
         public ITourRepository Tours { get; }
         public ICommentRepository Comments { get; }
+        public IAuditRepository AuditRecords { get; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -18,11 +19,17 @@ namespace TPS.Web.Persistence
             Images = new ImageRepository(context);
             Tours = new TourRepository(context);
             Comments = new CommmentRepository(context);
+            AuditRecords = new AuditRepository(context);
         }
 
         public void Complete()
         {
             _context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
         }
     }
 }

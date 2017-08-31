@@ -250,8 +250,11 @@
     <Compile Include="Core\Dtos\CommentDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Models\Audit.cs" />
+    <Compile Include="Core\Models\AuditAttribute.cs" />
     <Compile Include="Core\Models\Comment.cs" />
     <Compile Include="Core\Models\Utils.cs" />
+    <Compile Include="Core\Repositories\IAuditRepository.cs" />
     <Compile Include="Core\Repositories\ICommentRepository.cs" />
     <Compile Include="Core\Repositories\IImageRepository.cs" />
     <Compile Include="Core\Dtos\ImageDto.cs" />
@@ -349,16 +352,28 @@
     <Compile Include="Persistence\Migrations\201708271820232_AddCommentTableWithForeignKeys.Designer.cs">
       <DependentUpon>201708271820232_AddCommentTableWithForeignKeys.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708301914424_AddAuditTable.cs" />
+    <Compile Include="Persistence\Migrations\201708301914424_AddAuditTable.Designer.cs">
+      <DependentUpon>201708301914424_AddAuditTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708301945183_AddFurtherAuditingCols.cs" />
+    <Compile Include="Persistence\Migrations\201708301945183_AddFurtherAuditingCols.Designer.cs">
+      <DependentUpon>201708301945183_AddFurtherAuditingCols.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708302128370_RemoveIdentityFromAuditId.cs" />
+    <Compile Include="Persistence\Migrations\201708302128370_RemoveIdentityFromAuditId.Designer.cs">
+      <DependentUpon>201708302128370_RemoveIdentityFromAuditId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\Models\Image.cs" />
-    <Compile Include="Core\Models\ImageBucket.cs" />
     <Compile Include="Core\ViewModels\ManageViewModels.cs" />
     <Compile Include="Core\Models\Tour.cs" />
     <Compile Include="Core\Models\TourImages.cs" />
     <Compile Include="Persistence\IApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repositories\AuditRepository.cs" />
     <Compile Include="Persistence\Repositories\CommmentRepository.cs" />
     <Compile Include="Persistence\Repositories\ImageRepository.cs" />
     <Compile Include="Persistence\Repositories\TourRepository.cs" />
@@ -573,6 +588,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708271820232_AddCommentTableWithForeignKeys.resx">
       <DependentUpon>201708271820232_AddCommentTableWithForeignKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708301914424_AddAuditTable.resx">
+      <DependentUpon>201708301914424_AddAuditTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708301945183_AddFurtherAuditingCols.resx">
+      <DependentUpon>201708301945183_AddFurtherAuditingCols.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708302128370_RemoveIdentityFromAuditId.resx">
+      <DependentUpon>201708302128370_RemoveIdentityFromAuditId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

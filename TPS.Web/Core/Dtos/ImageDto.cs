@@ -12,7 +12,7 @@ namespace TPS.Web.Core.Dtos
         public string CreatedDate { get; set; }
         public string Thumbnail { get; set; }
         public string ImageMimeType { get; set; }
-        public string Confirmed { get; set; }
+        public bool Confirmed { get; set; }
         public string OwnerId { get; set; }
         public string Query { get; set; }
     }

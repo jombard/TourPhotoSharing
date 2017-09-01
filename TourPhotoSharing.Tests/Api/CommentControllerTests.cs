@@ -55,7 +55,18 @@ namespace TourPhotoSharing.Tests.Api
             var commentDto = new CommentDto();
             var result = _controller.AddComment(commentDto);
 
-            result.Should().BeOfType<OkNegotiatedContentResult<string>>();
+            result.Should().BeOfType<OkNegotiatedContentResult<CommentDto>>();
+        }
+
+        [TestMethod]
+        public void AddComment_InvalidRequest_ShouldReturnBadRequest()
+        {
+            _controller.ModelState.AddModelError("CommentValue", "CommentValue is required");
+
+            var commentDto = new CommentDto();
+            var result = _controller.AddComment(commentDto);
+
+            result.Should().BeOfType<BadRequestResult>();
         }
 
         [TestMethod]

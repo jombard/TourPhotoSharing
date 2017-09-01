@@ -14,7 +14,6 @@ namespace TPS.Web.Core.ViewModels
         {
             Id = image.Id.ToString();
             Title = image.Title;
-            AltText = image.AltText;
             Caption = image.Caption;
             ImagePath = image.ImageUrl;
             Thumbnail = image.Thumbnail;
@@ -28,8 +27,6 @@ namespace TPS.Web.Core.ViewModels
 
         [Required]
         public string Title { get; set; }
-
-        public string AltText { get; set; }
 
         [DataType(DataType.Html)]
         public string Caption { get; set; }

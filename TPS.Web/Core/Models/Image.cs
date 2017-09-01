@@ -14,8 +14,6 @@ namespace TPS.Web.Core.Models
         [Required]
         public string Title { get; set; }
 
-        public string AltText { get; set; }
-
         [DataType(DataType.Html)]
         public string Caption { get; set; }
 
@@ -73,7 +71,6 @@ namespace TPS.Web.Core.Models
             Id = imageDto.Id;
             Title = imageDto.Title;
             Caption = imageDto.Caption;
-            AltText = imageDto.AltText;
             ImageUrl = imageDto.ImageUrl;
             CreatedDate = DateTime.Now;
             Confirmed = false;

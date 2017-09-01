@@ -366,6 +366,10 @@
     <Compile Include="Persistence\Migrations\201708302128370_RemoveIdentityFromAuditId.Designer.cs">
       <DependentUpon>201708302128370_RemoveIdentityFromAuditId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709011826321_DropAltColumnFromImage.cs" />
+    <Compile Include="Persistence\Migrations\201709011826321_DropAltColumnFromImage.Designer.cs">
+      <DependentUpon>201709011826321_DropAltColumnFromImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
@@ -600,6 +604,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708302128370_RemoveIdentityFromAuditId.resx">
       <DependentUpon>201708302128370_RemoveIdentityFromAuditId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709011826321_DropAltColumnFromImage.resx">
+      <DependentUpon>201709011826321_DropAltColumnFromImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

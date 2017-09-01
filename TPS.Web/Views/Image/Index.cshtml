@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <img src="@imageModel.ImagePath.Replace("~", "..")?@imageModel.Query&w=100&h=100&mode=crop"
-                                 alt="@imageModel.AltText"
+                                 alt="@imageModel.Title @imageModel.Caption"
                                  class="img-responsive" />
                             <div>
                                 <button type="button" class="btn btn-block btn-link js-edit-link">
@@ -101,7 +101,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <img src="@imageModel.ImagePath.Replace("~", "..")?@imageModel.Query&w=100&h=100&mode=crop" 
-                                 alt="@imageModel.AltText" 
+                                 alt="@imageModel.Title @imageModel.Caption" 
                                  class="img-responsive" />
                             <div>
                                 <button type="button" class="btn btn-block btn-link js-edit-link">

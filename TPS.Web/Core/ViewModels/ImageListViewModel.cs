@@ -5,15 +5,24 @@ namespace TPS.Web.Core.ViewModels
 {
     public class ImageListViewModel
     {
-        public readonly List<ImageViewModel> Images;
+        public readonly List<ImageViewModel> ConfirmedImages;
+        public readonly List<ImageViewModel> PendingImages;
 
         public ImageListViewModel(IEnumerable<Image> images)
         {
-            Images = new List<ImageViewModel>();
+            ConfirmedImages = new List<ImageViewModel>();
+            PendingImages = new List<ImageViewModel>();
 
             foreach (var image in images)
             {
-                Images.Add(new ImageViewModel(image));
+                if (image.Confirmed)
+                {
+                    ConfirmedImages.Add(new ImageViewModel(image));
+                }
+                else
+                {
+                    PendingImages.Add(new ImageViewModel(image));
+                }
             }
         }
     }

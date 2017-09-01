@@ -8,16 +8,6 @@
 <p class="lead">Label your photos and provide a description. Save the changes to add the photo to the tour.</p>
 
 <div class="approve-images">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <strong>Select the tour to assign the uploads</strong>
-                <select class="form-control">
-                    <option>LEJOG</option>
-                </select>
-            </div>
-        </div>
-    </div>
 
     @foreach (var image in Model.PendingImages)
     {
@@ -30,6 +20,7 @@
             <div class="col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <p class="lead">By confirming this photo you will be adding it to the tour.</p>
                         <button type="button" class="btn btn-primary js-save-image" data-image-id="@image.Id">
                             <i class="glyphicon glyphicon-ok"></i>
                             Confirm Photo
@@ -47,13 +38,9 @@
 
 <div class="upload-message hidden">
     <p>There are currently no pending uploads.</p>
-    <a href="@Url.Action("Upload")" class="btn btn-primary">
-        <i class="glyphicon glyphicon-upload"></i>
-        Upload a new photo now
-    </a>
-    <a href="@Url.Action("Index", "Image")" class="btn btn-link">
-        <i class="glyphicon glyphicon-picture"></i>
-        View my photos
+    <a href="@Url.Action("Index", "Tour")" class="btn btn-primary">
+        <i class="glyphicon glyphicon-road"></i>
+        View the tour
     </a>
     
 </div>
@@ -77,9 +64,13 @@
 
             var imageId = $this.attr("data-image-id");
 
+            var url = location.href.split("/");
+            var tourId = url[url.length - 1];
+
             var imageObj = {
                 Id: imageId,
-                Confirmed: true
+                Confirmed: true,
+                TourId: tourId
             };
 
             $.ajax({

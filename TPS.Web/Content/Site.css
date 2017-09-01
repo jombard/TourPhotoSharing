@@ -278,3 +278,6 @@ textarea {
 .my-photos .thumbnail {
   margin-bottom: 0;
 }
+.navbar {
+  border-radius: 0;
+}

@@ -132,18 +132,27 @@
                                         @Html.TextAreaFor(m => imageModel.Caption, new {@class = "form-control js-image-caption"})
                                     </div>
 
-                                    <button type="button" class="btn btn-primary js-save-image" data-image-id="@imageModel.Id">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                        Save Changes
-                                    </button>
-                                    <button type="button" class="btn btn-link js-cancel-image" data-image-id="@imageModel.Id">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                        Cancel Changes
-                                    </button>
-                                    <button type="button" class="btn btn-link js-delete-image" data-image-id="@imageModel.Id">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                        Remove Photo
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-primary js-save-image" data-image-id="@imageModel.Id">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                                Save Changes
+                                            </button>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <button type="button" class="btn btn-link js-cancel-image" data-image-id="@imageModel.Id">
+                                                <i class="glyphicon glyphicon-remove"></i>
+                                                Cancel Changes
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <button type="button" class="btn btn-link js-delete-image" data-image-id="@imageModel.Id">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                                Remove Photo
+                                            </button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

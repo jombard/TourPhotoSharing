@@ -29,6 +29,11 @@ body {
   flex: 1;
   margin-bottom: 50px;
 }
+@media (min-width: 768px) {
+  .wrapper > .container {
+    min-height: 600px;
+  }
+}
 footer {
   background-color: #474949;
   border-top: 1px solid #2e2f2f;

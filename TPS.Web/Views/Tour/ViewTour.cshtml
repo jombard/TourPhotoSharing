@@ -59,30 +59,34 @@
 </div>
 
 <div id="image-list" >
-    <div class="panel panel-default image-filters">
-        <div class="row">
-            @*<div class="col-sm-6 col-md-3">
-                <input class="search form-control" placeholder="Type to filter by name, date or time" />
-            </div>*@
-            <div class="col-sm-12 col-md-6">
-                @Html.DropDownListFor(m => m.UploaderNames, new SelectList(Model.UploaderNames), "Show all photos", new {@class = "form-control m-w-300", id = "selectOwner"})
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <span class="sort btn btn-default" data-sort="date">
-                    Sort by date
-                </span>
-                <span class="sort btn btn-default" data-sort="owner">
-                    Sort by uploader
-                </span>
-                <span class="btn btn-primary js-view-map hidden">
-                    <i class="glyphicon glyphicon-globe"></i>
-                    <span>View map</span>
-                </span>
-                
-                @if (Model.Tour.OwnerId == User.Identity.GetUserId())
-                {
-                    <a href="@Url.Action("Confirm", "Image", new {id=Model.Tour.Id})" class="btn btn-link">Pending images</a>
-                }
+    <div class="navbar navbar-default navbar-filter">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Filter by uploader <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="select-uploader">Show all</a>
+                        </li>
+                        @foreach (var uploader in Model.UploaderNames)
+                        {
+                            <li>
+                                <a href="#" class="select-uploader">@uploader</a>
+                            </li>
+
+                        }
+                    </ul>
+                </li>
+            </ul>
+            <div class="navbar-form navbar-right">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary js-view-map hidden">
+                        <i class="glyphicon glyphicon-globe"></i>
+                        <span>View map</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -212,19 +216,29 @@
         var options = { valueNames: ["date", "owner"] };
         var imageList = new List("image-list", options);
 
-        $("#selectOwner").on("change", function() {
-            var selectedOwner = $(this).val();
+
+        $(".select-uploader").on("click", function (e) {
+            e.preventDefault();
+
+            $(".select-uploader").each(function(i, a) {
+                $(a).parent().removeClass("active");
+            });
+
+            var selectedOwner = $(this).text();
+            $(this).parent().addClass("active");
             $("#map").addClass("hidden").empty();
 
             $(".owner").each(function(i, owner) {
                 $(owner).closest("li").show();
-                if (selectedOwner !== "" && $(owner).find("span").text() !== selectedOwner) {
+                if (selectedOwner !== "Show all" && $(owner).find("span").text() !== selectedOwner) {
                     $(owner).closest("li").hide();
                 }
             });
         });
 
-        function mapInit() {
+        function mapInit(e) {
+            e.preventDefault();
+
             $("#map").toggleClass("hidden");
 
             if ($("#map").children().length)

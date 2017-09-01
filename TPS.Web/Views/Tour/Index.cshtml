@@ -28,8 +28,10 @@
                         @Html.ActionLink("View", "ViewTour", new {tour.Id}, new {@class = "btn btn-primary btn-block"})
                         @if (tour.OwnerId == User.Identity.GetUserId())
                         {
-                            @Html.ActionLink("Edit", "Edit", new {tour.Id}, new {@class = "btn btn-link btn-block"})
+                            @Html.ActionLink("Pending images", "Confirm", "Image", new { tour.Id }, new { @class = "btn btn-link" })
+                            @Html.ActionLink("Edit", "Edit", new {tour.Id}, new {@class = "btn btn-link"})
                         }
+
                     </div>
                 </div>
             </div>

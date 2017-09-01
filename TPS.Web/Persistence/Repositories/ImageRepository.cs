@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -21,7 +22,7 @@ namespace TPS.Web.Persistence.Repositories
         public IEnumerable<Image> GetUserImages(string userId)
         {
             return _context.Images
-                .Where(i => i.OwnerId == userId).ToList();
+                .Where(i => i.OwnerId == userId).Include(u => u.Owner).ToList();
         }
 
         public Image GetImage(string imageId)
@@ -48,7 +49,7 @@ namespace TPS.Web.Persistence.Repositories
 
         public IEnumerable<Image> GetPending()
         {
-            return _context.Images.Where(i => !i.Confirmed).ToList();
+            return _context.Images.Where(i => !i.Confirmed).Include(u => u.Owner).ToList();
         }
 
         public Image UploadUserImage(HttpPostedFileBase file, string userId)

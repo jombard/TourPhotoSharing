@@ -227,7 +227,7 @@
         }).on("click", ".js-save-image", function (e) {
             e.preventDefault();
             var $this = $(this);
-            var row = $this.closest(".row");
+            var row = $this.closest(".thumbnail");
 
             var imageId = $this.attr("data-image-id");
             var caption = row.find(".js-image-caption").val();
@@ -273,7 +273,7 @@
             e.preventDefault();
 
             var $this = $(this);
-            var row = $this.closest(".row");
+            var row = $this.closest(".thumbnail");
             var img = row.find("img");
             row.find(".js-edit-link").removeClass("hidden");
             row.find(".js-rotate-link").addClass("hidden");

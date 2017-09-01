@@ -8,7 +8,7 @@
 
 <p class="lead">Drop your photos in the area below or click inside to select your photos for upload.</p>
 
-@using (Html.BeginForm("SaveUploadedFile", "Image", FormMethod.Post, new {enctype = "multipart/form-data", @class = "dropzone", id = "dropzoneForm"}))
+@using (Html.BeginForm("UploadImage", "Image", FormMethod.Post, new {enctype = "multipart/form-data", @class = "dropzone", id = "dropzoneForm"}))
 {
     <div class="fallback">
         <p>Select your files for upload</p>

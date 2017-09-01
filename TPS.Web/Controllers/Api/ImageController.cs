@@ -77,7 +77,9 @@ namespace TPS.Web.Controllers.Api
 
             imageDto.OwnerId = userId;
 
-            var id = _unitOfWork.Images.AddImage(imageDto);
+            var image = Mapper.Map<ImageDto, Image>(imageDto);
+
+            var id = _unitOfWork.Images.AddImage(image);
             _unitOfWork.Complete();
 
             return Ok(id);

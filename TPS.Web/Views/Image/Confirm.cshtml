@@ -1,4 +1,4 @@
-﻿@model List<TPS.Web.Core.ViewModels.ImageViewModel>
+﻿@model TPS.Web.Core.ViewModels.ImageListViewModel
 @{
     ViewBag.Title = "Confirm Pending Uploads";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    @foreach (var image in Model)
+    @foreach (var image in Model.Images)
     {
         <div class="row form-group">
             <div class="col-sm-6">

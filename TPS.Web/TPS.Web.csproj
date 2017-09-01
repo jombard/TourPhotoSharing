@@ -245,6 +245,7 @@
     <Compile Include="Controllers\Api\ImageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Core\Models\ImageProperties.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Core\Dtos\CommentDto.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Core\ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="Core\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Core\ViewModels\ForgotViewModel.cs" />
+    <Compile Include="Core\ViewModels\ImageListViewModel.cs" />
     <Compile Include="Core\ViewModels\LoginViewModel.cs" />
     <Compile Include="Core\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Core\ViewModels\ResetPasswordViewModel.cs" />
@@ -376,6 +378,7 @@
     <Compile Include="Persistence\Repositories\AuditRepository.cs" />
     <Compile Include="Persistence\Repositories\CommmentRepository.cs" />
     <Compile Include="Persistence\Repositories\ImageRepository.cs" />
+    <Compile Include="Core\Models\ProcessImage.cs" />
     <Compile Include="Persistence\Repositories\TourRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

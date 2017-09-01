@@ -1,4 +1,4 @@
-﻿@model List<TPS.Web.Core.ViewModels.ImageViewModel>
+﻿@model TPS.Web.Core.ViewModels.ImageListViewModel
 
 @{
     ViewBag.Title = "My Photos";
@@ -14,11 +14,11 @@
 
 <hr/>
 
-@if (Model.Any())
+@if (Model.Images.Any())
 {
     <p class="lead">Add a description to a photo or remove unwanted photos.</p>
     <ul class="list-inline my-photos">
-        @foreach (var imageModel in Model)
+        @foreach (var imageModel in Model.Images)
         {
             <li>
                 <div class="thumbnail @(imageModel.Confirmed ? "" : "img-pending")">
@@ -159,6 +159,7 @@ else
                 method: "PUT",
                 data: imageObj
             }).done(function (result) {
+                console.log(result);
                 var img = row.find("img");
                 img.parent().toggleClass("col-sm-6 col-sm-12");
                 img.attr("src", img.attr("src").split("?")[0] + "?" + img.attr("src").split("?")[1] + "&w=100&h=100&mode=crop");

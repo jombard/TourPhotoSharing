@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TPS.Web.Core.Dtos;
+using System.Web;
 using TPS.Web.Core.Models;
 
 namespace TPS.Web.Core.Repositories
@@ -9,6 +9,8 @@ namespace TPS.Web.Core.Repositories
         IEnumerable<Image> GetUserImages(string userId);
         Image GetImage(string imageId);
         void Remove(Image image);
-        string AddImage(ImageDto imageDto);
+        string AddImage(Image image);
+        IEnumerable<Image> GetPending();
+        Image UploadUserImage(HttpPostedFileBase file, string userId);
     }
 }

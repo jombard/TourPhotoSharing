@@ -58,7 +58,7 @@ namespace TourPhotoSharing.Tests.Api
             var image = new Image();
             _mockRepository.Setup(r => r.GetImage("1")).Returns(image);
 
-            var imageDto = new ImageDto {Title = "Updated Title", Caption = "Caption", Query = "Query"};
+            var imageDto = new ImageDto {Title = "Updated Title", Caption = "Caption", Query = "Query", Confirmed = true};
 
             var result = _controller.UpdateImage("1", imageDto);
 
@@ -97,9 +97,10 @@ namespace TourPhotoSharing.Tests.Api
         [TestMethod]
         public void AddImage_ValidRequest_ShouldReturnOk()
         {
-            var imageDto = new ImageDto();
-            _mockRepository.Setup(i => i.AddImage(imageDto)).Returns("1");
+            var image = new Image();
+            _mockRepository.Setup(i => i.AddImage(image)).Returns("1");
 
+            var imageDto = new ImageDto();
             var result = _controller.AddImage(imageDto);
 
             result.Should().BeOfType<OkNegotiatedContentResult<string>>();

@@ -46,7 +46,7 @@ namespace TPS.Web.Controllers.Api
             commentDto.Id = comment.Id;
             commentDto.Commenter = new UserDto { FullName = User.GetFullName() };
 
-            return Created(new Uri(Request.RequestUri + "/" + comment.Id), commentDto);
+            return Ok(commentDto);
         }
 
         // DELETE: api/Comments/id

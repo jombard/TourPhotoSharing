@@ -15,5 +15,6 @@ namespace TPS.Web.Core.Dtos
         public bool Confirmed { get; set; }
         public string OwnerId { get; set; }
         public string Query { get; set; }
+        public string TourId { get; set; }
     }
 }

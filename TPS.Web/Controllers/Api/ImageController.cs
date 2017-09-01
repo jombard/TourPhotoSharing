@@ -47,6 +47,16 @@ namespace TPS.Web.Controllers.Api
             if (imageDto.Confirmed)
                 imageInDb.Confirmed = true;
 
+            if (!string.IsNullOrEmpty(imageDto.TourId))
+            {
+                var tour = _unitOfWork.Tours.GetTour(imageDto.TourId);
+
+                if (tour == null)
+                    return NotFound();
+
+                _unitOfWork.Images.AddImageToTour(imageInDb, tour);
+            }
+
             _unitOfWork.Complete();
 
             return Ok();

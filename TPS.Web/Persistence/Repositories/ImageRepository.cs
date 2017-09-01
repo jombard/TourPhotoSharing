@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using TPS.Web.Core.Models;
 using TPS.Web.Core.Repositories;
 
@@ -30,6 +32,12 @@ namespace TPS.Web.Persistence.Repositories
         public void Remove(Image image)
         {
             _context.Images.Remove(image);
+
+            var fullFilePath = HostingEnvironment.MapPath(image.ImageUrl);
+            if (fullFilePath != null && File.Exists(fullFilePath))
+            {
+                File.Delete(fullFilePath);
+            }
         }
 
         public string AddImage(Image image)
@@ -67,6 +75,16 @@ namespace TPS.Web.Persistence.Repositories
             };
 
             return image;
+        }
+
+        public void AddImageToTour(Image image, Tour tour)
+        {
+            var tourImage = new TourImages
+            {
+                Image = image,
+                Tour = tour
+            };
+            _context.TourImages.Add(tourImage);
         }
     }
 }

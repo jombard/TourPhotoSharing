@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
+using System.Web.Hosting;
 using System.Web.Http.Results;
 using TPS.Web.App_Start;
 using TPS.Web.Controllers.Api;
@@ -104,6 +106,16 @@ namespace TourPhotoSharing.Tests.Api
             var result = _controller.AddImage(imageDto);
 
             result.Should().BeOfType<OkNegotiatedContentResult<string>>();
+        }
+
+        [TestMethod]
+        public void TempTestMethod()
+        {
+            var path = HostingEnvironment.MapPath(
+                @"~\uploads\images\dc1dfe37-b189-4ec3-8fdf-dab93f9848f5\2ef0a8649aa642eda64f42e7a5177fb7.jpg");
+
+            Console.WriteLine(path);
+            Assert.IsTrue(true);
         }
     }
 }

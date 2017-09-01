@@ -12,5 +12,6 @@ namespace TPS.Web.Core.Repositories
         string AddImage(Image image);
         IEnumerable<Image> GetPending();
         Image UploadUserImage(HttpPostedFileBase file, string userId);
+        void AddImageToTour(Image image, Tour tour);
     }
 }

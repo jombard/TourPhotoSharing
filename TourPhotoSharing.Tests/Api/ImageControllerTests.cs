@@ -18,15 +18,18 @@ namespace TourPhotoSharing.Tests.Api
     {
         private ImageController _controller;
         private Mock<IImageRepository> _mockRepository;
+        private Mock<ITourRepository> _mockTourRepository;
         private string _userId;
 
         [TestInitialize]
         public void TestInitialize()
         {
             _mockRepository = new Mock<IImageRepository>();
+            _mockTourRepository = new Mock<ITourRepository>();
 
             var mockUoW = new Mock<IUnitOfWork>();
             mockUoW.Setup(u => u.Images).Returns(_mockRepository.Object);
+            mockUoW.Setup(u => u.Tours).Returns(_mockTourRepository.Object);
 
             _controller = new ImageController(mockUoW.Object);
             _userId = "1";
@@ -65,6 +68,34 @@ namespace TourPhotoSharing.Tests.Api
             var result = _controller.UpdateImage("1", imageDto);
 
             result.Should().BeOfType<OkResult>();
+        }
+
+        [TestMethod]
+        public void UpdateImage_AddImageToTour_ShouldReturnOk()
+        {
+            var image = new Image();
+            var tour = new Tour();
+            _mockRepository.Setup(r => r.GetImage("1")).Returns(image);
+            _mockTourRepository.Setup(r => r.GetTour("1")).Returns(tour);
+
+            var imageDto = new ImageDto {TourId = "1"};
+
+            var result = _controller.UpdateImage("1", imageDto);
+
+            result.Should().BeOfType<OkResult>();
+        }
+
+        [TestMethod]
+        public void UpdateImage_TourDoesNotExist_ShouldReturnNotFound()
+        {
+            var image = new Image();
+            _mockRepository.Setup(r => r.GetImage("1")).Returns(image);
+
+            var imageDto = new ImageDto {TourId = "1"};
+
+            var result = _controller.UpdateImage("1", imageDto);
+
+            result.Should().BeOfType<NotFoundResult>();
         }
 
         [TestMethod]

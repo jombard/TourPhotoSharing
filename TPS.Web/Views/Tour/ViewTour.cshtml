@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@model TPS.Web.Core.ViewModels.TourImagesViewModel
+﻿@model TPS.Web.Core.ViewModels.TourImagesViewModel
 
 @{
     ViewBag.Title = Model.Tour.Name;
@@ -109,7 +108,6 @@
                                  data-height="@imageModel.Image.Height"
                                  class="image img-responsive"/>
                             <div class="img-data">
-                                <div class="date">@imageModel.Image.CreatedDate.Value.Ticks</div>
                                 <div class="img-caption">@imageModel.Image.Caption</div>
                                 <div class="owner">
                                     Photo by: <span>@imageModel.Image.Owner.FullName</span>
@@ -213,10 +211,6 @@
 
         var google = google || {};
 
-        var options = { valueNames: ["date", "owner"] };
-        var imageList = new List("image-list", options);
-
-
         $(".select-uploader").on("click", function (e) {
             e.preventDefault();
 
@@ -274,7 +268,7 @@
 
                 google.maps.event.addListener(marker,
                     "click",
-                    (function(marker, i) {
+                    (function(marker) {
                         return function() {
                             infowindow.setContent(loc.alt);
                             infowindow.open(map, marker);

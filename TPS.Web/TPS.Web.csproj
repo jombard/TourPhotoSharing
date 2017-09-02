@@ -260,6 +260,8 @@
     <Compile Include="Core\Repositories\IImageRepository.cs" />
     <Compile Include="Core\Dtos\ImageDto.cs" />
     <Compile Include="Core\Repositories\ITourRepository.cs" />
+    <Compile Include="Core\Repositories\IUtilLibrary.cs" />
+    <Compile Include="Core\Libraries\UtilLibrary.cs" />
     <Compile Include="Core\ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="Core\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Core\ViewModels\ForgotViewModel.cs" />

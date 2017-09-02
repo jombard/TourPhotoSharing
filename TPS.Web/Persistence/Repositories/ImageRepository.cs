@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.Hosting;
 using TPS.Web.Core.Models;
 using TPS.Web.Core.Repositories;
 using Image = TPS.Web.Core.Models.Image;
@@ -15,10 +12,12 @@ namespace TPS.Web.Persistence.Repositories
     public class ImageRepository : IImageRepository
     {
         private readonly IApplicationDbContext _context;
+        private readonly IUtilLibrary _util;
 
-        public ImageRepository(IApplicationDbContext context)
+        public ImageRepository(IApplicationDbContext context, IUtilLibrary util)
         {
             _context = context;
+            _util = util;
         }
 
         public IEnumerable<Image> GetUserImages(string userId)
@@ -36,11 +35,7 @@ namespace TPS.Web.Persistence.Repositories
         {
             _context.Images.Remove(image);
 
-            var fullFilePath = HostingEnvironment.MapPath(image.ImageUrl);
-            if (fullFilePath != null && File.Exists(fullFilePath))
-            {
-                File.Delete(fullFilePath);
-            }
+            _util.Delete(image);
         }
 
         public string AddImage(Image image)
@@ -92,16 +87,10 @@ namespace TPS.Web.Persistence.Repositories
 
         public void Rotate(Image image)
         {
-            var fullFilePath = HostingEnvironment.MapPath(image.ImageUrl);
-            if (fullFilePath != null && File.Exists(fullFilePath))
+            var result = _util.Rotate(image);
+
+            if (result)
             {
-                using (var i = System.Drawing.Image.FromFile(fullFilePath))
-                {
-                    i.RotateFlip(RotateFlipType.Rotate90FlipNone);
-
-                    i.Save(fullFilePath);
-                }
-
                 var width = image.Width;
                 image.Width = image.Height;
                 image.Height = width;

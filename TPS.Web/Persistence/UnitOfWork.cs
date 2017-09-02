@@ -1,4 +1,5 @@
 ﻿using TPS.Web.Core;
+using TPS.Web.Core.Libraries;
 using TPS.Web.Core.Repositories;
 using TPS.Web.Persistence.Repositories;
 
@@ -13,10 +14,14 @@ namespace TPS.Web.Persistence
         public ICommentRepository Comments { get; }
         public IAuditRepository AuditRecords { get; }
 
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
-            Images = new ImageRepository(context);
+
+            var utilLibrary = new UtilLibrary();
+
+            Images = new ImageRepository(context, utilLibrary);
             Tours = new TourRepository(context);
             Comments = new CommmentRepository(context);
             AuditRecords = new AuditRepository(context);

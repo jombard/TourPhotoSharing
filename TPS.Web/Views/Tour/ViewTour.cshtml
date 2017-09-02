@@ -245,7 +245,8 @@
                     lat: parseFloat(pic.dataset.lat),
                     lng: parseFloat(pic.dataset.lng),
                     alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
-                        "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>"
+                    "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>",
+                    src: pic.src.split("?")[0]
                 }
             });
 
@@ -262,7 +263,8 @@
             $.each(mapLocations, function(i, loc) {
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(loc.lat, loc.lng),
-                    map: map
+                    map: map,
+                    icon: loc.src + "?w=50&h=50&mode=crop"
                 });
                 bounds.extend(marker.position);
 

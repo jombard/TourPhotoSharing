@@ -44,6 +44,9 @@ namespace TPS.Web.Controllers.Api
             if (imageDto.Query != null)
                 imageInDb.Query = imageDto.Query;
 
+            if (imageDto.Rotate)
+                _unitOfWork.Images.Rotate(imageInDb);
+
             if (imageDto.Confirmed)
                 imageInDb.Confirmed = true;
 

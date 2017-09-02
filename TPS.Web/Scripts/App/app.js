@@ -21,7 +21,7 @@ $(document).on("click", ".image", function (e) {
             title: pic.alt + (authorName ? "<br />Photo by: " + authorName : ""),
             w: $(pic).data("width"),
             h: $(pic).data("height")
-        }
+        };
     });
 
     var options = {

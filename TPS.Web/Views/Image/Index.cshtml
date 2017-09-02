@@ -18,150 +18,17 @@
 {
     <p class="lead">Your uploaded photos that are yet to be approved.</p>
     <p>These photos will not appear in the tour view.</p>
-    <ul class="list-inline my-photos">
-        @foreach (var imageModel in Model.PendingImages)
-        {
-            <li>
-                <div class="thumbnail">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <img src="@imageModel.ImagePath.Replace("~", "..")?@imageModel.Query&w=100&h=100&mode=crop"
-                                 alt="@imageModel.Title @imageModel.Caption"
-                                 class="img-responsive" />
-                            <div>
-                                <button type="button" class="btn btn-block btn-link js-edit-link">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                    Edit
-                                </button>
-                                @*<a href="#" class="btn btn-block btn-primary js-rotate-link hidden" data-image-id="@imageModel.Id">
-                            <i class="glyphicon glyphicon-refresh"></i>
-                            Rotate
-                        </a>*@
-                            </div>
-                        </div>
-                        <div class="col-sm-12 hidden js-image-edit">
-                            @if (!imageModel.Confirmed)
-                            {
-                                <div class="alert alert-info">
-                                    <i class="glyphicon glyphicon-exclamation-sign"></i>
-                                    This photo has not yet been approved by an administrator and will not appear on the tour page.
-                                </div>
-                            }
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    @Html.LabelFor(m => imageModel.Caption, new { @class = "h3" })
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <p>Add a useful description to this image.</p>
-                                        @Html.TextAreaFor(m => imageModel.Caption, new { @class = "form-control js-image-caption" })
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <button type="button" class="btn btn-primary js-save-image" data-image-id="@imageModel.Id">
-                                                <i class="glyphicon glyphicon-ok"></i>
-                                                Save Changes
-                                            </button>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <button type="button" class="btn btn-link js-cancel-image" data-image-id="@imageModel.Id">
-                                                <i class="glyphicon glyphicon-remove"></i>
-                                                Cancel Changes
-                                            </button>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6">
-                                            <button type="button" class="btn btn-link js-delete-image" data-image-id="@imageModel.Id">
-                                                <i class="glyphicon glyphicon-trash"></i>
-                                                Remove Photo
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    @Html.Partial("_ImageEditGallery", Model.PendingImages)
 
-
-            </li>
-        }
-    </ul>
     <hr/>
 }
+
 @if (Model.ConfirmedImages.Any())
 {
     <p class="lead">Add a description to a photo or remove unwanted photos.</p>
-    <ul class="list-inline my-photos">
-        @foreach (var imageModel in Model.ConfirmedImages)
-        {
-            <li>
-                <div class="thumbnail">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <img src="@imageModel.ImagePath.Replace("~", "..")?@imageModel.Query&w=100&h=100&mode=crop" 
-                                 alt="@imageModel.Title @imageModel.Caption" 
-                                 class="img-responsive" />
-                            <div>
-                                <button type="button" class="btn btn-block btn-link js-edit-link">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                    Edit
-                                </button>
-                                @*<a href="#" class="btn btn-block btn-primary js-rotate-link hidden" data-image-id="@imageModel.Id">
-                                    <i class="glyphicon glyphicon-refresh"></i>
-                                    Rotate
-                                </a>*@
-                            </div>  
-                        </div>
-                        <div class="col-sm-12 hidden js-image-edit">
-                            @if (!imageModel.Confirmed)
-                            {
-                                <div class="alert alert-info">
-                                    <i class="glyphicon glyphicon-exclamation-sign"></i>
-                                    This photo has not yet been approved by an administrator and will not appear on the tour page.
-                                </div>
-                            }
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    @Html.LabelFor(m => imageModel.Caption, new {@class = "h3"})
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <p>Add a useful description to this image.</p>
-                                        @Html.TextAreaFor(m => imageModel.Caption, new {@class = "form-control js-image-caption"})
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <button type="button" class="btn btn-primary js-save-image" data-image-id="@imageModel.Id">
-                                                <i class="glyphicon glyphicon-ok"></i>
-                                                Save Changes
-                                            </button>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <button type="button" class="btn btn-link js-cancel-image" data-image-id="@imageModel.Id">
-                                                <i class="glyphicon glyphicon-remove"></i>
-                                                Cancel Changes
-                                            </button>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6">
-                                            <button type="button" class="btn btn-link js-delete-image" data-image-id="@imageModel.Id">
-                                                <i class="glyphicon glyphicon-trash"></i>
-                                                Remove Photo
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        }
-    </ul>
+    @Html.Partial("_ImageEditGallery", Model.ConfirmedImages)
 }
+
 @if(!Model.ConfirmedImages.Any() && !Model.PendingImages.Any())
 {
     <p>You have not uploaded any photos</p>
@@ -172,10 +39,10 @@
 @section Scripts {
     @Scripts.Render("~/Scripts/App/app.min.js")
     <script>
-        $(".thumbnail").on("click", ".js-edit-link", function(e) {
+        $(".my-photos").on("click", ".js-edit-link", function(e) {
             e.preventDefault();
             var $this = $(this);
-            var $thumbnail = $this.closest(".thumbnail");
+            var $thumbnail = $this.closest("li");
             var img = $thumbnail.find("img");
             var cols = $thumbnail.find(".col-sm-12");
 
@@ -186,32 +53,17 @@
             img.attr("src", imgParams[0]);
             $thumbnail.find(".js-rotate-link").removeClass("hidden");
             $thumbnail.find(".js-image-edit").removeClass("hidden");
-            $thumbnail.closest("li").attr("style", "display:block;");
+            $thumbnail.attr("style", "display:block;");
             cols.toggleClass("col-sm-12 col-sm-6");
         }).on("click", ".js-rotate-link", function (e) {
             e.preventDefault();
             var $this = $(this);
             var imageId = $this.attr("data-image-id");
-            var $thumbnail = $this.closest(".thumbnail");
+            var $thumbnail = $this.closest(".row");
             var img = $thumbnail.find("img");
-            var query = img.attr("src").split("?")[1];
-            var options = new URLSearchParams(query);
-
-            var rotate = options.get("rotate");
-            if (rotate === "90") {
-                options.set("rotate", 180);
-            } else if (rotate === "180") {
-                options.set("rotate", 270);
-            } else if (rotate === "270") {
-                options.delete("rotate");
-            } else {
-                options.set("rotate", 90);
-            }
-
-            img.attr("src", img.attr("src").split("?")[0] + "?" + options);
 
             var imageObj = {
-                query: options.toString()
+                Rotate: true
             };
 
             $.ajax({
@@ -220,6 +72,7 @@
                 data: imageObj
             }).done(function (result) {
                 console.log("rotate result", result);
+                img.attr("src", img.attr("src") + "?" + new Date().getTime());
             }).fail(function (error) {
                 console.log("rotate error", error);
             });
@@ -227,7 +80,7 @@
         }).on("click", ".js-save-image", function (e) {
             e.preventDefault();
             var $this = $(this);
-            var row = $this.closest(".thumbnail");
+            var row = $this.closest("li");
 
             var imageId = $this.attr("data-image-id");
             var caption = row.find(".js-image-caption").val();
@@ -246,8 +99,8 @@
             }).done(function (result) {
                 console.log(result);
                 var img = row.find("img");
-                img.parent().toggleClass("col-sm-6 col-sm-12");
-                img.attr("src", img.attr("src").split("?")[0] + "?" + img.attr("src").split("?")[1] + "&w=100&h=100&mode=crop");
+                img.parent().parent().toggleClass("col-sm-6 col-sm-12");
+                img.attr("src", img.attr("src").split("?")[0] + "?w=100&h=100&mode=crop");
                 row.find(".js-image-edit").addClass("hidden col-sm-12").removeClass("col-sm-6");
                 row.closest("li").attr("style", "display:inline-block;");
             }).fail(function (error) {
@@ -273,12 +126,12 @@
             e.preventDefault();
 
             var $this = $(this);
-            var row = $this.closest(".thumbnail");
+            var row = $this.closest("li");
             var img = row.find("img");
             row.find(".js-edit-link").removeClass("hidden");
             row.find(".js-rotate-link").addClass("hidden");
-            img.parent().toggleClass("col-sm-6 col-sm-12");
-            img.attr("src", img.attr("src").split("?")[0] + "?" + img.attr("src").split("?")[1] + "&w=100&h=100&mode=crop");
+            img.parent().parent().toggleClass("col-sm-6 col-sm-12");
+            img.attr("src", img.attr("src").split("?")[0] + "?w=100&h=100&mode=crop");
             row.find(".js-image-edit").addClass("hidden col-sm-12").removeClass("col-sm-6");
             row.closest("li").attr("style", "display:inline-block;");
         });

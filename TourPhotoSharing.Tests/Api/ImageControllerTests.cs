@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Web.Hosting;
 using System.Web.Http.Results;
 using TPS.Web.App_Start;
 using TPS.Web.Controllers.Api;
@@ -10,6 +9,7 @@ using TPS.Web.Core;
 using TPS.Web.Core.Dtos;
 using TPS.Web.Core.Models;
 using TPS.Web.Core.Repositories;
+using Image = TPS.Web.Core.Models.Image;
 
 namespace TourPhotoSharing.Tests.Api
 {
@@ -140,13 +140,34 @@ namespace TourPhotoSharing.Tests.Api
         }
 
         [TestMethod]
+        public void UpdateImage_RotateImageValidRequest_ShouldReturnOk()
+        {
+            var image = new Image();
+            _mockRepository.Setup(i => i.GetImage("1")).Returns(image);
+
+            var imageDto = new ImageDto {Rotate = true};
+            var result = _controller.UpdateImage("1", imageDto);
+
+            result.Should().BeOfType<OkResult>();
+        }
+
+        [TestMethod]
         public void TempTestMethod()
         {
-            var path = HostingEnvironment.MapPath(
-                @"~\uploads\images\dc1dfe37-b189-4ec3-8fdf-dab93f9848f5\2ef0a8649aa642eda64f42e7a5177fb7.jpg");
+            var path =
+                @"C:\Users\Jon Lombard\Documents\Visual Studio 2017\Projects\TourPhotoSharing\TPS.Web\Uploads\images\dc1dfe37-b189-4ec3-8fdf-dab93f9848f5\376214e2b1544dec91047799a5b447ff.jpg";
 
             Console.WriteLine(path);
+
+            //using (var i = System.Drawing.Image.FromFile(path))
+            //{
+            //    i.RotateFlip(RotateFlipType.Rotate90FlipNone);
+
+            //    i.Save(path);
+            //}
+
             Assert.IsTrue(true);
         }
+
     }
 }

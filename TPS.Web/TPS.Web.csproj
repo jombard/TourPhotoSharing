@@ -520,6 +520,7 @@
     <Content Include="Uploads\images\.gitignore" />
     <Content Include="Views\Image\ConfirmUpload.cshtml" />
     <Content Include="Uploads\documents\lejog-memoir.pdf" />
+    <Content Include="Views\Image\_ImageEditGallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

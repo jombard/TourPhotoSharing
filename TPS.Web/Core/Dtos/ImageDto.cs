@@ -15,5 +15,6 @@ namespace TPS.Web.Core.Dtos
         public string OwnerId { get; set; }
         public string Query { get; set; }
         public string TourId { get; set; }
+        public bool Rotate { get; set; }
     }
 }

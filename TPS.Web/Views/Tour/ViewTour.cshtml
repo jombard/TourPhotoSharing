@@ -19,7 +19,7 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        Filter by uploader <span class="caret"></span>
+                        Filter photo's by uploader <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -150,8 +150,14 @@
     <script>
         $(".js-view-map").on("click", function(e) {
             e.preventDefault();
-
+            var $this = $(this);
             $("#map").toggleClass("hidden");
+
+            if ($("#map").hasClass("hidden")) {
+                $this.find("span").text("View map");
+            } else {
+                $this.find("span").text("Close map");
+            }
 
             var mapLocations = $("img").filter(function (i, pic) {
                 return pic.dataset.lat && pic.dataset.lng && $(pic).is(":visible");

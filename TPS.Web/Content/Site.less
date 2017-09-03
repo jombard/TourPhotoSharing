@@ -207,32 +207,27 @@ textarea {
         margin: 0;
         padding: 0;
         float: left;
-        width: 100%;
+        width: 50%;
 
         @media @screen-xs-min {
-            width: 50%;
-        }
-
-        @media @screen-sm-min {
             width: 33.33333333%;
         }
 
-        @media @screen-md-min {
+        @media @screen-sm-min {
             width: 25%;
+        }
+
+        @media @screen-md-min {
+            width: 20%;
         }
     }
 
     .thumbnail {
         position: relative;
         padding: 0;
-        margin-bottom: 10px;
+        margin-bottom: 0;
         border-radius: 0;
         border: none;
-
-        @media @screen-xs-min {
-            margin-left: 5px;
-            margin-right: 5px;
-        }
 
         .img-data {
             position: absolute;
@@ -267,7 +262,9 @@ textarea {
 
 .tour-header {
     position: relative;
-    margin-bottom: 20px;
+    margin-top: -18px;
+    margin-left: -15px;
+    margin-right: -15px;
 
     img {
         margin: 0 auto;
@@ -328,19 +325,41 @@ textarea {
     border-radius: 0;
 }
 
-.navbar-filter  {
+.navbar-filter {
+    margin: 0 -15px;
+
     .navbar-nav > li > a.navbar-brand,
     .navbar-brand {
         padding: 15px;
         line-height: 20px;
         height: 50px;
         font-size: 18px;
+        width: 100%;
+        text-align: center;
+
+        @media @screen-sm-min {
+            width: inherit;
+            text-align: left;
+        }
+    }
+}
+
+#image-list > .row {
+    margin: 0 -30px 20px;
+}
+
+.select-uploader {
+    text-align: center;
+
+    @media @screen-sm-min {
+        text-align: left;
     }
 }
 
 .navbar-form {
     margin-top: 8px;
     margin-bottom: 8px;
+    text-align: center;
 }
 
 .audit-data {
@@ -373,6 +392,8 @@ textarea {
 
     .modal-content {
         border-radius: 0;
+        border: none;
+        box-shadow: none;
     }
 
     .tour-img {

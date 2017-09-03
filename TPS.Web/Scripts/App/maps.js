@@ -42,12 +42,12 @@ function mapInit(mapDivId, mapLocations) {
         google.maps.event.addListener(marker,
             "click",
             (function (marker) {
-                return function () {
+                return function() {
                     if (loc.alt) {
                         infowindow.setContent(loc.alt);
                         infowindow.open(map, marker);
                     }
-                }
+                };
             })(marker, i));
     });
 

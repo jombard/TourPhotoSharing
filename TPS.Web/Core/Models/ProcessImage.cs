@@ -32,8 +32,10 @@ namespace TPS.Web.Core.Models
 
             var instructions = new Instructions(resizeSettings);
 
-            var imageJob = new ImageJob(_image, _filePath + "<guid>", instructions, true, true);
-            imageJob.CreateParentDirectory = true;
+            var imageJob = new ImageJob(_image, _filePath + "<guid>", instructions, true, true)
+            {
+                CreateParentDirectory = true
+            };
 
             _compressedImg = ImageBuilder.Current.Build(imageJob);
         }

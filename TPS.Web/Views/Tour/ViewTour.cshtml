@@ -54,7 +54,7 @@
                 @foreach (var imageModel in Model.TourImages)
                 {
                     <li>
-                        <div class="thumbnail"> @* TODO image should open in gallery viewer that allows further control, remove use of photoswipe plugin *@
+                        <div class="thumbnail" data-toggle="modal" data-target="#photoModal"> @* TODO image should open in gallery viewer that allows further control, remove use of photoswipe plugin *@
                             <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?w=320&h=256&mode=crop"
                                  alt="@imageModel.Image.Caption"
                                  data-author="@imageModel.Image.Owner.FullName"
@@ -148,6 +148,19 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYa67zXJI_Zdh_NNyuIfq1k6rO2TuNp8Y&callback=enableMaps"></script>
     <script>
+
+        $("#photoModal").on("show.bs.modal", function(e) {
+            var thumbnail = $(e.relatedTarget);
+            var img = thumbnail.find("img").attr("src").split("?")[0];
+            console.log(thumbnail, img);
+            var caption = thumbnail.find(".img-caption").text();
+            var owner = thumbnail.find(".owner").text();
+
+            var $modal = $(this);
+            $modal.find(".modal-title").text(caption);
+            $modal.find(".img-owner").text(owner);
+            $modal.find(".tour-img").attr("src", img);
+        });
 
         $(".select-uploader").on("click", function (e) {
             e.preventDefault();

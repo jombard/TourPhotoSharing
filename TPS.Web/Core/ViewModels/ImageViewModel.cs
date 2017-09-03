@@ -15,7 +15,6 @@ namespace TPS.Web.Core.ViewModels
             Title = image.Title;
             Caption = image.Caption;
             ImagePath = image.ImageUrl;
-            Thumbnail = image.Thumbnail;
             Query = image.Query;
             Confirmed = image.Confirmed;
             Owner = image.Owner.FullName;

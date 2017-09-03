@@ -21,16 +21,8 @@ namespace TPS.Web.Core.Models
         [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
 
-        private DateTime? _createdDate;
-
         [DataType(DataType.DateTime)]
-        public DateTime? CreatedDate
-        {
-            get => _createdDate ?? DateTime.UtcNow;
-            set => _createdDate = value;
-        }
-
-        public byte[] Thumbnail { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         public string ImageMimeType { get; set; }
 
@@ -45,9 +37,14 @@ namespace TPS.Web.Core.Models
 
         public float? Longitude { get; set; }
 
+        private DateTime? _uploadDate;
+
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime UploadDate { get; set; }
+        public DateTime UploadDate {
+            get => _uploadDate ?? DateTime.UtcNow;
+            set => _uploadDate = value;
+        }
 
         public string Query { get; set; }
 
@@ -55,15 +52,9 @@ namespace TPS.Web.Core.Models
 
         public int? Height { get; set; }
 
-        public static readonly string[] ValidImageTypes = {
-            "image/gif",
-            "image/jpeg",
-            "image/pjpeg",
-            "image/png"
-        };
-
         public Image()
         {
+            UploadDate = DateTime.UtcNow;
         }
 
         public Image(ImageDto imageDto)

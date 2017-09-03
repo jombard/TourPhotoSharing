@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -68,8 +67,7 @@ namespace TPS.Web.Persistence.Repositories
                 OwnerId = userId,
                 Latitude = imageProps.Latitude,
                 Longitude = imageProps.Longitude,
-                CreatedDate = imageProps.DateCreated,
-                UploadDate = DateTime.Now
+                CreatedDate = imageProps.DateCreated
             };
 
             return image;

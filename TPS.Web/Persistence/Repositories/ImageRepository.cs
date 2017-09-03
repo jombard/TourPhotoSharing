@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -93,6 +94,34 @@ namespace TPS.Web.Persistence.Repositories
                 image.Width = image.Height;
                 image.Height = width;
             }
+        }
+
+        public bool AddStar(Image image, string userId)
+        {
+            try
+            {
+                var user = _context.Users.Find(userId);
+                image.StarredUsers.Add(user);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool RemoveStar(Image image, string userId)
+        {
+            try
+            {
+                var user = _context.Users.Find(userId);
+                image.StarredUsers.Remove(user);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

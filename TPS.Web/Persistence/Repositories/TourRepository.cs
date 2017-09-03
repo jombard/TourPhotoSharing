@@ -36,6 +36,7 @@ namespace TPS.Web.Persistence.Repositories
                 .Where(t => t.Tour.Id.ToString() == id && t.Image.Confirmed)
                 .Include(i => i.Image)
                 .Include(u => u.Image.Owner)
+                .Include(s => s.Image.StarredUsers)
                 .OrderBy(t => t.Image.CreatedDate)
                 .ToList();
         }

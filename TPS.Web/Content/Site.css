@@ -212,12 +212,16 @@ textarea {
   width: 90%;
 }
 .list-tour-images .thumbnail .img-data .owner,
-.list-tour-images .thumbnail .img-data .img-caption {
+.list-tour-images .thumbnail .img-data .img-caption,
+.list-tour-images .thumbnail .img-data .img-stars {
   display: block;
   position: relative;
   left: -50%;
   color: white;
   text-shadow: 2px 2px 8px #444;
+}
+.list-tour-images .thumbnail .img-data .img-stars {
+  float: right;
 }
 .list-tour-images .thumbnail .img-data .owner {
   bottom: 5px;

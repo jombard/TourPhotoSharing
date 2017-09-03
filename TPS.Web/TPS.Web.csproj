@@ -244,6 +244,7 @@
     <Compile Include="Controllers\Api\AuditsController.cs" />
     <Compile Include="Controllers\Api\CommentsController.cs" />
     <Compile Include="Controllers\Api\ImageController.cs" />
+    <Compile Include="Controllers\Api\StarController.cs" />
     <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />

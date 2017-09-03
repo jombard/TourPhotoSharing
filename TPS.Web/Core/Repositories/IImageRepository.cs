@@ -14,5 +14,7 @@ namespace TPS.Web.Core.Repositories
         Image UploadUserImage(HttpPostedFileBase file, string userId);
         void AddImageToTour(Image image, Tour tour);
         void Rotate(Image image);
+        bool AddStar(Image image, string userId);
+        bool RemoveStar(Image image, string userId);
     }
 }

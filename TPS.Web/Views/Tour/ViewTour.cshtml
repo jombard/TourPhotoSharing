@@ -62,6 +62,7 @@
                                  data-lng="@imageModel.Image.Longitude"
                                  data-width="@imageModel.Image.Width"
                                  data-height="@imageModel.Image.Height"
+                                 data-date="@imageModel.Image.CreatedDate"
                                  class="image img-responsive"/>
                             <div class="img-data">
                                 <div class="img-caption">@imageModel.Image.Caption</div>
@@ -148,18 +149,48 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYa67zXJI_Zdh_NNyuIfq1k6rO2TuNp8Y&callback=enableMaps"></script>
     <script>
+        $(".js-view-map").on("click", function(e) {
+            e.preventDefault();
 
-        $("#photoModal").on("show.bs.modal", function(e) {
+            $("#map").toggleClass("hidden");
+
+            var mapLocations = $("img").filter(function (i, pic) {
+                return pic.dataset.lat && pic.dataset.lng && $(pic).is(":visible");
+            }).map(function (i, pic) {
+                return {
+                    lat: parseFloat(pic.dataset.lat),
+                    lng: parseFloat(pic.dataset.lng),
+                    alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
+                        "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>",
+                    src: pic.src.split("?")[0]
+                }
+            });
+
+            mapInit("map", mapLocations);
+        });
+
+        $("#photoModal").on("shown.bs.modal", function(e) {
             var thumbnail = $(e.relatedTarget);
-            var img = thumbnail.find("img").attr("src").split("?")[0];
-            console.log(thumbnail, img);
+            var img = thumbnail.find("img");
+            var imgSrc = img.attr("src").split("?")[0];
             var caption = thumbnail.find(".img-caption").text();
             var owner = thumbnail.find(".owner").text();
+            var date = img.attr("data-date");
+            var mapObj = [{
+                lat: parseFloat(img.attr("data-lat")),
+                lng: parseFloat(img.attr("data-lng")),
+                alt: "<div><div class='thumbnail'><img src='" + imgSrc + "' /></div>" +
+                "<p>" + caption + "</p><p class='small'>Photo by: " + owner + "</p></div>",
+                src: imgSrc
+            }];
 
             var $modal = $(this);
             $modal.find(".modal-title").text(caption);
             $modal.find(".img-owner").text(owner);
-            $modal.find(".tour-img").attr("src", img);
+            $modal.find(".img-date").text(date);
+            $modal.find(".tour-img").attr("src", imgSrc);
+
+            mapInit("imgMap", mapObj);
         });
 
         $(".select-uploader").on("click", function (e) {

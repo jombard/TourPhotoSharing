@@ -316,6 +316,25 @@ textarea {
   color: #fff;
   opacity: 1;
 }
+@media (min-width: 992px) {
+  .modal .close {
+    color: inherit;
+    opacity: inherit;
+  }
+}
 .modal .modal-content {
   border-radius: 0;
+}
+.modal .tour-img {
+  margin: 0 auto;
+}
+@media (min-width: 992px) {
+  .modal .tour-img {
+    max-height: 780px;
+  }
+}
+@media (min-width: 1200px) {
+  .modal .tour-img {
+    max-height: 900px;
+  }
 }

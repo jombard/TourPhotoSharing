@@ -330,11 +330,11 @@ textarea {
 }
 @media (min-width: 992px) {
   .modal .tour-img {
-    max-height: 780px;
+    max-height: 740px;
   }
 }
 @media (min-width: 1200px) {
   .modal .tour-img {
-    max-height: 900px;
+    max-height: 780px;
   }
 }

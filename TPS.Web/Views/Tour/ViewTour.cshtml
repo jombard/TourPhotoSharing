@@ -143,7 +143,6 @@
 @Html.Partial("_ImageModal")
 
 @section Scripts {
-    @*@Scripts.Render("~/Scripts/App/gallery.js")*@
     @Scripts.Render("~/Scripts/App/maps.js")
     @*@Scripts.Render("~/Scripts/App/comments.js")*@
     <script async defer
@@ -169,28 +168,60 @@
             mapInit("map", mapLocations);
         });
 
-        $("#photoModal").on("shown.bs.modal", function(e) {
-            var thumbnail = $(e.relatedTarget);
-            var img = thumbnail.find("img");
+        function getNextImage(thisImg, move) {
+            var index = 0;
+            var items = $("li:visible").find("img.image").map(function (i, pic) {
+                if (thisImg.src.split("?")[0] === pic.src.split("?")[0]) {
+                    index = i;
+                }
+                return pic;
+            });
+
+            var nextItem = index + move;
+
+            if (nextItem === items.length || nextItem < 0) {
+                $("#photoModal").modal("hide");
+                return;
+            }
+
+            showImageOnModal($(items[nextItem]), $("#photoModal"));
+        }
+
+        function showImageOnModal(img, $modal) {
             var imgSrc = img.attr("src").split("?")[0];
-            var caption = thumbnail.find(".img-caption").text();
-            var owner = thumbnail.find(".owner").text();
+            var caption = img.attr("alt") || "";
+            var owner = img.attr("data-author");
             var date = img.attr("data-date");
             var mapObj = [{
                 lat: parseFloat(img.attr("data-lat")),
                 lng: parseFloat(img.attr("data-lng")),
-                alt: "<div><div class='thumbnail'><img src='" + imgSrc + "' /></div>" +
-                "<p>" + caption + "</p><p class='small'>Photo by: " + owner + "</p></div>",
                 src: imgSrc
             }];
 
-            var $modal = $(this);
             $modal.find(".modal-title").text(caption);
             $modal.find(".img-owner").text(owner);
             $modal.find(".img-date").text(date);
             $modal.find(".tour-img").attr("src", imgSrc);
 
             mapInit("imgMap", mapObj);
+        }
+
+        $("#photoModal").on("click", ".next, .prev", function(e) {
+            e.preventDefault();
+
+            var move = $(this).hasClass("next") ? 1 : -1;
+
+            var img = $(this).closest(".modal-content").find(".tour-img").get(0);
+            console.log("img", img);
+            getNextImage(img, move);
+        });
+
+        $("#photoModal").on("shown.bs.modal", function(e) {
+            var thumbnail = $(e.relatedTarget);
+            var img = thumbnail.find("img");
+            var $modal = $(this);
+
+            showImageOnModal(img, $modal);
         });
 
         $(".select-uploader").on("click", function (e) {

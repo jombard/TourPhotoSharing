@@ -8,9 +8,9 @@ function mapInit(mapDivId, mapLocations) {
 
     var $mapDiv = $("#" + mapDivId);
 
-    if (!mapLocations.length) {
+    if (!mapLocations.length || !mapLocations[0]["lat"]) {
         var noMapData = $("<div />").addClass("alert alert-danger").text("Unfortunately there is no location data for the selected photo's.");
-        $($mapDiv).append(noMapData);
+        $mapDiv.empty().append(noMapData);
         return;
     }
 
@@ -43,8 +43,10 @@ function mapInit(mapDivId, mapLocations) {
             "click",
             (function (marker) {
                 return function () {
-                    infowindow.setContent(loc.alt);
-                    infowindow.open(map, marker);
+                    if (loc.alt) {
+                        infowindow.setContent(loc.alt);
+                        infowindow.open(map, marker);
+                    }
                 }
             })(marker, i));
     });

@@ -29,10 +29,15 @@ namespace TPS.Web
             bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
                 "~/Scripts/dropzone/dropzone.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                "~/Scripts/DataTables/jquery.dataTables.js",
+                "~/Scripts/DataTables/dataTables.bootstrap.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-simplex.min.css",
                       "~/Scripts/dropzone/basic.min.css",
                       "~/Scripts/dropzone/dropzone.min.css",
+                      "~/Content/DataTables/dataTables.bootstrap.min.css",
                       "~/Content/photoswipe.css",
                       "~/Content/default-skin/default-skin.css",
                       "~/Content/site.css"));

@@ -53,9 +53,9 @@ namespace TPS.Web.Persistence.Repositories
         {
             var filepath = $@"~\uploads\images\{userId}\";
 
-            var compressImage = new ProcessImage(file, filepath);
+            var compressImage = _util.ProcessImage(file, filepath);
 
-            var imageProps = new ImageProperties(file);
+            var imageProps = _util.ImageProperties(file);
 
             var image = new Image
             {

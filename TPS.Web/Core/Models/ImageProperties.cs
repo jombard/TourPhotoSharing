@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing.Imaging;
+using System.Drawing.Imaging; // TODO remove this ref http://imageresizing.net/docs/v4/docs/best-practices
 using System.IO;
 using System.Linq;
 using System.Text;

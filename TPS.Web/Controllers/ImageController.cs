@@ -57,7 +57,7 @@ namespace TPS.Web.Controllers
                 completed.Add(imageDto);
             }
 
-            _unitOfWork.Complete(); // TODO assign image to tour
+            _unitOfWork.Complete();
 
             return Json(new { completed });
         }

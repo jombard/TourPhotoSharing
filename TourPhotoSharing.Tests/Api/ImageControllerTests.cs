@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
+using ImageResizer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
+using System.IO;
 using System.Web.Http.Results;
 using TPS.Web.App_Start;
 using TPS.Web.Controllers.Api;
@@ -155,16 +156,15 @@ namespace TourPhotoSharing.Tests.Api
         public void TempTestMethod()
         {
             var path =
-                @"C:\Users\Jon Lombard\Documents\Visual Studio 2017\Projects\TourPhotoSharing\TPS.Web\Uploads\images\dc1dfe37-b189-4ec3-8fdf-dab93f9848f5\376214e2b1544dec91047799a5b447ff.jpg";
+                @"C:\Users\Jon Lombard\Documents\Visual Studio 2017\Projects\TourPhotoSharing\TPS.Web\Uploads\images\01aac50e3eb541969cdb3d093da6b830.jpg";
 
-            Console.WriteLine(path);
+            var output = @"C:\Temp\";
+            var final = Path.GetDirectoryName(output);
 
-            //using (var i = System.Drawing.Image.FromFile(path))
-            //{
-            //    i.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            var imageJob = new ImageJob(path, output + "<guid>", new Instructions(), true, true);
+            //imageJob.CreateParentDirectory = true;
 
-            //    i.Save(path);
-            //}
+            var i = ImageBuilder.Current.Build(imageJob);
 
             Assert.IsTrue(true);
         }

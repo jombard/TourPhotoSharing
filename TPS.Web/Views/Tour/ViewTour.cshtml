@@ -212,13 +212,19 @@
             mapInit("imgMap", mapObj);
         }
 
+        $("#photoModal").on("click", ".star", function(e) {
+            e.preventDefault();
+            var $this = $(this);
+
+            $this.toggleClass("btn-default btn-danger");
+        });
+
         $("#photoModal").on("click", ".next, .prev", function(e) {
             e.preventDefault();
 
             var move = $(this).hasClass("next") ? 1 : -1;
 
             var img = $(this).closest(".modal-content").find(".tour-img").get(0);
-            console.log("img", img);
             getNextImage(img, move);
         });
 

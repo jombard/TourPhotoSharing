@@ -244,6 +244,7 @@
     <Compile Include="Controllers\Api\AuditsController.cs" />
     <Compile Include="Controllers\Api\CommentsController.cs" />
     <Compile Include="Controllers\Api\ImageController.cs" />
+    <Compile Include="Controllers\Api\StarController.cs" />
     <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
@@ -257,11 +258,13 @@
     <Compile Include="Core\Models\Audit.cs" />
     <Compile Include="Core\Models\AuditAttribute.cs" />
     <Compile Include="Core\Models\Comment.cs" />
+    <Compile Include="Core\Models\StarredImages.cs" />
     <Compile Include="Core\Models\Utils.cs" />
     <Compile Include="Core\Repositories\IAuditRepository.cs" />
     <Compile Include="Core\Repositories\ICommentRepository.cs" />
     <Compile Include="Core\Repositories\IImageRepository.cs" />
     <Compile Include="Core\Dtos\ImageDto.cs" />
+    <Compile Include="Core\Repositories\IStarRepository.cs" />
     <Compile Include="Core\Repositories\ITourRepository.cs" />
     <Compile Include="Core\Repositories\IUtilLibrary.cs" />
     <Compile Include="Core\Libraries\UtilLibrary.cs" />
@@ -392,6 +395,7 @@
     <Compile Include="Persistence\Repositories\CommmentRepository.cs" />
     <Compile Include="Persistence\Repositories\ImageRepository.cs" />
     <Compile Include="Core\Models\ProcessImage.cs" />
+    <Compile Include="Persistence\Repositories\StarRepository.cs" />
     <Compile Include="Persistence\Repositories\TourRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

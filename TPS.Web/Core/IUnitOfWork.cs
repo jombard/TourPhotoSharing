@@ -9,6 +9,7 @@ namespace TPS.Web.Core
         ITourRepository Tours { get; }
         ICommentRepository Comments { get; }
         IAuditRepository AuditRecords { get; }
+        IStarRepository StarredImages { get; }
 
         void Complete();
     }

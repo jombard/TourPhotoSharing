@@ -56,6 +56,7 @@
                     <li>
                         <div class="thumbnail" data-toggle="modal" data-target="#photoModal"> @* TODO image should open in gallery viewer that allows further control, remove use of photoswipe plugin *@
                             <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?w=320&h=256&mode=crop"
+                                 data-image-id="@imageModel.Image.Id"
                                  alt="@imageModel.Image.Caption"
                                  data-author="@imageModel.Image.Owner.FullName"
                                  data-lat="@imageModel.Image.Latitude"
@@ -159,14 +160,20 @@
                 $this.find("span").text("Close map");
             }
 
-            var mapLocations = $("img").filter(function (i, pic) {
+            var mapLocations = $("img").filter(function(i, pic) {
                 return pic.dataset.lat && pic.dataset.lng && $(pic).is(":visible");
-            }).map(function (i, pic) {
+            }).map(function(i, pic) {
                 return {
                     lat: parseFloat(pic.dataset.lat),
                     lng: parseFloat(pic.dataset.lng),
-                    alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
-                        "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>",
+                    alt: "<div><div class='thumbnail'><img src='" +
+                        pic.src +
+                        "' /></div>" +
+                        "<p>" +
+                        pic.alt +
+                        "</p><p class='small'>Photo by: " +
+                        pic.dataset.author +
+                        "</p></div>",
                     src: pic.src.split("?")[0]
                 }
             });
@@ -176,7 +183,7 @@
 
         function getNextImage(thisImg, move) {
             var index = 0;
-            var items = $("li:visible").find("img.image").map(function (i, pic) {
+            var items = $("li:visible").find("img.image").map(function(i, pic) {
                 if (thisImg.src.split("?")[0] === pic.src.split("?")[0]) {
                     index = i;
                 }
@@ -195,19 +202,23 @@
 
         function showImageOnModal(img, $modal) {
             var imgSrc = img.attr("src").split("?")[0];
+            var imageId = img.attr("data-image-id");
             var caption = img.attr("alt") || "";
             var owner = img.attr("data-author");
             var date = img.attr("data-date");
-            var mapObj = [{
-                lat: parseFloat(img.attr("data-lat")),
-                lng: parseFloat(img.attr("data-lng")),
-                src: imgSrc
-            }];
+            var mapObj = [
+                {
+                    lat: parseFloat(img.attr("data-lat")),
+                    lng: parseFloat(img.attr("data-lng")),
+                    src: imgSrc
+                }
+            ];
 
             $modal.find(".modal-title").text(caption);
             $modal.find(".img-owner").text(owner);
             $modal.find(".img-date").text(date);
             $modal.find(".tour-img").attr("src", imgSrc);
+            $modal.find(".star").attr("data-image-id", imageId).removeClass("btn-danger").addClass("btn-default");
 
             mapInit("imgMap", mapObj);
         }
@@ -215,8 +226,19 @@
         $("#photoModal").on("click", ".star", function(e) {
             e.preventDefault();
             var $this = $(this);
+            var imageId = $this.attr("data-image-id");
+            var method = $this.hasClass("btn-default") ? "POST" : "DELETE";
 
-            $this.toggleClass("btn-default btn-danger");
+            $.ajax({
+                url: "/api/star/" + imageId,
+                method: method
+            }).done(function(result) {
+                if (result) {
+                    $this.toggleClass("btn-default btn-danger");
+                }
+            }).fail(function(result) {
+                console.log("star error", result);
+            });
         });
 
         $("#photoModal").on("click", ".next, .prev", function(e) {
@@ -236,7 +258,7 @@
             showImageOnModal(img, $modal);
         });
 
-        $(".select-uploader").on("click", function (e) {
+        $(".select-uploader").on("click", function(e) {
             e.preventDefault();
 
             $(".select-uploader").each(function(i, a) {

@@ -775,6 +775,9 @@
     <Content Include="Uploads\documents\lejog-memoir.pdf" />
     <Content Include="Views\Image\_ImageEditGallery.cshtml" />
     <Content Include="Views\Audit\Index.cshtml" />
+    <Content Include="Views\Shared\_GalleryLayout.cshtml" />
+    <Content Include="Views\Shared\_Analytics.cshtml" />
+    <Content Include="Views\Shared\_Head.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

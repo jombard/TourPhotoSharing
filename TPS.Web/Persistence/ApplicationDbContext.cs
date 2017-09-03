@@ -13,7 +13,6 @@ namespace TPS.Web.Persistence
         public DbSet<TourImages> TourImages { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Audit> AuditRecords { get; set; }
-        public DbSet<StarredImages> StarredImages { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -23,6 +22,21 @@ namespace TPS.Web.Persistence
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany<Image>(i => i.StarredImages)
+                .WithMany(c => c.StarredUsers)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("UserRefId");
+                    cs.MapRightKey("ImageRefId");
+                    cs.ToTable("StarredImages");
+                });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

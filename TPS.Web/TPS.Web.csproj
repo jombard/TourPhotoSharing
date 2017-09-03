@@ -244,7 +244,6 @@
     <Compile Include="Controllers\Api\AuditsController.cs" />
     <Compile Include="Controllers\Api\CommentsController.cs" />
     <Compile Include="Controllers\Api\ImageController.cs" />
-    <Compile Include="Controllers\Api\StarController.cs" />
     <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
@@ -258,13 +257,11 @@
     <Compile Include="Core\Models\Audit.cs" />
     <Compile Include="Core\Models\AuditAttribute.cs" />
     <Compile Include="Core\Models\Comment.cs" />
-    <Compile Include="Core\Models\StarredImages.cs" />
     <Compile Include="Core\Models\Utils.cs" />
     <Compile Include="Core\Repositories\IAuditRepository.cs" />
     <Compile Include="Core\Repositories\ICommentRepository.cs" />
     <Compile Include="Core\Repositories\IImageRepository.cs" />
     <Compile Include="Core\Dtos\ImageDto.cs" />
-    <Compile Include="Core\Repositories\IStarRepository.cs" />
     <Compile Include="Core\Repositories\ITourRepository.cs" />
     <Compile Include="Core\Repositories\IUtilLibrary.cs" />
     <Compile Include="Core\Libraries\UtilLibrary.cs" />
@@ -386,6 +383,14 @@
     <Compile Include="Persistence\Migrations\201709031921444_AddStarredImagesTable.Designer.cs">
       <DependentUpon>201709031921444_AddStarredImagesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709032036130_RemoveStarredImagesTable.cs" />
+    <Compile Include="Persistence\Migrations\201709032036130_RemoveStarredImagesTable.Designer.cs">
+      <DependentUpon>201709032036130_RemoveStarredImagesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709032043572_AddStarredImageCollectionsForUserAndImage.cs" />
+    <Compile Include="Persistence\Migrations\201709032043572_AddStarredImageCollectionsForUserAndImage.Designer.cs">
+      <DependentUpon>201709032043572_AddStarredImageCollectionsForUserAndImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
@@ -399,7 +404,6 @@
     <Compile Include="Persistence\Repositories\CommmentRepository.cs" />
     <Compile Include="Persistence\Repositories\ImageRepository.cs" />
     <Compile Include="Core\Models\ProcessImage.cs" />
-    <Compile Include="Persistence\Repositories\StarRepository.cs" />
     <Compile Include="Persistence\Repositories\TourRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -879,6 +883,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709031921444_AddStarredImagesTable.resx">
       <DependentUpon>201709031921444_AddStarredImagesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709032036130_RemoveStarredImagesTable.resx">
+      <DependentUpon>201709032036130_RemoveStarredImagesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709032043572_AddStarredImageCollectionsForUserAndImage.resx">
+      <DependentUpon>201709032043572_AddStarredImageCollectionsForUserAndImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

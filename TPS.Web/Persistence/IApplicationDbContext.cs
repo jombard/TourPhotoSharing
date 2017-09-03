@@ -11,6 +11,5 @@ namespace TPS.Web.Persistence
         DbSet<Comment> Comments { get; set; }
         IDbSet<ApplicationUser> Users { get; set; }
         DbSet<Audit> AuditRecords { get; set; }
-        DbSet<StarredImages> StarredImages { get; set; }
     }
 }

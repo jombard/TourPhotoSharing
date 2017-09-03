@@ -111,7 +111,6 @@
     <Compile Include="Api\ImageControllerTests.cs" />
     <Compile Include="Api\CommentControllerTests.cs" />
     <Compile Include="Api\AuditControllerTests.cs" />
-    <Compile Include="Api\StarControllerTests.cs" />
     <Compile Include="Controllers\TourControllerTests.cs" />
     <Compile Include="Controllers\ImageControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

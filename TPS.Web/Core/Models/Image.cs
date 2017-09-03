@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TPS.Web.Core.Dtos;
@@ -52,9 +53,12 @@ namespace TPS.Web.Core.Models
 
         public int? Height { get; set; }
 
+        public ICollection<ApplicationUser> StarredUsers { get; set; }
+
         public Image()
         {
             UploadDate = DateTime.UtcNow;
+            StarredUsers = new HashSet<ApplicationUser>();
         }
 
         public Image(ImageDto imageDto)

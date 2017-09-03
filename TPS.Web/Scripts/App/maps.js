@@ -11,8 +11,11 @@ function mapInit(mapDivId, mapLocations) {
     if (!mapLocations.length || !mapLocations[0]["lat"]) {
         var noMapData = $("<div />").addClass("alert alert-danger").text("Unfortunately there is no location data for the selected photo's.");
         $mapDiv.empty().append(noMapData);
+        $mapDiv.removeClass("map-height");
         return;
     }
+
+    $mapDiv.addClass("map-height");
 
     var bounds = new google.maps.LatLngBounds();
     var infowindow = new google.maps.InfoWindow();

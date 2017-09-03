@@ -14,12 +14,15 @@ namespace TPS.Web.Core.ViewModels
 
         public string OwnerId { get; set; }
 
+        public string Thumbnail { get; set; }
+
         public TourFormViewModel(Tour tour)
         {
             Id = tour.Id.ToString();
             Name = tour.Name;
             Description = tour.Description;
             OwnerId = tour.OwnerId;
+            Thumbnail = tour.Thumbnail;
         }
 
         public TourFormViewModel()

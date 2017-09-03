@@ -13,50 +13,6 @@
     </div>
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3>Updates</h3>
-    </div>
-    <div class="panel-body">
-        <div class="blog-article">
-            <h2>A cycle challenge memoir</h2>
-            <p><i class="glyphicon glyphicon-user"></i> by Jon Lombard</p>
-            <small>Posted on 30 August 2017 at 10:34 AM</small>
-            <hr/>
-            <p class="lead">Read a journal about cycling from Land's End to John o'Groats</p>
-            <p>Daniel Darkens has kindly submited his memoir of the tour for general reading.</p>
-            <p>Feel free to download the attachment <a href="~/Uploads/documents/lejog-memoir.pdf" target="_blank">here</a>.</p>
-        </div>
-    </div>
-    @*<div class="panel-footer">
-        <p>This is the blog post footer</p>
-    </div>
-    <div class="panel-body">
-        <div class="blog-article">
-            <h2>Blog Post Update</h2>
-            <p><i class="glyphicon glyphicon-user"></i> by Jon Lombard</p>
-            <small>Posted on 24 August 2017 at 21:34 PM</small>
-            <hr/>
-            <p class="lead">A blog post update first line goes here</p>
-            <p>This is a blog post update with some text in here</p>
-            <p>This is a blog post update with some text in here</p>
-            <p>This is a blog post update with some text in here</p>
-        </div>
-    </div>
-    <div class="panel-body">
-        <div class="blog-article">
-            <h2>Blog Post Update</h2>
-            <p><i class="glyphicon glyphicon-user"></i> by Jon Lombard</p>
-            <small>Posted on 24 August 2017 at 21:34 PM</small>
-            <hr/>
-            <p class="lead">A blog post update first line goes here</p>
-            <p>This is a blog post update with some text in here</p>
-            <p>This is a blog post update with some text in here</p>
-            <p>This is a blog post update with some text in here</p>
-        </div>
-    </div>*@
-</div>
-
 <div id="image-list" >
     <div class="navbar navbar-inverse navbar-filter">
         <div class="container-fluid">
@@ -98,7 +54,7 @@
                 @foreach (var imageModel in Model.TourImages)
                 {
                     <li>
-                        <div class="thumbnail">
+                        <div class="thumbnail"> <!-- TODO image should open in gallery viewer that allows further control, remove use of photoswipe plugin -->
                             <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?w=320&h=256&mode=crop"
                                  alt="@imageModel.Image.Caption"
                                  data-author="@imageModel.Image.Owner.FullName"
@@ -119,6 +75,50 @@
             </ul>
         </div>
     </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Updates</h3>
+    </div>
+    <div class="panel-body">
+        <div class="blog-article">
+            <h2>A cycle challenge memoir</h2>
+            <p><i class="glyphicon glyphicon-user"></i> by Jon Lombard</p>
+            <small>Posted on 30 August 2017 at 10:34 AM</small>
+            <hr />
+            <p class="lead">Read a journal about cycling from Land's End to John o'Groats</p>
+            <p>Daniel Darkens has kindly submited his memoir of the tour for general reading.</p>
+            <p>Feel free to download the attachment <a href="~/Uploads/documents/lejog-memoir.pdf" target="_blank">here</a>.</p>
+        </div>
+    </div>
+    @*<div class="panel-footer">
+            <p>This is the blog post footer</p>
+        </div>
+        <div class="panel-body">
+            <div class="blog-article">
+                <h2>Blog Post Update</h2>
+                <p><i class="glyphicon glyphicon-user"></i> by Jon Lombard</p>
+                <small>Posted on 24 August 2017 at 21:34 PM</small>
+                <hr/>
+                <p class="lead">A blog post update first line goes here</p>
+                <p>This is a blog post update with some text in here</p>
+                <p>This is a blog post update with some text in here</p>
+                <p>This is a blog post update with some text in here</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="blog-article">
+                <h2>Blog Post Update</h2>
+                <p><i class="glyphicon glyphicon-user"></i> by Jon Lombard</p>
+                <small>Posted on 24 August 2017 at 21:34 PM</small>
+                <hr/>
+                <p class="lead">A blog post update first line goes here</p>
+                <p>This is a blog post update with some text in here</p>
+                <p>This is a blog post update with some text in here</p>
+                <p>This is a blog post update with some text in here</p>
+            </div>
+        </div>*@
 </div>
 
 <div class="comment-box" style="display: none;">

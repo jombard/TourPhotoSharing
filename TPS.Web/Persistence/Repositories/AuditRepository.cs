@@ -21,7 +21,7 @@ namespace TPS.Web.Persistence.Repositories
 
         public IEnumerable<Audit> GetAudits()
         {
-            return _context.AuditRecords.ToList();
+            return _context.AuditRecords.OrderByDescending(t => t.Timestamp).ToList();
         }
 
         public Audit GetAudit(string auditId)

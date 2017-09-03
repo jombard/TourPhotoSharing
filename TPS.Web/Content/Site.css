@@ -297,3 +297,9 @@ textarea {
   margin-top: 8px;
   margin-bottom: 8px;
 }
+.audit-data {
+  width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

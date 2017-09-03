@@ -1,8 +1,47 @@
-﻿@model dynamic
-
-@{
+﻿@{
     ViewBag.Title = "View Logs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>View Logs</h2>
+
+<table id="auditTable" class="table">
+    <thead>
+    <tr>
+        <th>SessionId</th>
+        <th>UserName</th>
+        <th>IPAddress</th>
+        <th>AreaAccessed</th>
+        <th>Timestamp</th>
+        <th>Data</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables")
+    <script>
+        $(document).ready(function() {
+            $('#auditTable').DataTable({
+                ajax: {
+                    url: "/api/audits",
+                    dataSrc: ""
+                },
+                columns: [
+                    { data: "SessionId"},
+                    { data: "UserName"},
+                    { data: "IPAddress"},
+                    { data: "AreaAccessed"},
+                    { data: "Timestamp"},
+                    {
+                        data: "Data",
+                        render: function(data) {
+                            return "<div class='audit-data' title='" + data + "'>" + data + "</div>";
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+}

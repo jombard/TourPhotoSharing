@@ -13,6 +13,7 @@ namespace TPS.Web.App_Start
                 cfg.CreateMap<Image, ImageDto>().ReverseMap();
                 cfg.CreateMap<Comment, CommentDto>().ReverseMap();
                 cfg.CreateMap<ApplicationUser, UserDto>().ReverseMap();
+                cfg.CreateMap<Audit, AuditDto>().ReverseMap();
             });
         }
     }

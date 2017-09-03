@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using TPS.Web.Core.Models
 @if (Request.IsAuthenticated)
 {
     <ul class="nav navbar-nav">
@@ -13,8 +14,14 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage")
+            @Html.ActionLink(User.GetFullName(), "Index", "Manage")
         </li>
+        @if (User.Identity.GetUserName() == "jombard@hotmail.com")
+        {
+            <li>
+                @Html.ActionLink("Logs", "Index", "Audit")
+            </li>
+        }
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
     }

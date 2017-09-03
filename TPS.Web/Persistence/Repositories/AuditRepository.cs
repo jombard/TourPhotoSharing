@@ -1,4 +1,6 @@
-﻿using TPS.Web.Core.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TPS.Web.Core.Models;
 using TPS.Web.Core.Repositories;
 
 namespace TPS.Web.Persistence.Repositories
@@ -15,6 +17,16 @@ namespace TPS.Web.Persistence.Repositories
         public void Add(Audit audit)
         {
             _context.AuditRecords.Add(audit);
+        }
+
+        public IEnumerable<Audit> GetAudits()
+        {
+            return _context.AuditRecords.ToList();
+        }
+
+        public Audit GetAudit(string auditId)
+        {
+            return _context.AuditRecords.Find(auditId);
         }
     }
 }

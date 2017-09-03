@@ -599,9 +599,17 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\tourpic.co.uk - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\App\app.js" />
-    <Content Include="Scripts\App\app.min.js">
-      <DependentUpon>app.js</DependentUpon>
+    <Content Include="Scripts\App\comments.js" />
+    <Content Include="Scripts\App\comments.min.js">
+      <DependentUpon>comments.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\App\gallery.js" />
+    <Content Include="Scripts\App\gallery.min.js">
+      <DependentUpon>gallery.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\App\maps.js" />
+    <Content Include="Scripts\App\maps.min.js">
+      <DependentUpon>maps.js</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

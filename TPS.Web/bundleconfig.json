@@ -4,5 +4,17 @@
     "inputFiles": [
       "Scripts/App/gallery.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/App/maps.min.js",
+    "inputFiles": [
+      "Scripts/App/maps.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/comments.min.js",
+    "inputFiles": [
+      "Scripts/App/comments.js"
+    ]
   }
 ]

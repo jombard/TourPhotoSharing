@@ -54,7 +54,7 @@
                 @foreach (var imageModel in Model.TourImages)
                 {
                     <li>
-                        <div class="thumbnail"> <!-- TODO image should open in gallery viewer that allows further control, remove use of photoswipe plugin -->
+                        <div class="thumbnail"> @* TODO image should open in gallery viewer that allows further control, remove use of photoswipe plugin *@
                             <img src="@imageModel.Image.ImageUrl.Replace("~", @"..\..")?w=320&h=256&mode=crop"
                                  alt="@imageModel.Image.Caption"
                                  data-author="@imageModel.Image.Owner.FullName"
@@ -142,74 +142,12 @@
 @Html.Partial("_ImageModal")
 
 @section Scripts {
-    @Scripts.Render("~/Scripts/App/app.js")
+    @*@Scripts.Render("~/Scripts/App/gallery.js")*@
+    @Scripts.Render("~/Scripts/App/maps.js")
+    @*@Scripts.Render("~/Scripts/App/comments.js")*@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYa67zXJI_Zdh_NNyuIfq1k6rO2TuNp8Y&callback=enableMaps"></script>
     <script>
-        var tourId = "@Model.Tour.Id";
-
-        function addComment(comment) {
-            var commenter = $("<h4 />").addClass("media-heading").text(comment.Commenter.FullName);
-            var dateDiv = $("<div />").addClass("small").text("on " + moment(comment.CommentDate).format("dddd, MMMM Do YYYY, h:mm a"));
-            var p = $("<p />").addClass("lead").text(comment.CommentValue);
-
-            var mediaLeft = $("<div />").addClass("media-left").append("<a href=#><img alt='64x64' class='media-object' src='/Uploads/avatar.jpg'></a>");
-            var mediaBody = $("<div />").addClass("media-body").append(commenter).append(dateDiv).append(p);
-            var li = $("<li />").addClass("media").append(mediaLeft).append(mediaBody);
-
-            $(".media-list").append(li);
-        }
-
-        $(document).ready(function() {
-            console.log("doc ready");
-
-            $.ajax({
-                url: "/api/Comments/" + tourId,
-                method: "GET"
-            }).done(function (comments) {
-                console.log("get comments result", comments);
-
-                $.each(comments, function(i, comment) {
-                    addComment(comment);
-                });
-            }).fail(function (error) {
-                console.log("get comments error", error);
-            });
-        });
-
-        $(".comment-entry").on("click", "button", function(e) {
-            e.preventDefault();
-
-            var commentTextarea = $(".comment-entry").find("textarea");
-
-            if (commentTextarea.val() === "") {
-                return;
-            }
-
-            var commentDto = {
-                CommentValue: commentTextarea.val(),
-                TourId: tourId
-            };
-
-            $.ajax({
-                url: "/api/Comments",
-                method: "POST",
-                data: commentDto
-            }).done(function (comment) {
-                console.log("post comment result", comment);
-                commentTextarea.val("");
-
-                addComment(comment);
-            }).fail(function (error) {
-                console.log("post comment error", error);
-            });
-        });
-
-        function enableMaps() {
-            $(".js-view-map").removeClass("hidden");
-        }
-
-        var google = google || {};
 
         $(".select-uploader").on("click", function (e) {
             e.preventDefault();
@@ -230,57 +168,5 @@
             });
         });
 
-        function mapInit(e) {
-            e.preventDefault();
-
-            $("#map").toggleClass("hidden");
-
-            if ($("#map").children().length)
-                return;
-
-            var mapLocations = $("img").filter(function (i, pic) {
-                return pic.dataset.lat && pic.dataset.lng && $(pic).is(":visible");
-            }).map(function (i, pic) {
-                return {
-                    lat: parseFloat(pic.dataset.lat),
-                    lng: parseFloat(pic.dataset.lng),
-                    alt: "<div><div class='thumbnail'><img src='" + pic.src + "' /></div>" +
-                    "<p>" + pic.alt + "</p><p class='small'>Photo by: " + pic.dataset.author + "</p></div>",
-                    src: pic.src.split("?")[0]
-                }
-            });
-
-            if (!mapLocations.length) {
-                var noMapData = $("<div />").addClass("alert alert-danger").text("Unfortunately there is no location data for the selected photo's.");
-                $("#map").append(noMapData);
-                return;
-            }
-
-            var bounds = new google.maps.LatLngBounds();
-            var infowindow = new google.maps.InfoWindow();
-
-            var map = new google.maps.Map(document.getElementById('map'));
-            $.each(mapLocations, function(i, loc) {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(loc.lat, loc.lng),
-                    map: map,
-                    icon: loc.src + "?w=50&h=50&mode=crop"
-                });
-                bounds.extend(marker.position);
-
-                google.maps.event.addListener(marker,
-                    "click",
-                    (function(marker) {
-                        return function() {
-                            infowindow.setContent(loc.alt);
-                            infowindow.open(map, marker);
-                        }
-                    })(marker, i));
-            });
-
-            map.fitBounds(bounds);
-        }
-
-        $(".js-view-map").on("click", mapInit);
     </script>
 }

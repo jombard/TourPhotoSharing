@@ -1,8 +1,8 @@
 [
   {
-    "outputFileName": "Scripts/App/app.min.js",
+    "outputFileName": "Scripts/App/gallery.min.js",
     "inputFiles": [
-      "Scripts/App/app.js"
+      "Scripts/App/gallery.js"
     ]
   }
 ]

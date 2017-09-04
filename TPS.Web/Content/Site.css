@@ -233,6 +233,7 @@ textarea {
 .list-tour-images .date {
   display: none;
 }
+/*TODO add primary colour to white background of header*/
 .tour-header {
   position: relative;
   margin-top: -18px;

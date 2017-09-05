@@ -59,7 +59,7 @@ namespace TPS.Web.Controllers
 
             _unitOfWork.Complete();
 
-            return Json(new { completed });
+            return Json(completed);
         }
 
         [Audit]

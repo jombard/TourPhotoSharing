@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using TPS.Web.App_Start;
 using TPS.Web.Controllers;
 using TPS.Web.Core;
+using TPS.Web.Core.Dtos;
 using TPS.Web.Core.Models;
 using TPS.Web.Core.Repositories;
 
@@ -109,9 +110,24 @@ namespace TourPhotoSharing.Tests.Controllers
         public void Upload_SaveImage_ReturnImageId()
         {
             _mockRepository.Setup(x => x.UploadUserImage(_postedfile.Object, "1"));
-            var result = _controller.UploadImage();
+            var result = _controller.UploadImage() as JsonResult;
+            var completed = result.Data as List<ImageDto>;
 
             result.Should().BeOfType<JsonResult>();
+            completed.Should().NotBeEmpty();
+        }
+
+        [TestMethod]
+        public void Upload_DoesNotSaveEmptyImage_ReturnOkWithoutImageInCompletedList()
+        {
+            _postedfile.SetupGet(f => f.ContentLength).Returns(0).Verifiable();
+
+            _mockRepository.Setup(x => x.UploadUserImage(_postedfile.Object, "1"));
+            var result = _controller.UploadImage() as JsonResult;
+            var completed = result.Data as List<ImageDto>;
+
+            result.Should().BeOfType<JsonResult>();
+            completed.Should().BeEmpty();
         }
     }
 }

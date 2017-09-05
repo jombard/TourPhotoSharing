@@ -30,7 +30,6 @@
         Dropzone.options.dropzoneForm = {
             acceptedFiles: "image/*",
             maxFilesize: 10,
-            //uploadMultiple: true,
             addRemoveLinks: true,
             parallelUploads: 1,
             init: function() {
@@ -54,7 +53,7 @@
                     console.log("removedfile", this, e);
 
                     //$.ajax({
-                    //    url: "/api/image/"
+                    //    url: "/api/image/" // TODO coomplete remove api call
                     //});
                 });
             }
